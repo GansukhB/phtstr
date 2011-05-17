@@ -1,0 +1,322 @@
+<!--
+body {
+	background-color: #13387E;
+	scrollbar-face-color: #5E85CA;
+	scrollbar-highlight-color: #6F97DE;
+	scrollbar-shadow-color: #476DB0;
+	scrollbar-3dlight-color: #5B8BD8;
+	scrollbar-arrow-color:  #13387E;
+	scrollbar-track-color: #2254A0;
+	scrollbar-darkshadow-color: #2254A0;
+	
+	font-family: Arial, Verdana, Helvetica, sans-serif
+	font-size: 11;
+	color: #ffffff;
+	}
+
+font,th,td,p {
+	font-family: Verdana, Arial, Helvetica, sans-serif
+	}
+	
+p, td {
+	font-size : 11;
+	color : #fffffff;
+	}
+	
+hr {
+	height: 0px;
+	border: solid #D1D7DC 0px;
+	border-top-width: 1px;
+	}
+	
+h1,h2 {
+	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	font-size : 22px;
+	font-weight : bold;
+	text-decoration : none;
+	line-height : 120%;
+	color : #ffffff;
+	}
+ 
+a:link	{
+	color:#3300CC;
+	}
+a:visited {
+	color:#3300CC;
+	}
+a:hover	{
+	color:#000000;
+	}
+	
+.manager_nav_off:link{
+	color:#C8D6ED;
+	text-decoration: none;
+	}
+.manager_nav_off:visited{
+	color:#C8D6ED;
+	text-decoration: none;
+	}
+.manager_nav_off:hover{
+	color:#ffffff;
+	text-decoration: none;
+	}
+	
+.manager_nav_on:link{
+	color:#ffffff;
+	text-decoration: none;
+	font-weight: bold;
+	}
+.manager_nav_on:visited{
+	color:#ffffff;
+	text-decoration: none;
+	font-weight: bold;
+	}
+.manager_nav_on:hover{
+	color:#ffffff;
+	text-decoration: none;
+	font-weight: bold;
+	}
+
+.title_links:link{
+	color:#FFFFFF;
+	text-decoration: none;
+	}
+.title_links:visited{
+	color:#FFFFFF;
+	text-decoration: none;
+	}
+.title_links:hover{
+	color:#FFFFFF;
+	text-decoration: underline;
+	}
+	
+.list_links:link{
+	color:#C8D5ED;
+	text-decoration: none;
+	font-size: 10;
+	font-weight: bold;
+	}
+.list_links:visited{
+	color:#C8D5ED;
+	text-decoration: none;
+	font-size: 10;
+	font-weight: bold;
+	}
+.list_links:hover{
+	color:#ffffff;
+	text-decoration: underline;
+	font-size: 10;
+	font-weight: bold;
+	}
+
+.edit_links:link{
+	color:#C8D5ED;
+	text-decoration: none;
+	font-size: 10;
+	font-weight: normal;
+	}
+.edit_links:visited{
+	color:#C8D5ED;
+	text-decoration: none;
+	font-size: 10;
+	font-weight: normal;
+	}
+.edit_links:hover{
+	color:#ffffff;
+	text-decoration: none;
+	font-size: 10;
+	font-weight: normal;
+	}
+	
+.yellow_links:link{
+	color:#FFE400;
+	}
+.yellow_links:visited{
+	color:#FFE400;
+	}
+.yellow_links:hover{
+	color:#000000;
+	}
+	
+td.data_box{
+	border-bottom: 1px solid #476DB0;
+	border-right: 1px solid #476DB0;
+	border-top: 1px solid #6F97DE;
+	border-left: 1px solid #6F97DE;
+	padding: 6px;
+	
+}
+
+td.options_box{
+	border-bottom: 1px solid #476DB0;
+	border-right: 1px solid #476DB0;
+	border-top: 1px solid #6F97DE;
+	border-left: 1px solid #6F97DE;
+	padding: 2px;	
+}
+
+td.listing{
+	 border-top: 1px solid #6F97DE;
+	 border-bottom: 1px solid #476DB0;
+	 font-weight: bold;
+	 font-size: 10;
+	 border-right: 1px solid #486FB4;
+	 border-left: 1px solid #678ED3;
+}
+td.listing_id{
+	 border-top: 1px solid #6F97DE;
+	 border-bottom: 1px solid #476DB0;
+	 font-size: 10;
+	 color: "#FFE400";
+	 font-weight: normal;
+	 border-right: 1px solid #486FB4;
+	 border-left: 1px solid #678ED3;
+}
+
+
+td.listing_on{
+	 font-size: 10;
+	 font-weight: bold;
+}
+td.listing_off{
+	 border-top: 1px solid #6F97DE;
+	 border-bottom: 1px solid #476DB0;
+	 font-weight: bold;
+	 font-size: 10;
+}
+td.listing_id_on{
+	 font-size: 10;
+	 color="#FFE400"
+}
+td.listing_id_off{
+	 border-top: 1px solid #6F97DE;
+	 border-bottom: 1px solid #476DB0;
+	 font-size: 10;
+	 color="#FFE400";
+}
+
+.footer{
+	color: #A8BBD7;
+}
+
+.footer_link:link{
+	color:#A8BBD7;
+	}
+.footer_link:visited{
+	color:#A8BBD7;
+	}
+.footer_link:hover{
+	color:#ffffff;
+	}
+
+/* $Id: example.css,v 1.5 2006/03/27 02:44:36 pat Exp $ */
+
+/*--------------------------------------------------
+  REQUIRED to hide the non-active tab content.
+  But do not hide them in the print stylesheet!
+  --------------------------------------------------*/
+.tabberlive .tabbertabhide {
+ display:none;
+}
+
+/*--------------------------------------------------
+  .tabber = before the tabber interface is set up
+  .tabberlive = after the tabber interface is set up
+  --------------------------------------------------*/
+.tabber {
+}
+.tabberlive {
+ margin-top:1em;
+}
+
+/*--------------------------------------------------
+  ul.tabbernav = the tab navigation list
+  li.tabberactive = the active tab
+  --------------------------------------------------*/
+ul.tabbernav
+{
+ margin:0;
+ padding: 3px 0;
+ border-bottom: 1px solid #778;
+ font: bold 12px Verdana, sans-serif;
+}
+
+ul.tabbernav li
+{
+ list-style: none;
+ margin: 0;
+ display: inline;
+}
+
+ul.tabbernav li a
+{
+ padding: 3px 0.5em;
+ margin-left: 3px;
+ border: 1px solid #778;
+ border-bottom: none;
+ background: #DDE;
+ text-decoration: none;
+}
+
+ul.tabbernav li a:link { color: #448; }
+ul.tabbernav li a:visited { color: #667; }
+
+ul.tabbernav li a:hover
+{
+ color: #000;
+ background: #AAE;
+ border-color: #227;
+}
+
+ul.tabbernav li.tabberactive a
+{
+ background-color: #fff;
+ border-bottom: 1px solid #fff;
+}
+
+ul.tabbernav li.tabberactive a:hover
+{
+ color: #000;
+ background: white;
+ border-bottom: 1px solid white;
+}
+
+/*--------------------------------------------------
+  .tabbertab = the tab content
+  Add style only after the tabber interface is set up (.tabberlive)
+  --------------------------------------------------*/
+.tabberlive .tabbertab {
+ padding:5px;
+ border:1px solid #aaa;
+ border-top:0;
+
+ /* If you don't want the tab size changing whenever a tab is changed
+    you can set a fixed height */
+
+ /* height:200px; */
+
+ /* If you set a fix height set overflow to auto and you will get a
+    scrollbar when necessary */
+
+ /* overflow:auto; */
+}
+
+/* If desired, hide the heading since a heading is provided by the tab */
+.tabberlive .tabbertab h2 {
+ display:none;
+}
+.tabberlive .tabbertab h3 {
+ display:none;
+}
+
+/* Example of using an ID to set different styles for the tabs on the page */
+.tabberlive#tab1 {
+}
+.tabberlive#tab2 {
+}
+.tabberlive#tab2 .tabbertab {
+ height:200px;
+ overflow:auto;
+}
+	
+-->

@@ -8,7 +8,7 @@
 		
 	************************************************************************************************************************************/
 		
-		$manager_title  = "Site Manager";
+		$manager_title  = "Photographer";
 		$website_url    = "http://www.yoursite.com"; // URL to the root of the site - *NOT CURRENTLY USED
 	
 		include( "../database.php" ); // ADD DATABASE CONNECTION FILE
@@ -145,4 +145,13 @@
 			$string = str_replace($cleanup_decimal, ".", $string);
 			return $string;
 		}
+  $user_name = "";
+  $user_id = 0;
+  $query = "SELECT * FROM photographers WHERE id = ".$_SESSION['user_id'];
+  $result = mysql_query($query);
+  while($user = mysql_fetch_object($result))
+  {
+    $user_name = $user->name;
+    $user_id = $user->id;
+  }
 ?>

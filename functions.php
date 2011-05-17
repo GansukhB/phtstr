@@ -2042,6 +2042,23 @@
 				}
 			}
 		}
-
-		
+    function get_photographer_by_pkg($pkg_id)
+    {
+      $query = "SELECT * FROM photo_package WHERE id = $pkg_id";
+      $result = mysql_query($query);
+      $user_id = 0;
+      $user_name = "";
+      while($pkg = mysql_fetch_object($result) )
+      {
+        $user_id = $pkg->user_uploaded;
+      }
+      
+      $query = "SELECT * FROM photographers WHERE id = '$user_id'";
+      $result = mysql_query($query);
+      while($user = mysql_fetch_object($result) )
+      {
+        $user_name = $user->name;
+      }
+      return $user_name;
+    }
 ?>

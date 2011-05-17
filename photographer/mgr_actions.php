@@ -113,11 +113,12 @@
 			session_register("access_type");
 			
 			// CHECK MGR_USERS DB FOR ACCESS
-			$mgr_users_result = mysql_query("SELECT username,password FROM mgr_users", $db);
+			$mgr_users_result = mysql_query("SELECT * FROM photographers", $db);
 			while($mgr_users = mysql_fetch_object($mgr_users_result)){
-				if(strtolower($_POST['username']) == strtolower($mgr_users->username) && strtolower($_POST['password']) == strtolower($mgr_users->password) && $setting->status == MD5(1)){
+				if(strtolower($_POST['username']) == strtolower($mgr_users->email) && strtolower($_POST['password']) == strtolower($mgr_users->password) && $setting->status == MD5(1)){
 					$_SESSION['access_status'] = "dfjfhkallkdfdmsa";
 					$_SESSION['access_type']  = "mgr";
+          $_SESSION['user_id'] = $mgr_users->id;
 					header("location: mgr.php");
 					exit;
 				}

@@ -112,7 +112,7 @@
                                     ?>
                                         <table>
                                             <tr>
-                                                <td><font face="arial" color="#ffffff" style="font-size: 11;"><b>Welcome to the <? echo $manager_title; ?> Website Manager</b></td>
+                                                <td><font face="arial" color="#ffffff" style="font-size: 11;"><b>Welcome to the <? echo $manager_title; ?> Website Manager <?php echo $user_name; ?></b></td>
                                             </tr>
                                             <tr>
                                                 <td>

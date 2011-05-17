@@ -121,7 +121,7 @@ else {
 						// COLSPAN DEPENDING ON ADMIN LOGIN
 						$colspan="6";
 						
-						$pg_result = mysql_query("SELECT * FROM photo_package order by id desc", $db);
+						$pg_result = mysql_query("SELECT * FROM photo_package WHERE user_uploaded = '$user_id' order by id desc", $db);
 						//$pg_rows = mysql_num_rows($pg_result);
 						
 						$pg_rows = 0;

@@ -155,10 +155,10 @@
 						
 					if($gid == 0){
 						$pg_rows = mysql_result(mysql_query("SELECT COUNT(id) FROM photo_package where active = '1' and (gallery_id = '$gid' or gallery_id = '')"),0);
-						$pg_result = mysql_query("SELECT * FROM photo_package WHERE active = '1' and (gallery_id = '$gid' or gallery_id = '') order by $order_by " . $order_type . "  LIMIT $startrecord,$perpage", $db);
+						$pg_result = mysql_query("SELECT * FROM photo_package WHERE user_uploaded = '$user_id' and active = '1' and (gallery_id = '$gid' or gallery_id = '') order by $order_by " . $order_type . "  LIMIT $startrecord,$perpage", $db);
 					} else {
 						$pg_rows = mysql_result(mysql_query("SELECT COUNT(id) FROM photo_package where active = '1' and (gallery_id = '$gid' or other_galleries LIKE '%,$gid,%')"),0);
-						$pg_result = mysql_query("SELECT * FROM photo_package WHERE active = '1' and (gallery_id = '$gid' or other_galleries LIKE '%,$gid,%') order by $order_by " . $order_type . "  LIMIT $startrecord,$perpage", $db);
+						$pg_result = mysql_query("SELECT * FROM photo_package WHERE user_uploaded = '$user_id' and active = '1' and (gallery_id = '$gid' or other_galleries LIKE '%,$gid,%') order by $order_by " . $order_type . "  LIMIT $startrecord,$perpage", $db);
 					}
 						
 						$pages = ceil($pg_rows/$perpage);
@@ -292,7 +292,7 @@
 						//$pg_rows = mysql_num_rows($pg_result);
 						while($pg = mysql_fetch_object($pg_result)){
 
-						$photo_result = mysql_query("SELECT * FROM uploaded_images where reference = 'photo_package' and reference_id = '$pg->id' order by original LIMIT 1", $db);
+						$photo_result = mysql_query("SELECT * FROM uploaded_images where user_uploaded = '$user_id' and reference = 'photo_package' and reference_id = '$pg->id' order by original LIMIT 1", $db);
 						$photo_rows = mysql_num_rows($photo_result);
 						$photo = mysql_fetch_object($photo_result);
 						if($photo->original > 0){
@@ -329,6 +329,7 @@
                                 }
                             ?>
                             <td align="left" class="listing" onClick="window.location.href='mgr.php?nav=<? echo $nav; ?>&item_id=<? echo $staff->id; ?>&order_by=<? echo $order_by; ?>&order_type=<? echo $order_type; ?>&gid=<? echo $_GET['gid']; ?>'"><a href="mgr.php?nav=<? echo $nav; ?>&item_id=<? echo $pg->id; ?>&order_by=<? echo $order_by; ?>&order_type=<? echo $order_type; ?>&gid=<? echo $_GET['gid']; ?>" class="list_links"><? if($photo_rows > 0){ ?><img src="<?PHP echo $stock_photo_path_manager; ?>i_<?php echo $photo->filename; ?>" width="75" border="0"><? }else{ ?><img src="./images/no_photo.gif" border="0"><? } ?></a></td>
+                            
                             <td width="750" align="left" class="listing" onClick="window.location.href='mgr.php?nav=<? echo $nav; ?>&item_id=<? echo $pg->id; ?>&order_by=<? echo $order_by; ?>&order_type=<? echo $order_type; ?>&gid=<? echo $_GET['gid']; ?>'">
                                 &nbsp;&nbsp;<a href="mgr.php?nav=<? echo $nav; ?>&item_id=<? echo $pg->id; ?>&order_by=<? echo $order_by; ?>&order_type=<? echo $order_type; ?>&gid=<? echo $_GET['gid']; ?>" class="list_links">Title: <? echo $trim_title; ?></a><br />
                                 
@@ -548,7 +549,7 @@
 							}
 							// EDIT ITEM
 							else{
-								$pg_result = mysql_query("SELECT * FROM photo_package where id = '$item_id' order by id desc", $db);
+								$pg_result = mysql_query("SELECT * FROM photo_package where user_uploaded = '$user_id' and id = '$item_id' order by id desc", $db);
 								$pg = mysql_fetch_object($pg_result);
 								echo "<form name=\"data_form\" action=\"" . $actions_page . "?pmode=save_edit\" method=\"post\" ENCTYPE=\"multipart/form-data\">";
 								echo "<input type=\"hidden\" value=\"" . $pg->id . "\" name=\"item_id\">";
@@ -753,7 +754,7 @@
 										<table cellapdding="0" cellspacing="0" width="100%">
 										<?
 												if($item_id != "new"){
-													$photo_result = mysql_query("SELECT * FROM uploaded_images where reference = 'photo_package' and reference_id = '$pg->id' order by original LIMIT 1", $db);
+													$photo_result = mysql_query("SELECT * FROM uploaded_images where user_uploaded = '$user_id' and reference = 'photo_package' and reference_id = '$pg->id' order by original LIMIT 1", $db);
 													$photo_rows = mysql_num_rows($photo_result);
 													$photo = mysql_fetch_object($photo_result);
 									if($photo->original > 0){
@@ -904,7 +905,7 @@
 									$absolute_image_path = $setting->site_url . $absolute_image_path;
 								
 									if($image_upload != 0){
-										$image_result = mysql_query("SELECT * FROM uploaded_images where reference = '$reference' and reference_id = '$item_id' order by quality_order", $db);
+										$image_result = mysql_query("SELECT * FROM uploaded_images where user_uploaded = '$user_id' and reference = '$reference' and reference_id = '$item_id' order by quality_order", $db);
 										$rows = mysql_num_rows($image_result);
 										
 										

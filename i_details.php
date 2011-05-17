@@ -349,6 +349,9 @@
 								} else {
 								echo "<tr><td class=\"photo_title\">";
 								echo $detail_title . $package->title;
+                echo '<br />'.$detail_photographer . get_photographer_by_pkg($package->id);
+                if($package->user_uploaded)
+                
 								echo "</td></tr>";
 							}
 							

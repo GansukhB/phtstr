@@ -332,8 +332,8 @@ $login_cart_login = "Now you can login and you will be returned to the shopping 
 $login_login_failed = "<b>Email/Password incorrect. If you have forgotten your password please <a href=\"recover_password.php\">click here</a>. If you are not yet a member <a href=\"subscribe.php\">click here</a>.</b>";
 $login_pending = "<b>You have not yet paid for your subscription or payment is still pending.</b>";
 $login_logged_out = "<b>You have been logged out.</b>";
-$login_login = "You are now logged in.<br>Quick Links:<br><b><a href=\"cart.php\">View Cart</a></b><br><b><a href=\"lightbox.php\">My Lightbox</a></b><br><b><a href=\"order_status.php\">My Orders</a></b>";
-$login_form_submit_button = "Enter";
+$login_login = "Та амжилттай  нэвтэрсэн байна..<br>Холбоосууд:<br><b><a href=\"cart.php\">Сагсыг харах</a></b><br><b><a href=\"lightbox.php\">My Lightbox</a></b><br><b><a href=\"order_status.php\">Миний захиалгууд</a></b>";
+$login_form_submit_button = "Оруулах";
 
 //LIGHTBOX PAGE
 $lightbox_my_lightbox = "My Lightbox";

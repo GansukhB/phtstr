@@ -152,10 +152,10 @@
 			
 			// SAVE DATA
 			$publish_date = $s_year . $s_month . $s_day;
-			$sql = "INSERT INTO photo_package (title,gallery_id,keywords,active,added,photographer,description,prod,sizes,update_29,all_prints,all_sizes,other_galleries,act_download,featured) VALUES ('$title','$gallery_id','$keywords','$active','$added','$photographer','$description','$prod','$size','1','$all_prints','$all_sizes','$other_galleries2','$act_download','$featured')";
+			$sql = "INSERT INTO photo_package (user_uploaded, title,gallery_id,keywords,active,added,photographer,description,prod,sizes,update_29,all_prints,all_sizes,other_galleries,act_download,featured) VALUES ('$user_id', '$title','$gallery_id','$keywords','$active','$added','$photographer','$description','$prod','$size','1','$all_prints','$all_sizes','$other_galleries2','$act_download','$featured')";
 			$result = mysql_query($sql);
 			
-			$last_result = mysql_query("SELECT id FROM photo_package order by id desc", $db);
+			$last_result = mysql_query("SELECT id FROM photo_package where user_uploaded = '$user_id' order by id desc", $db);
 			$last = mysql_fetch_object($last_result);
 			
 			/*
@@ -185,7 +185,7 @@
 										  // $result_code returns 1,2,3 / results of upload... 1 Success, 2 Type Not Supported , 3 Empty
 				if($result_code == 1){
 					$added = date("Ymd");					
-					$sql = "INSERT INTO uploaded_images (reference,reference_id,filename,price,quality,quality_order,added,price_contact,original) VALUES ('$reference','$last->id','$image_details[1]','$price','$quality','$quality_order','$added','$price_contact','1')";
+					$sql = "INSERT INTO uploaded_images (user_uploaded, reference,reference_id,filename,price,quality,quality_order,added,price_contact,original) VALUES ('$user_id', '$reference','$last->id','$image_details[1]','$price','$quality','$quality_order','$added','$price_contact','1')";
 					$result = mysql_query($sql);
 				}
 			}
@@ -225,7 +225,7 @@
 						
 						if($result_code == 1){
 							$added = date("Ymd");					
-							$sql = "INSERT INTO uploaded_images (reference,reference_id,filename,price,quality,quality_order,added,price_contact,original) VALUES ('$reference','$last->id','$image_details[1]','$price1','$quality','$quality_order','$added','$price_contact','$original')";
+							$sql = "INSERT INTO uploaded_images (user_uploaded, reference,reference_id,filename,price,quality,quality_order,added,price_contact,original) VALUES ('$user_id', '$reference','$last->id','$image_details[1]','$price1','$quality','$quality_order','$added','$price_contact','$original')";
 							$result = mysql_query($sql);
 						}
 					}
@@ -492,7 +492,7 @@
 										 // $result_code returns 1,2,3 / results of upload... 1 Success, 2 Type Not Supported , 3 Empty
 				if($result_code == 1){
 					$added = date("Ymd");
-					$sql = "INSERT INTO uploaded_images (reference,reference_id,filename,price,quality,quality_order,added,price_contact) VALUES ('$reference','$item_id','$image_details[1]','$price','$quality','$quality_order','$added','$price_contact')";
+					$sql = "INSERT INTO uploaded_images (user_uploaded, reference,reference_id,filename,price,quality,quality_order,added,price_contact) VALUES ('$user_id', '$reference','$item_id','$image_details[1]','$price','$quality','$quality_order','$added','$price_contact')";
 					$result = mysql_query($sql);
 				}
 			}

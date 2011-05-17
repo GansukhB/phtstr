@@ -96,7 +96,13 @@
 												<? } ?>
 												<? if($_GET['message'] == "logged"){ ?>
 												<tr>
-													<td><font color="#ff0000"><b><? echo $login_login; ?></td>
+													<td><font color="#ff0000"><b><? echo $login_login; ?>
+                              
+                              </font>
+                              <?php if(1): ?>
+                                <a href="./photographers/">Зурагчны хэсэг</a>
+                              <?php endif; ?>
+                          </td>
 												</tr>
 												<? } else { ?>
 												<tr>

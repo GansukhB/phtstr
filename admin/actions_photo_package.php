@@ -131,7 +131,9 @@
 			
 			if($_FILES['image'] != ""){
 				# GRAB IPTC INFO
-				get_iptc_data($_FILES['image']['tmp_name']);
+				$iptc = get_iptc_data($_FILES['image']['tmp_name']);
+        echo $iptc;
+        
 				# ADD IPTC INFO TO OTHER INFO	
 				if($iptc_keywords){
 					$keywords = addslashes($iptc_keywords);

@@ -151,10 +151,17 @@ function onItemSelectHandler (o_item) {
 		<tr>
 			<td class="sub_banner">
 				<?PHP echo $left_options; ?>
+        
 			</td>
 		</tr>
 		<tr>
-							<td align="left" nowrap style="padding: 5px 5px 5px 10px;"><a href="cart.php" class="search_bar_links"><?PHP echo $left_view_cart; ?></a> <? if($_SESSION['photog_id']){ ?> <br> <a href="photog_main.php" class="search_bar_links"><?PHP echo $left_photog_area; ?></a><? } else if($pmphp == 1){ ?> <br> <a href="photog_login.php" class="search_bar_links"><?PHP echo $left_photog_login; ?></a> <? } ?><?php if($setting->allow_subs_month != 0 or $setting->allow_subs != 0 or $setting->allow_sub_free != 0){ ?><? if($_SESSION['sub_member']){ ?> <br> <a href="public_actions.php?pmode=logout" class="search_bar_links"><?PHP echo $left_logout; ?></a><? } else { ?> <br> <a href="login.php" class="search_bar_links"><?PHP echo $left_login; ?></a><? } }?><br>
+							<td align="left" nowrap style="padding: 5px 5px 5px 10px;"><a href="cart.php" class="search_bar_links"><?PHP echo $left_view_cart; ?></a> <? if($_SESSION['photog_id']){ ?> <br> <a href="photog_main.php" class="search_bar_links"><?PHP echo $left_photog_area; ?></a><? } else if($pmphp == 1){ ?> <br> <a href="photog_login.php" class="search_bar_links"><?PHP echo $left_photog_login; ?></a> <? } ?><?php if($setting->allow_subs_month != 0 or $setting->allow_subs != 0 or $setting->allow_sub_free != 0){ ?><? if($_SESSION['sub_member']){ ?> <br> <a href="public_actions.php?pmode=logout" class="search_bar_links"><?PHP echo $left_logout; ?></a><? } else { ?> <br> <a href="login.php" class="search_bar_links"><?PHP echo $left_login; ?></a><? } }?>
+              
+              
+              
+              <br>
+              
+              <a href="./photographer/mgr.php" class="search_bar_links">Зурагчин</a><br />
 							<hr width="95%">
 							<?
 							if($_SESSION['sub_member']){
@@ -350,6 +357,7 @@ function onItemSelectHandler (o_item) {
 		<tr>
 			<td class="sub_banner">
 				<?PHP echo $left_statistics; ?>
+        
 			</td>
 		</tr>
 		<td>

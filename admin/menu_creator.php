@@ -68,7 +68,7 @@
 													}
 												}
             // level two output (sub category)------------------------------------------
-                        $ca2_result = mysql_query("SELECT title,id,pub_pri,rdmcode FROM photo_galleries where active = '1' and nest_under = '$ca->id'" . $extrasql . " order by galorder", $db);
+                        $ca2_result = mysql_query("SELECT * FROM photo_galleries where active = '1' and nest_under = '$ca->id'" . $extrasql . " order by galorder", $db);
 												$ca2_rows = mysql_num_rows($ca2_result);
 												if($ca2_rows == 0){
 												 	$output.= "],";
@@ -76,6 +76,11 @@
 												while($ca2 = mysql_fetch_object($ca2_result)){
 													$title2 = $ca2->title;
 													//addslashes($title2);
+                          if($_GET['lang'] != "English" )
+                          {
+                            if($ca2->{'title_'.$_GET['lang']} != "")
+                              $title2 = $ca2->{'title_'.$_GET['lang']};
+                          }
 													htmlspecialchars($title2);
 												$output.= $cr . "['" . addslashes($title2);
 											if($setting->show_num == 1){ 
@@ -97,7 +102,7 @@
 													}
 												} 
 						// level three output (sub sub category)-----------------------------------
-						            $ca3_result = mysql_query("SELECT title,id,pub_pri,rdmcode FROM photo_galleries where active = '1' and nest_under = '$ca2->id'" . $extrasql . " order by galorder", $db);
+						            $ca3_result = mysql_query("SELECT * FROM photo_galleries where active = '1' and nest_under = '$ca2->id'" . $extrasql . " order by galorder", $db);
 												$ca3_rows = mysql_num_rows($ca3_result);
 												if($ca3_rows == 0){
 												 	$output.= "],";
@@ -105,6 +110,11 @@
 												while($ca3 = mysql_fetch_object($ca3_result)){
 													$title3 = $ca3->title;
 													//addslashes($title3);
+                          if($_GET['lang'] != "English" )
+                          {
+                            if($ca3->{'title_'.$_GET['lang']} != "")
+                              $title3 = $ca3->{'title_'.$_GET['lang']};
+                          }
 													htmlspecialchars($title3);
 												$output.= $cr . "['" . addslashes($title3);
 											if($setting->show_num == 1){
@@ -126,7 +136,7 @@
 													}
 												}
 						// level four output (sub sub sub category)--------------------------------
-						            $ca4_result = mysql_query("SELECT title,id,pub_pri,rdmcode FROM photo_galleries where active = '1' and nest_under = '$ca3->id'" . $extrasql . " order by galorder", $db);
+						            $ca4_result = mysql_query("SELECT * FROM photo_galleries where active = '1' and nest_under = '$ca3->id'" . $extrasql . " order by galorder", $db);
 												$ca4_rows = mysql_num_rows($ca4_result);
 												if($ca4_rows == 0){
 												 	$output.= "],";
@@ -134,6 +144,12 @@
 												while($ca4 = mysql_fetch_object($ca4_result)){
 													$title4 = $ca4->title;
 													//addslashes($title4);
+                          if($_GET['lang'] != "English" )
+                          {
+                            if($ca4->{'title_'.$_GET['lang']} != "")
+                              $title4 = $ca4->{'title_'.$_GET['lang']};
+                          }
+                          
 													htmlspecialchars($title4);
 												$output.= $cr . "['" . addslashes($title4);
 											if($setting->show_num == 1){
@@ -155,7 +171,7 @@
 													}
 												}
 					 // level five output (sub sub sub sub category)------------------------------
-					 			        $ca5_result = mysql_query("SELECT title,id,pub_pri,rdmcode FROM photo_galleries where active = '1' and nest_under = '$ca4->id'" . $extrasql . " order by galorder", $db);
+					 			        $ca5_result = mysql_query("SELECT * FROM photo_galleries where active = '1' and nest_under = '$ca4->id'" . $extrasql . " order by galorder", $db);
 												$ca5_rows = mysql_num_rows($ca5_result);
 												if($ca5_rows == 0){
 												 	$output.= "],";
@@ -163,6 +179,11 @@
 												while($ca5 = mysql_fetch_object($ca5_result)){
 													$title5 = $ca5->title;
 													//addslashes($title5);
+                          if($_GET['lang'] != "English" )
+                          {
+                            if($ca5->{'title_'.$_GET['lang']} != "")
+                              $title5 = $ca5->{'title_'.$_GET['lang']};
+                          }
 													htmlspecialchars($title5);
 												$output.= $cr . "['" . addslashes($title5);
 											if($setting->show_num == 1){

@@ -147,7 +147,7 @@
 							$title2 = str_replace($replace_char, " ", $ids5[$key]);
 				?>
 								<td valign="top" width="<?php echo round(100/$setting->dis_columns); ?>%">
-									<table width="100%">
+									<table width="100px">
 										<tr>
 											<td align="center" valign="middle" height="<? echo $setting->thumb_width + 15; ?>" bgcolor="#F9F9F9" style="border: 1px solid #eeeeee; padding: 5px 0px 5px 0px;">
 												

@@ -52,24 +52,22 @@
 <html>
 	<head>
 		<script language=JavaScript src='./js/xns.js'></script>
+    <?php echo $script1; ?>
 <? print($head); ?>
-		<center>
-        <table cellpadding="0" cellspacing="0"><tr><td valign="top">
-		<table cellpadding="0" cellspacing="0" width="765" class="main_table" style="border: 5px solid #<? echo $border_color; ?>;">
+</head>
+		<div class="container">
 			<? include("header.php"); ?>
+			
+      <div id="main">
+				
+				<? include("i_gallery_nav.php"); ?>
+        
+        <div class="right-main">
+			
 			<tr>
-				<td class="left_nav_header"><? echo $misc_photocat; ?></td>
-				<td></td>
-				<? include("search_bar.php"); ?>
-			</tr>
-			<tr>
-				<td rowspan="1" valign="top"><? include("i_gallery_nav.php"); ?></td>
-				<td background="images/col2_shadow.gif" valign="top"><img src="images/col2_white.gif"></td>
 				<td valign="top" height="18">
-					<table cellpadding="0" cellspacing="0" width="560" height="100%">
-						<tr>
-							<td colspan="3" height="5"></td>
-						</tr>
+					<table cellpadding="0" cellspacing="0" width="560" >
+						
 						<tr>
 							<?php
 							$crumb = $search_gal_crumb_link;
@@ -77,14 +75,9 @@
 						?>
 						</tr>
 						<tr>
-							<td class="index_copy_area" colspan="3" height="4"></td>
-						</tr>						
-						<tr>
 							<td colspan="3" valign="top" height="100%" class="homepage_line">
 								<table width="100%" border="0">
-									<tr>
-										<td height="6"></td>
-									</tr>
+									
 									<tr>
 										<td class="gallery_copy">
 											<? copy_area(29,2); ?>
@@ -101,16 +94,12 @@
 											?>
 										</td>
 									</tr>
-									<tr>
-										<td style="padding: 10px;"></td>
-									</tr>
 								</table>
 							</td>
 						</tr>
 					</table>				
 				</td>
-			</tr>
-			<? include("footer.php"); ?>			
+			</tr>			
 		</table>
         </td>
         <td valign="top">
@@ -119,9 +108,13 @@
 					include('pf_feed.php');
 				}
 			?>
-        </td>
-        </tr></table>
-		</center>
+       </div> <!-- end class right-main -->
+       
+       <?php include('i_banner.php'); ?>
+       
+      </div><!-- end main id-->
+      </div> <!-- end container class -->
+      <? include("footer.php"); ?>
 	</body>
 </html>
 <?

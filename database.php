@@ -4,6 +4,11 @@
 		$db_password	= "root";	// DATABASE PASSWORD
 		$db_host		= "localhost";		// DATABASE HOST
 
+    //$db_name		= "irmuun";	// DATABASE NAME
+		//$db_username	= "irmuun";	// DATABASE USERNAME
+		//$db_password	= "Irmuun321";	// DATABASE PASSWORD
+		//$db_host		= "irmuun.db.7895615.hostedresource.com";		// DATABASE HOST
+    //die("blah blah");
 		error_reporting(0);
 		if(!$db = mysql_connect($db_host, $db_username, $db_password)){
 			echo "<span style=\"font-family: verdana; font-size: 12px; color: #ff0000;\"><strong>PhotoStore has encountered a serious error:</strong><br />Could not connect to the database: " . mysql_error() . "</span>";

@@ -83,8 +83,29 @@
 	}
 	
 		// HEAD
-		$head = $page_title . $metatags . $style . $body;
-		
+		//$head = $page_title . $metatags . $style . $body;
+    $style1 = "<link rel=\"stylesheet\" href=\"blueprint/screen.css\" media=\"screen\"/>
+                <link rel=\"stylesheet\" href=\"blueprint/print.css\" media=\"print\"/>
+                <link rel=\"stylesheet\" href=\"styles/css.css\" />";
+    $script1 = "<script src=\"js/js/jquery-1.5.js\" type=\"text/javascript\"></script>";            
+    
+    /*
+    $script1 .= "<script type=\"text/javascript\" >
+      $(document).ready(function() {
+        $(\".tab-content\").hide();
+        $(\"ul.tab li:first\").addClass(\"active\").show(); 
+        $(\".tab-content:first\").show(); 
+        $(\"ul.tab li\").click(function() {
+          $(\"ul.tab li\").removeClass(\"active\"); 
+          $(this).addClass(\"active\"); 
+          $(\".tab-content\").hide(); 
+          var activeTab = $(this).find(\"a\").attr(\"href\"); 
+          $(activeTab).fadeIn();
+          return false;
+        });
+      });
+    </script>"; */
+		$head = $page_title. $metatags. $style1 ;//. $script1;
 		// PUT CHECKOUT SYSTEM INTO TEST/DEMO MODE BY SETTING $checkout_demo_mode = 1
 		$checkout_demo_mode = 0;
 		
@@ -202,4 +223,6 @@
 		$pf_articles = "";// NUMBER OF ARICLES TO DISPLAY
 		$pf_titleonly = 0;// ONLY SHOW NEWS TITLES AND NOT DESCRIPTIONS 0 = OFF / 1 = ON
 		$pf_ref = $_SERVER['HTTP_HOST'];
+    
+    
 ?>

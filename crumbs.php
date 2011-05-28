@@ -1,7 +1,7 @@
-						<tr> 
-							<td class="crumb" width="300">
-								<a href="index.php" class="crumb_links"><?PHP echo $crumbs_home; ?></a> <img src="images/nav_arrow.gif" align="absmiddle" />
-								<?php
+<div class="most-content">
+            <ul class="tab">
+              <li class="active">
+              <?php
 									if($_GET['gid']){
 										$crumb_array_name = array();
 										//$crumb_array_id = array();
@@ -32,16 +32,16 @@
 												$pri_gal_result = mysql_query("SELECT pub_pri,rdmcode FROM photo_galleries where id = '$key'", $db);
 												$pri_gal = mysql_fetch_object($pri_gal_result);
 												if($pri_gal->pub_pri != 0){
-												echo "<a href=\"pri.php?gal=" . $pri_gal->rdmcode . "&gid=" . $key . "\" class=\"crumb_links\">" . $value . "</a> ";
+												echo "<li class=\"active\"><a href=\"pri.php?gal=" . $pri_gal->rdmcode . "&gid=" . $key . "\" class=\"crumb_links\">" . $value . "</a></li> ";
 											} else {
 												mod_gallerylink($value,$key,"crumb_links");
 											}
-												echo " <img src=\"images/nav_arrow.gif\" align=\"absmiddle\" /> ";
+												//echo " <img src=\"images/nav_arrow.gif\" align=\"absmiddle\" /> ";
 											} else {
 												$pri_gal1_result = mysql_query("SELECT pub_pri,rdmcode FROM photo_galleries where id = '$key'", $db);
 												$pri_gal1 = mysql_fetch_object($pri_gal1_result);
 												if($pri_gal1->pub_pri != 0){
-												echo "<a href=\"pri.php?gal=" . $pri_gal1->rdmcode . "&gid=" . $key . "\" class=\"crumb_links\">" . $value . "</a> ";
+												echo "<li class=\"active\"><a href=\"pri.php?gal=" . $pri_gal1->rdmcode . "&gid=" . $key . "\" class=\"crumb_links\">" . $value . "</a> </li>";
 											} else {
 												mod_gallerylink($value,$key,"crumb_links");
 												}
@@ -49,11 +49,23 @@
 											$thru++;
 										}
 									} else {
-										echo $crumb;
+										echo "<a>$crumb</a>";
 									}
 								?>
-								
+                </li>
+								<!--
 							</td>
 							<td align="left" class="featured_news_header" valign="top"><img src="images/triangle_1.gif"></td>
 							<td class="other_photos_tabs2" nowrap><a href="new_photos.php" class="white_bold_link"><? echo $crumbs_newest; ?></a> &nbsp; <a href="popular_photos.php" class="white_bold_link"><? echo $crumbs_popular; ?></a></td>
-						</tr>
+						</tr>-->
+            <?php
+              $currentFile = $_SERVER["PHP_SELF"];
+              $parts = Explode('/', $currentFile);
+              $current_page =  $parts[count($parts) - 1]; 
+            ?>
+            <div style="float:right;">
+                        <li> <a href="new_photos.php" ><? echo $crumbs_newest; ?></a></li>
+                        <li><a href="popular_photos.php"><? echo $crumbs_popular; ?></a></li>
+                    </div>
+                    </ul>
+             </div>

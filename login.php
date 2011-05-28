@@ -25,26 +25,16 @@
 <html>
 	<head>
 		<? print($head); ?>
-		<center>
+	 <div class="container">
+    <? include("header.php"); ?>
+		<div id="main">
+			<? include("i_gallery_nav.php"); ?>
+      <div class="right-main">
+        <div class="r-left-main">
+        
+        
 		<table cellpadding="0" cellspacing="0" width="765" class="main_table" style="border: 5px solid #<? echo $border_color; ?>;">
-			<? include("header.php"); ?>
-			<tr>
-				<td class="left_nav_header"><? echo $misc_photocat; ?></td>
-				<td></td>
-				<? include("search_bar.php"); ?>
-			</tr>
-			<tr>
-				<td rowspan="1" valign="top"><? include("i_gallery_nav.php"); ?></td>
-				<td background="images/col2_shadow.gif" valign="top"><img src="images/col2_white.gif"></td>
-				<td valign="top" height="18">
-					<table cellpadding="0" cellspacing="0" width="560" height="100%">
-						<tr>
-							<td colspan="3" height="5"></td>
-						</tr>
-						<?php
-							$crumb = $login_member_login;
-							include("crumbs.php");
-						?>
+
 						<tr>
 							<td class="index_copy_area" colspan="3" height="4"></td>
 						</tr>						
@@ -99,9 +89,10 @@
 													<td><font color="#ff0000"><b><? echo $login_login; ?>
                               
                               </font>
-                              <?php if(1): ?>
-                                <a href="./photographers/">Зурагчны хэсэг</a>
-                              <?php endif; ?>
+                              
+                              <?php 
+                                
+                              ?>
                           </td>
 												</tr>
 												<? } else { ?>
@@ -132,10 +123,12 @@
 						</tr>
 					</table>				
 				</td>
-			</tr>
-			<? include("footer.php"); ?>			
+			</tr>		
 		</table>
-		</center>
+		  </div> <!-- end class right-main -->
+      </div><!-- end main id-->
+      </div> <!-- end container class -->
+      <? include("footer.php"); ?>
 	</body>
 </html>
 <?

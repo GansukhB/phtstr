@@ -15,7 +15,8 @@
 	
 	//GET PHOTO PATH
 	$stock_photo_path = "./" . $setting->photo_dir . "/";
-	
+	//$stock_photo_path = "../". "stock_photos1" . "/";
+  
 	//SECURITY CHECK FOR WATERMARK
 	if($setting->show_watermark_thumb == 1){
 		echo "watermarking is on, you can't bypass it sorry!";
@@ -52,8 +53,11 @@
 	//CREATE THE IMAGE FOR DISPLAY
 	$photoImage = ImageCreateFromJPEG($src);
 	$dst_img = ImageCreateTrueColor($width, $height);
+  
 	imagecopyresampled($dst_img, $photoImage, 0, 0, 0, 0, $width, $height, imagesx($photoImage), imagesy($photoImage));
-	
+  
+  
+  
 	imagejpeg($dst_img,'', $imgquality);
 	imagedestroy($photoImage);
 	imagedestroy($dst_img);

@@ -47,6 +47,17 @@
 	$dst_img = ImageCreateTrueColor($width, $height);												
 	imagecopyresampled($dst_img, $photoImage, 0, 0, 0, 0, $width, $height, imagesx($photoImage), imagesy($photoImage));
 	
+  $watermark = "./images/watermark";
+  
+  if($width < $height)
+  {
+    $watermark .= "_v";
+  }
+    $watermark .= ".png"; 
+  $logoImage = ImageCreateFromPNG($watermark);
+  
+	imagecopyresampled($dst_img, $logoImage, 0, 0, 0, 0, $width, $height, imagesx($logoImage), imagesy($logoImage));
+  
 	imagejpeg($dst_img,'', $imgquality);
 	imagedestroy($photoImage); 
 	imagedestroy($dst_img);

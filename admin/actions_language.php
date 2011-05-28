@@ -39,10 +39,28 @@
         $result  = mysql_query($query);
         if($result){
           echo "database changed";
-          header("Location: mgr.php?nav=0");
+          //header("Location: mgr.php?nav=0");
         }else{
           echo "database couldn't changed".mysql_error();
         }
+        
+        $query = "ALTER TABLE `news` ADD `article_$lang` TEXT NOT NULL AFTER `id`, ADD `title_$lang` VARCHAR(255) NOT NULL AFTER `id`";
+        $result  = mysql_query($query);
+        if($result){
+          echo "database changed";
+          //header("Location: mgr.php?nav=0");
+        }else{
+          echo "database couldn't changed".mysql_error();
+        }
+       
+        $query = "ALTER TABLE `copy_areas` ADD `article_$lang` TEXT NOT NULL AFTER `id`, ADD `title_$lang` VARCHAR(255) NOT NULL AFTER `id`";
+        $result  = mysql_query($query);
+        if($result){
+          echo "database changed";
+          header("Location: mgr.php?nav=0");
+        }else{
+          echo "database couldn't changed".mysql_error();
+        } 
       }
       else
       {

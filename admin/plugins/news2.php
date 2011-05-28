@@ -281,7 +281,40 @@
 								}
 							?>
 							<td align="center" class="listing" onClick="window.location.href='mgr.php?nav=<? echo $nav; ?>&item_id=<? echo $news->id; ?>&order_by=<? echo $order_by; ?>&order_type=<? echo $order_type; ?>'">
-								<a href="mgr.php?nav=<? echo $nav; ?>&item_id=<? echo $news->id; ?>&order_by=<? echo $order_by; ?>&order_type=<? echo $order_type; ?>" class="edit_links">[edit]</a>
+								<!--
+                <a href="mgr.php?nav=<? echo $nav; ?>&item_id=<? echo $news->id; ?>&order_by=<? echo $order_by; ?>&order_type=<? echo $order_type; ?>" class="edit_links">
+                [edit]</a>-->
+                <?php
+                        $language_dir = "../language";
+                        $l_real_dir = realpath($language_dir);
+                        $l_dir = opendir($l_real_dir);
+                        $i = 0;
+                        // LOOP THROUGH THE PLUGINS DIRECTORY
+                        $lfile = array();
+                        while(false !== ($file = readdir($l_dir))){
+                        $lfile[] = $file;
+                        }
+                        //SORT THE CSS FILES IN THE ARRAY
+                        sort($lfile);
+                      ?>
+
+                      
+                      <?php
+                        //GO THROUGH THE ARRAY AND GET FILENAMES
+                        foreach($lfile as $key => $value){
+                          //IF FILENAME IS . OR .. OR SLIDESHOW.CSS DO NO SHOW IN THE LIST
+                          $fname = strip_ext($lfile[$key]);
+                          if($fname != ".." && $fname != "." && trim($fname) != ""){
+                              
+                       ?>
+                       <a href="mgr.php?nav=<? echo $nav; ?>&item_id=<? echo $news->id; ?>&order_by=<? echo $order_by; ?>&order_type=<? echo $order_type; ?>&lang=<?php echo $fname; ?>" class="edit_links">
+                        [edit]<?php echo $fname ;?>
+                       </a>
+                       <?php       
+                          }
+                        }
+                          
+                      ?>
 							</td>
 							<td align="center" class="listing">
 								<input name="<? echo $news->id; ?>" type="checkbox" value="1">
@@ -438,12 +471,13 @@
 							$this_year = substr($news->publish_date, 0, 4);
 							echo "<form name=\"data_form\" action=\"" . $actions_page . "?pmode=save_edit\" method=\"post\" ENCTYPE=\"multipart/form-data\">";
 							echo "<input type=\"hidden\" value=\"" . $news->id . "\" name=\"item_id\">";
-							echo "<input type=\"hidden\" value=\"mgr.php?nav=" . $nav . "&message=saved&item_id=" . $item_id . "\" name=\"return\">";
+							echo "<input type=\"hidden\" value=\"mgr.php?nav=" . $nav . "&message=saved&item_id=" . $item_id . "&lang=".$_GET['lang']."\" name=\"return\">";
 						}
 					?>
 					<input type="hidden" value="<? echo $reference; ?>" name="reference">
 					<input type="hidden" value="<? echo $file_path; ?>" name="file_path">
 					<input type="hidden" value="<? echo $image_path; ?>" name="image_path">
+          <input type="hidden" value="<? echo $_GET['lang']; ?>" name="language" readonly>
 					<tr>
 						<td bgcolor="#3C6ABB" align="center" style="padding: 3px; border-bottom: 1px solid #355894;">
 							<table cellpadding="0" cellspacing="0" width="95%">
@@ -483,19 +517,19 @@
 								<tr>
 									<td bgcolor="#5E85CA" class="data_box">
 										<font face="arial" color="#ffffff" style="font-size: 11;"><b>Title</b><br>(Can NOT use: /"\|][;:)(*^%$#@<> in the title.)<br>
-										<input type="text" name="title" value="<? echo $news->title; ?>" style="font-size: 13; font-weight: bold; width: 100%; border: 1px solid #000000;" maxlength="150">
+										<input type="text" name="title" value="<? if($_GET['lang'] == 'English') echo $news->title; else  echo $news->{ 'title_'.$_GET['lang']}; ?>" style="font-size: 13; font-weight: bold; width: 100%; border: 1px solid #000000;" maxlength="150">
 									</td>
 								</tr>
 								<? if($setting->editor == 1 and $editor == 1){ ?>
 								<tr>
 									<td bgcolor="#5E85CA" class="data_box">
-										<? $sContent = $news->article; ?>
+										<? if($_GET['lang'] == 'English') $sContent = $news->article; else $sContent = $news->{'article_'.$_GET['lang']}; ?>
 										<font face="arial" color="#ffffff" style="font-size: 11;"><b>Article:</b><br>
 										<?php											
 											$agent = $_SERVER['HTTP_USER_AGENT'];
 											if(eregi("mac", $agent) && $setting->force_mac == 0){
 										?>
-											<textarea name="article" id="article" rows=8 cols=30 style="width: 100%"><?php echo $sContent; ?></textarea>										
+											<textarea name="article" id="article" rows=8 cols=30 style="width: 100%"><?php  echo $sContent;  ?></textarea>										
 										<?php
 											} else {
 										?>										

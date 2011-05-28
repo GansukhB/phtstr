@@ -36,11 +36,14 @@
   }
   
 ?>
+<!--
 <?php
 	if($setting->show_abanner and $setting->abanner_name){
 		$top_banner= explode("-",$setting->abanner_name);
 		if($top_banner[1] < 99){
 ?>
+
+
 <tr>
    <td colspan="3" align="right">
     </td>
@@ -128,4 +131,44 @@
 		  ?>
 					</table>
 				</td>
-			</tr>
+			</tr>-->
+      <?php
+      $qry = "SELECT COUNT(id) as cnt FROM photo_package WHERE active=1";
+      $rslt = mysql_query($qry);
+      
+      $allphotos = mysql_fetch_assoc($rslt);
+      $allphotos = $allphotos['cnt'];
+      ?>
+        <div class="header">
+        	<div class="top-header">
+            	<div class="logo"><a href="index.php"><img src="images/logo.png"></a></div>
+                <div class="text"><?php echo $allphotos; ?> Stock photos</div>
+                <div class="search-main">
+                	<form action="search.php" id="SearchForm">
+                        <div>
+                            <label>
+                            <input type="textbox" value="Search..." name="search" class="input">
+                            </label>
+                            <input type="image" src="images/input-img.gif" class="button">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--top-header tugsgul-->
+            <!--menu ehlel-->
+            <div class="menu" style="text-transform:uppercase;">
+            	<ul>
+                	<li><a href="index.php"><?php echo $top_home; ?></a></li> 
+                    <li><a href="faqs.php"><?php echo $top_faq; ?></a></li>  
+                    <li><a href="./blog"><?php echo $top_news; ?></a></li>  
+                    <li><a href="#">Уралдаан</a></li>  
+                    <li><a href="order_status.php"><?php echo $order_crumb_link; ?></a></li>  
+                    <?php if(!$_SESSION['mem_name']): ?>
+                      <li><a href="subscribe.php"><?php echo $left_login; ?></a></li> 
+                    <?php else: ?>
+                      <li><a href="public_actions.php?pmode=logout"><?php echo $left_logout ?></a>
+                    <?php endif; ?>
+                </ul>
+            </div>
+            <!--menu tugsgul-->
+        </div>

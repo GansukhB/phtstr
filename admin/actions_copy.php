@@ -113,8 +113,17 @@
 		case "save_edit":
 			//ADDED IN PS350 TO CLEANUP THE DATA ENTRY
 			$title = cleanup($title);
+      
+      $title_field = 'title';
+      $article_field = 'article'; 
+      
+      if($_POST['language'] != 'English')
+      {
+        $title_field .= '_'.$_POST['language'];
+        $article_field .= '_'.$_POST['language'];
+      }
 			//ADD EDITED DATA TO THE DATABASE
-			$sql = "UPDATE copy_areas SET title='$title',article='$article',image_upload='$set_image_upload',image_area_name='$set_image_area_name',image_w='$set_image_width',image_h='$set_image_height',file_upload='$set_file_upload',file_area_name='$set_file_area_name',display='$display' WHERE id = '$item_id'";
+			$sql = "UPDATE copy_areas SET $title_field='$title',$article_field='$article',image_upload='$set_image_upload',image_area_name='$set_image_area_name',image_w='$set_image_width',image_h='$set_image_height',file_upload='$set_file_upload',file_area_name='$set_file_area_name',display='$display' WHERE id = '$item_id'";
 			$result = mysql_query($sql);
 			
 			// UPLOAD FILE

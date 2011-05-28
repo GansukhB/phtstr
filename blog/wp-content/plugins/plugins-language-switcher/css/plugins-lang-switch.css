@@ -1,0 +1,62 @@
+/* 
+    Document   : admin-lang-switch.css
+    Created on : 04.05.2010
+    Author     : Vladimir Garagulya
+    Description:
+        Admin Language Switcher WordPress plugin Admin Settings Page CSS
+*/
+
+/* 
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+.txt_left {
+  text-align: left;
+}
+.txt_center {
+  text-align: center;
+}
+.txt_right {
+  text-align: right;
+}
+
+.form_color_row {
+  float: left;
+  display: block;  
+  margin-bottom: 5px;
+  width: 100%;
+  clear: both;
+}
+
+img.input_radio {
+	vertical-align: middle;
+}
+
+a.plugins_lang_switch_rsb_link {
+	padding:4px;
+	display:block;
+	padding-left:25px;
+	background-repeat:no-repeat;
+	background-position:5px 50%;
+	text-decoration:none;
+	border:none;
+}
+
+a.plugins_lang_switch_rsb_link:hover {
+	border-bottom-width:1px;
+}
+
+.plugins_lang_switch-submit {
+  width: 130px;
+}
+
+input.warning:hover, a.warning:hover {
+	color: red;
+}
+
+.fli {
+  float: left;
+  display: inline;
+}
+

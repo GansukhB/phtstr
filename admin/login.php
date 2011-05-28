@@ -1,5 +1,6 @@
 <?
 	
+  
 	error_reporting(0);
 	
 	include( "config_mgr.php" );

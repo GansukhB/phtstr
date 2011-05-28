@@ -14,17 +14,19 @@
 	
 	$photocount=1;
 	
-	$gallery_result = mysql_query("SELECT id FROM photo_galleries where active = '1' and pub_pri = '0' and free = '0' and monthly = '0' and yearly = '0'", $db);
+	$gallery_result = mysql_query("SELECT id FROM photo_galleries where active = '1' ", $db);// and pub_pri = '0' and free = '0' and monthly = '0' and yearly = '0'", $db);
 	while($gallery = mysql_fetch_object($gallery_result)){
 		$approved_cats[] = $gallery->id;
 	}
 	
 	$approved_cats = implode(", ", $approved_cats);
 	
-	$package_rows = mysql_result(mysql_query("SELECT COUNT(id) FROM photo_package where active = '1' and photog_show = '1' and photographer = '$_REQUEST[photogid]' and gallery_id IN ($approved_cats)"),0);
+  $photogid = $_GET['photogid'];
+  
+	$package_rows = mysql_result(mysql_query("SELECT COUNT(id) FROM photo_package where active = '1' and photog_show = '1' and photographer = '$photogid' and gallery_id IN ($approved_cats)"),0);
 	$pages = ceil($package_rows/$perpage);
 	
-	$package_result = mysql_query("SELECT id,title,description,gallery_id,code FROM photo_package where active = '1' and photog_show = '1' and photographer = '$_REQUEST[photogid]' and gallery_id IN ($approved_cats) order by added desc LIMIT $startrecord,$perpage", $db);
+	$package_result = mysql_query("SELECT id,title,description,gallery_id,code FROM photo_package where active = '1' and photog_show = '1' and photographer = '$photogid' and gallery_id IN ($approved_cats) order by added desc LIMIT $startrecord,$perpage", $db);
 	while($package = mysql_fetch_object($package_result)){
 	
 

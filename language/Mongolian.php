@@ -214,12 +214,12 @@ $slide_stop_looping = "Stop Looping";
 $slide_start_loop = "Loop";
 
 //PLUGNPAY ERROR PAGE
-$pp_error_crumb_link = "My Cart - ERROR";
-$pp_error_main_message = "An error occured while processing your credit card.";
+$pp_error_crumb_link = "Миний сагс - АЛДАА";
+$pp_error_main_message = "Төлбөрийн картай холбоотой алдаа гарлаа";
 
 //PLUGNPAY CHECKOUT DETAILS
 $pp_crumb_link = "Миний сагс";
-$pp_enter_info_to_complete = "To complete your purchase please enter your payment information below and click submit.";
+$pp_enter_info_to_complete = "Төлбөр хийхийн тулд доор картын мэдээллээ оруулна уу.";
 $pp_order_total = "Бүгд: ";
 $pp_order_email = "<br>Имэйл:<br />";
 $pp_order_name = "<br>Нэр:<br />";
@@ -245,28 +245,28 @@ $paypal_sub_return_crumb_link = "Subscription";
 $plugnpay_ipn_sub_thank_you = "Thank you for your subscription order, we will contact you shortly by email.<br>You may return to our main site by clicking here <a href=\"index.php\">[Home]</a>.";
 
 //PHOTOGRAPHERS GALLERY
-$photog_list_crumb_link = "Photographers";
+$photog_list_crumb_link = "Гэрэл зурагчид";
 
 //ORDER STATUS PAGE
-$order_status_crumb_link = "My Order Status";
-$order_status_date = "Date";
-$order_status_order = "Order Number";
+$order_status_crumb_link = "Миний захиалгын төлөв";
+$order_status_date = "Огноо";
+$order_status_order = "Захиулгын тоо";
 
 //ORDER FORM PAGE
-$order_crumb_link = "Order";
-$order_special_notes = "Special Request / Notes:";
-$order_submit_form_button = "Submit Form";
+$order_crumb_link = "Захиалах";
+$order_special_notes = "Чухал хүсэлт/ Тэмдэглэл:";
+$order_submit_form_button = "Оруулах";
 $order_form_notice = "To complete your order please fill in the form and click submit!<br>EVERYTHING MUST BE CORRECT SO DOUBLE CHECK!<br>It is the only way to ship, and contact you!";
 
 //NEWS DETAILS PAGE
-$news_details_crumb_link = "News Details";
-$news_details_back_button = "[Back]";
+$news_details_crumb_link = "Мэдээний дэлгэрэнгүй";
+$news_details_back_button = "[Буцах]";
 
 //NEWS PAGE
-$news_crumb_link = "News";
+$news_crumb_link = "Мэдээ";
 
 //NEWEST PHOTOS PAGE
-$newest_crumb_link = "Newest Photos";
+$newest_crumb_link = "Шинэ зургууд";
 
 //MYGATE IPN
 $mygate_ipn_failed_message = "Sorry but the transaction failed for some unknown reason.";
@@ -279,26 +279,26 @@ $mygate_ipn_sub_thank_you = "Thank you for your subscription order. You will be 
 $mygate_ipn_sub_pending = "Your payment has either been denied or is still pending. We will contact you shortly. Return to our <a href=\"index.php\">home page</a>";
 
 //MY INFO PAGE
-$my_info_crumb_link = "My Info";
+$my_info_crumb_link = "Миний мэдээлэл";
 
 //MY DETAILS PAGE
-$my_details_profile = "Profile";
-$my_details_profile_text = "Edit your profile and click save.";
-$my_details_profile_saved = "<font color=\"FF0000\">Your changes have been saved.</font>";
-$my_details_save_button = "save";
+$my_details_profile = "Профайл";
+$my_details_profile_text = "Профайлаа өөрчлөөд хадгална уу.";
+$my_details_profile_saved = "<font color=\"FF0000\">Өөрчлөлтийг амжилттай хадгаллаа.</font>";
+$my_details_save_button = "Хадгалах";
 
 //CHECK / MONEY ORDER FINISH PAGE
-$cmo_process_order_message = "Processing order";
-$cmo_completed_order_message = "Complete";
-$cmo_thanks = "Thanks";
-$cmo_print_version = "<b>Printable version</b>";
-$cmo_your_order_is = "Thank you for your order, your order info is:";
-$cmo_order_date = "<b>Order Date:</b>";
-$cmo_order_email = "<b>Email:</b>";
-$cmo_order_method = "<b>Payment Method:</b>";
-$cmo_order_status = "<b>Order Status:</b>";
-$cmo_order_id = "<b>Order ID:</b>";
-$cmo_order_visitor_id = "<b>Visitor ID:</b>";
+$cmo_process_order_message = "Захиалгыг боловсруулж байна";
+$cmo_completed_order_message = "Дууслаа";
+$cmo_thanks = "Баярлалаа";
+$cmo_print_version = "<b>Хэвлэж болох хувилбар</b>";
+$cmo_your_order_is = "Захиалга өгсөнд баярлалаа. Захиалгын мэдээлэл:";
+$cmo_order_date = "<b>Захиалсан Огноо:</b>";
+$cmo_order_email = "<b>Имэйл:</b>";
+$cmo_order_method = "<b>Төлбөрийн хэлбэр:</b>";
+$cmo_order_status = "<b>Төлөв:</b>";
+$cmo_order_id = "<b>Захиалгын ID:</b>";
+$cmo_order_visitor_id = "<b>Зочны ID:</b>";
 $cmo_order_tracking = "<b>Tracking:</b>";
 $cmo_ups = "UPS:";
 $cmo_fedex = "FedEx:";
@@ -326,87 +326,87 @@ $cmo_sub_order = "Subscription Order<br>";
 $cmo_sub_id = "Subscription ID = ";
 
 //LOGIN PAGE
-$login_member_login = "Member Login";
-$login_logged_thanks = "Thanks for signing up for a free account, you may now log in.";
-$login_cart_login = "Now you can login and you will be returned to the shopping cart to checkout.";
-$login_login_failed = "<b>Email/Password incorrect. If you have forgotten your password please <a href=\"recover_password.php\">click here</a>. If you are not yet a member <a href=\"subscribe.php\">click here</a>.</b>";
+$login_member_login = "Гишүүн нэвтрэх";
+$login_logged_thanks = "Энгийн хэрэглчээр бүртгүүллээ. Нэвтэрч болно.";
+$login_cart_login = "Худалдаа хийхийн тулд одоо нэвтрэх боломжтой.";
+$login_login_failed = "<b>Имэйл/НууцҮг буруу байна. Нууц үгээ мартсан бол <a href=\"recover_password.php\">энд</a> дар. Хараахан манай элсээгүй бол <a href=\"subscribe.php\">энд</a> дарж бүртгүүлнэ үү.</b>";
 $login_pending = "<b>You have not yet paid for your subscription or payment is still pending.</b>";
 $login_logged_out = "<b>You have been logged out.</b>";
-$login_login = "Та амжилттай  нэвтэрсэн байна..<br>Холбоосууд:<br><b><a href=\"cart.php\">Сагсыг харах</a></b><br><b><a href=\"lightbox.php\">My Lightbox</a></b><br><b><a href=\"order_status.php\">Миний захиалгууд</a></b>";
+$login_login = "Та амжилттай  нэвтэрсэн байна..<br>Холбоосууд:<br><b><a href=\"cart.php\">Сагсыг харах</a></b><br><b><a href=\"lightbox.php\">Миний цуглуулга</a></b><br><b><a href=\"order_status.php\">Миний захиалгууд</a></b>";
 $login_form_submit_button = "Оруулах";
 
 //LIGHTBOX PAGE
-$lightbox_my_lightbox = "My Lightbox";
-$lightbox_create_new = "<b>Create New Lightbox:</b>";
+$lightbox_my_lightbox = "Миний цуглуулга";
+$lightbox_create_new = "<b>Цуглуулга үүсгэх:</b>";
 $lightbox_go_button = "GO";
-$lightbox_select_one = "<b>Select a Lightbox:</b><br />";
-$lightbox_select_lightbox = "SELECT A LIGHTBOX   ";
-$lightbox_email_it = "<b>Email This Lightbox:</b><br />(use , in between email addresses Example: john@doe.com , jane@doe.com)<br />";
-$lightbox_message_optional = "<b>Message to email with lightbox:</b> (Optional)<br />";
-$lightbox_removed = "<b>The image has been removed</b>";
-$lightbox_added = "<b>The image has been added</b>";
-$lightbox_delete_all = "<b>All photos have been deleted from this lightbox</b>";
-$lightbox_need_to_create = "<b>You need to select or create a lightbox to add photos to</b>";
-$lightbox_is_created = "<b>New lightbox is created and ready to use</b>";
-$lightbox_deleted_lightbox = "<b>The lightbox was deleted</b>";
-$lightbox_was_emailed = "<b>The lightbox was emailed</b>";
+$lightbox_select_one = "<b>Цуглуулгаа сонго:</b><br />";
+$lightbox_select_lightbox = "Цуглуулгаа сонго   ";
+$lightbox_email_it = "<b>Цуглуулгыг имэйлээр илгээх:</b><br />(use , in between email addresses Example: john@doe.com , jane@doe.com)<br />";
+$lightbox_message_optional = "<b>Цуглуулгатай хамт зурвас илгээх:</b> (боломжтой)<br />";
+$lightbox_removed = "<b>Зураг хасагдлаа</b>";
+$lightbox_added = "<b>Зураг нэмлээ</b>";
+$lightbox_delete_all = "<b>Цуглуулгын бүх зургийг арилгалаа</b>";
+$lightbox_need_to_create = "<b>Зураг нэмэх цомгоос сонгох эсвэл шинээр үүсгэх хэрэгтэй</b>";
+$lightbox_is_created = "<b>Шинэ цомог бэлэн боллоо.</b>";
+$lightbox_deleted_lightbox = "<b>Цомгийг устгалаа</b>";
+$lightbox_was_emailed = "<b>Цомгийг имэйлээр илгээлээ</b>";
 $lightbox_please_select = "<b>Please select a lightbox from the drop down list, or create a new one and then select it</b>";
 $lightbox_return_to_page = "[Return to last image you were viewing]";
-$lightbox_page_name = "Lightbox: ";
-$lightbox_no_image = "<b>You have no images in this lightbox</b>";
-$lightbox_delete_it_now = "Delete this lightbox ";
-$lightbox_lightbox_name = "Lightbox: ";
-$lightbox_click_for_details = "  Click for details";
-$lightbox_remove_photo = "<b>Remove from Lightbox</b>";
-$lightbox_photo_title = "<b>Photo Title:</b>";
-$lightbox_photo_description = "<b>Description:</b>";
-$lightbox_delete_all_photos = "Delete all images in this lightbox";
-$lightbox_delete_this_lightbox = "Delete this lightbox ";
+$lightbox_page_name = "Цомог: ";
+$lightbox_no_image = "<b>Цомогт зураг алга</b>";
+$lightbox_delete_it_now = "Энэ цомгийг устгах ";
+$lightbox_lightbox_name = "Цомог: ";
+$lightbox_click_for_details = "  Дэлгэрэнгүй";
+$lightbox_remove_photo = "<b>Цомгоос хасах</b>";
+$lightbox_photo_title = "<b>Зургийн гарчиг:</b>";
+$lightbox_photo_description = "<b>Товч тайлбар:</b>";
+$lightbox_delete_all_photos = "Цомгийг хоослох";
+$lightbox_delete_this_lightbox = "Цомгийг устгах ";
 
 //LICENSING PAGE
 $license_crumb = "Licensing";
 
 //HOME PAGE
 $homepage_news = "&nbsp; Latest News";
-$homepage_featured = "Featured Photos";
-$homepage_newest = "Newest Photos";
-$homepage_popular = "Most Popular Photos";
+$homepage_featured = "Онцлох зургууд";
+$homepage_newest = "Шинэ зургууд";
+$homepage_popular = "Олонд танигдсан зургууд";
 
 //IMAGE DISPLAY MESSAGES
 $image_no_access = "Sorry image can't be shown because watermarking is turned on for thumbnail display.";
 
 //SEARCH PAGE AREA
-$search_gal_crumb_link = "Search Results";
-$search_gal_rating = "<br>Rating: ";
-$search_gal_rate_member = "<br>Rating: 0.0";
-$search_gal_details = "Photo Details";
-$search_gal_viewed = "Viewed: ";
-$search_gal_alt_remlightbox = "Remove From Lightbox";
-$search_gal_alt_addlightbox = "Add To Lightbox";
-$search_gal_results = "Results: ";
-$search_gal_photo = "Photos";
-$search_gal_pages = "Pages";
-$search_gal_page = "Page:";
-$search_gal_previous = "Previous";
-$search_gal_next = "Next";
-$search_gal_sub_cat = "Sub Categories of ";
-$search_gal_no_photo = "There were no photos found. Please try searching again.";
+$search_gal_crumb_link = "Хайлтын үр дүн";
+$search_gal_rating = "<br>Үнэлгээ: ";
+$search_gal_rate_member = "<br>Үнэлгээ: 0.0";
+$search_gal_details = "Зургийн дэлгэрэнгүй";
+$search_gal_viewed = "Үзсэн: ";
+$search_gal_alt_remlightbox = "Цомгоос хасах";
+$search_gal_alt_addlightbox = "Цомог руу нэмэх";
+$search_gal_results = "Үр дүн: ";
+$search_gal_photo = "Зургууд";
+$search_gal_pages = "Хуудсууд";
+$search_gal_page = "Хуудаё:";
+$search_gal_previous = "Өмнөх";
+$search_gal_next = "Дараах";
+$search_gal_sub_cat = "Дэд төрөл ";
+$search_gal_no_photo = "Зураг олдсонгүй өөр хайлт хийнэ үү.";
 
 //POPULAR PHOTO GALLERY
-$popular_gal_rating = "<br>Rating: ";
-$popular_gal_rate_member = "<br>Rating: 0.0";
-$popular_gal_details = "Photo Details";
+$popular_gal_rating = "<br>Үнэлгээ: ";
+$popular_gal_rate_member = "<br>Үнэлгээ: 0.0";
+$popular_gal_details = "Зургийн дэлгэрэнгүй";
 $popular_gal_viewed = "Viewed: ";
-$popular_gal_alt_remlightbox = "Remove From Lightbox";
-$popular_gal_alt_addlightbox = "Add To Lightbox";
-$popular_gal_results = "Results: ";
-$popular_gal_photo = "Photos";
-$popular_gal_pages = "Pages";
-$popular_gal_page = "Page:";
-$popular_gal_previous = "Previous";
-$popular_gal_next = "Next";
-$popular_gal_sub_cat = "Sub Categories of ";
-$popular_gal_no_photo = "There are no photos in this category";
+$popular_gal_alt_remlightbox = "Цомгоос хасах";
+$popular_gal_alt_addlightbox = "Цомогт нэмэх";
+$popular_gal_results = "Үр дүн: ";
+$popular_gal_photo = "Зураг";
+$popular_gal_pages = "Хуудас";
+$popular_gal_page = "Хуудас:";
+$popular_gal_previous = "Өмнөх";
+$popular_gal_next = "Дараах";
+$popular_gal_sub_cat = "Дэд төрөл ";
+$popular_gal_no_photo = "Энэ төрлөөс өөр зураг олдсонгүй";
 
 //PHOTOGRAPHERS PHOTO GALLERY
 $photog_gal_crumb_link = "Гэрэл зурагчид";

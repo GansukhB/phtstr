@@ -1530,7 +1530,12 @@
 						$ca_result = mysql_query("SELECT * FROM copy_areas where id = '$copy_area_id'", $db);
 						$ca_rows = mysql_num_rows($ca_result);
 						$ca = mysql_fetch_object($ca_result);
-						$new_copy = str_replace("{COMPANY_NAME}", $setting->site_title, $ca->article);
+            $article = $ca->article;
+            if($_SESSION['lang'] != 'English')
+            {
+              $article = $ca->{'article_'.$_SESSION['lang'] };
+            }
+						$new_copy = str_replace("{COMPANY_NAME}", $setting->site_title, $article);
 						echo $new_copy;
 				break;
 				
@@ -2048,10 +2053,15 @@
       $result = mysql_query($query);
       $user_id = 0;
       $user_name = "";
+      
+      $photographer = array();
+      
       while($pkg = mysql_fetch_object($result) )
       {
         $user_id = $pkg->user_uploaded;
+        
       }
+      array_push($photographer, $user_id);
       
       $query = "SELECT * FROM photographers WHERE id = '$user_id'";
       $result = mysql_query($query);
@@ -2059,6 +2069,8 @@
       {
         $user_name = $user->name;
       }
-      return $user_name;
+      array_push($photographer, $user_name);
+      
+      return $photographer;
     }
 ?>

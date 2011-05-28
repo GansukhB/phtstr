@@ -16,6 +16,8 @@ function onItemSelectHandler (o_item) {
 }
 </script>
 <?PHP } ?>
+
+<!--
 <div name="gallery_nav" id="gallery_nav" nowrap>
 	<table cellpadding="0" cellspacing="0" width="200" style="border: 1px solid #eeeeee;">
 	<?
@@ -57,7 +59,7 @@ function onItemSelectHandler (o_item) {
 	  	<tr>
 			<td style="padding-left: 0px;" class="gallery_nav">
 			<?
-			include("tree.php");
+			//include("tree.php");
 			?>
 			</td>
 		</tr>
@@ -549,3 +551,73 @@ function onItemSelectHandler (o_item) {
 	?>
 	</table>
 </div>
+-->
+<div class="left-main">
+            	<h1><?php echo $misc_photocat; ?></h1>
+                <!--left menu ehlel-->
+                <div class="left-menu">
+                	<ul>
+                    <?php 
+                      $query = "SELECT * FROM photo_galleries ORDER BY title";
+                      if($_SESSION['lang'])
+                      {
+                        //$query .= '_'.$_SESSION['lang'];
+                      }
+                      $result = mysql_query($query);
+                      
+                    ?>
+                    <?php while($item = mysql_fetch_object($result)): ?>
+                      <li><a href="gallery.php?gid=<?php echo $item->id; ?>"><?php 
+                        if($_SESSION['lang'] != 'English'){
+                          if(trim($item->{ 'title_'.$_SESSION['lang']}) != "")
+                            echo $item->{ 'title_'.$_SESSION['lang']};
+                          else echo $item->title;
+                        }
+                        else echo $item->title;
+                        ?>
+                      </a></li>
+                    <?php endwhile; ?>
+                  </ul>
+                </div>
+                <div class="left-search-main">
+                  <div class="top-bg"></div>
+                    <div class="main">
+                      <form name="select_lang" method="post" action="public_actions.php?pmode=select_lang">
+                      <input type="hidden" name="return" value="<? echo $return_url; ?>">
+                      <?PHP echo $left_select_language; ?><br>
+                      <select name="lang" style="font-size: 10; font-weight: bold; width: 150; border: 1px solid #000000;" onchange="document.select_lang.submit()">
+                      <?
+                        $language_dir = "language";
+                        $l_real_dir = realpath($language_dir);
+                        $l_dir = opendir($l_real_dir);
+                        // LOOP THROUGH THE PLUGINS DIRECTORY
+                        $lfile = array();
+                        while(false !== ($file = readdir($l_dir))){
+                          $lfile[] = $file;
+                        }
+                        //SORT THE CSS FILES IN THE ARRAY
+                        sort($lfile);
+                        //GO THROUGH THE ARRAY AND GET FILENAMES
+                        foreach($lfile as $key => $value){
+                        //IF FILENAME IS . OR .. DO NO SHOW IN THE LIST
+                        $fname = strip_ext($lfile[$key]);
+                        if($fname != ".." && $fname != "."){
+                          if($_SESSION['lang'] == $fname){
+                            echo "<option selected>" . $fname . "</option>";
+                          } elseif(trim($fname) != "") {
+                            echo "<option>" . $fname . "</option>";
+                          }
+                        }
+                      }
+                      ?>
+                      </select>
+                      <!--<input type="submit" value="<?PHP echo $left_go_button; ?>" class="go_button2">-->
+                      </form>
+                    </div>
+                  <div class="bottom-bg"></div>
+                </div>
+                <!--left menu tugsgul-->
+                <div style="clear:both; height: 10px;"></div>
+                <!--left search ehlel-->
+                <?php include('search_nav.php');?>
+            </div>

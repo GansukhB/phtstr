@@ -63,7 +63,7 @@ if ($static == 'static') {
 
       for ($ncount = 1; $ncount <= $units; $ncount++) { // loop from 1 to the number of units
            if(!$voted) { // if the user hasn't yet voted, draw the voting stars
-              $rater.='<li><a href="db.php?j='.$ncount.'&amp;q='.$id.'&amp;t='.$ip.'&amp;c='.$units.'" title="'.$ncount.' out of '.$units.'" class="r'.$ncount.'-unit rater" rel="nofollow">'.$ncount.'</a></li>';
+              $rater.='<li style="display:inline;"> <a href="db.php?j='.$ncount.'&amp;q='.$id.'&amp;t='.$ip.'&amp;c='.$units.'" title="'.$ncount.' out of '.$units.'" class="r'.$ncount.'-unit rater" rel="nofollow">'.$ncount.'</a></li>';
            }
       }
       $ncount=0; // resets the count

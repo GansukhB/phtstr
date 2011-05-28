@@ -29,24 +29,13 @@ if($id != ""){
 ?>
 <html>
 	<head>
+    <?php echo $script1; ?>
 		<? print($head); ?>
-		<center>
-        <table cellpadding="0" cellspacing="0"><tr><td valign="top">
-		<table cellpadding="0" cellspacing="0" width="765" class="main_table" style="border: 5px solid #<? echo $border_color; ?>;">
-			<? include("header.php"); ?>
-			<tr>
-				<td class="left_nav_header"><? echo $misc_photocat; ?></td>
-				<td></td>
-				<? include("search_bar.php"); ?>
-			</tr>
-			<tr>
-				<td rowspan="1" valign="top"><? include("i_gallery_nav.php"); ?></td>
-				<td background="images/col2_shadow.gif" valign="top"><img src="images/col2_white.gif"></td>
-				<td valign="top" height="18">
-					<center><table cellpadding="0" cellspacing="0" width="560" height="100%">
-						<tr>
-							<td colspan="3" height="4"></td>
-						</tr>
+  <div class="container">
+    <? include("header.php"); ?>
+		<div id="main">
+			<? include("i_gallery_nav.php"); ?>
+      <div class="right-main">
 						<tr>
 							<?php
 							$crumb = $order_crumb_link;
@@ -163,18 +152,13 @@ if($id != ""){
 					</table>				
 				</td>
 			</tr>
-			<? include("footer.php"); ?>			
-		</table>
-        </td>
-        <td valign="top">
-			<?php
-				if($pf_feed_status){
-					include('pf_feed.php');
-				}
-			?>
-        </td>
-        </tr></table>
-		</center>
+			</div> <!-- end class right-main -->
+      
+      <?php include('i_banner.php'); ?>
+      
+      </div><!-- end main id-->
+      </div> <!-- end container class -->
+      <? include("footer.php"); ?>
 	</body>
 </html>
 <?

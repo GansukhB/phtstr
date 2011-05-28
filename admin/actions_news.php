@@ -116,7 +116,17 @@
 			$title = cleanup($title);
 			//SAVE THE NEW CHANGES TO THE DATABASE
 			$publish_date = $s_year . $s_month . $s_day;	
-			$sql = "UPDATE news SET title='$title',article='$article',publish_date='$publish_date',active='$active',homepage='$homepage' WHERE id = '$item_id'";
+      
+      $title_field = 'title';
+      $article_field = 'article'; 
+      
+      if($_POST['language'] != 'English')
+      {
+        $title_field .= '_'.$_POST['language'];
+        $article_field .= '_'.$_POST['language'];
+      }
+      
+			$sql = "UPDATE news SET $title_field='$title', $article_field='$article',publish_date='$publish_date',active='$active',homepage='$homepage' WHERE id = '$item_id'";
 			$result = mysql_query($sql);
 			
 				// UPLOAD FILE

@@ -1,3 +1,4 @@
+<!--
 <td class="search_bar">
 <?PHP if($setting->search_onoff == 1){ ?>
 <script language="javascript" type="text/javascript">
@@ -12,7 +13,8 @@ return false;
 
 }
 </script>
-					<table width="100%">
+			
+      		<table width="100%">
 						<tr>
 							<td width="400" nowrap>
 								<div style="background-color: #E8E8E8; border: 1px solid #AFAFAF; padding: 3px;">
@@ -27,3 +29,4 @@ return false;
 					</table>
 <?PHP } ?>
 			  </td>
+-->

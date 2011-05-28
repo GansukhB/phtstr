@@ -134,7 +134,93 @@
                       </div>
                   </div>
                   <div class="r-content-main">
-                  		<h2>Your account</h2>
+                  		<h2><?php echo $left_details; ?></h2>
+                      
+                      
+                  <?php if($_SESSION['sub_member']){
+							$member_end_result = mysql_query("SELECT added,sub_length,info FROM members where id = '" . $_SESSION['sub_member'] . "'", $db);
+							$member_end = mysql_fetch_object($member_end_result);
+							
+							$this_day = substr($member_end->added, 6, 2);
+							$this_month = substr($member_end->added, 4, 2);
+							$this_year = substr($member_end->added, 0, 4);
+							
+														
+							if($member_end->sub_length == "Y"){
+								$addmonths = 12;
+							} else {
+								$addmonths = 1;
+							}
+							
+							$basedate = strtotime($member_end->added);
+							$mydate = strtotime("+$addmonths month", $basedate);							
+							$future_month = date("m/d/Y", $mydate);	
+						}		
+	?>
+<?php
+							if($_SESSION['sub_member']){
+							?>
+							<?PHP echo $left_logged; ?><? echo $_SESSION['mem_name']; ?><br>
+							<?
+						}
+						 if($_SESSION['sub_member']){
+							if($_SESSION['mem_down_limit'] > 0 && $member_end->sub_length != "F"){
+							?>
+							<?PHP echo $left_download; ?>
+							<?
+							if($_SESSION['mem_down_limit'] == 99999){
+							?>
+							<?PHP echo $left_unlimited; ?>
+							<? 
+							} else { 
+							echo $_SESSION['mem_down_limit'];
+							}
+							?>
+							<br>
+							<?PHP echo $left_expired; ?>
+							<? 
+							echo $future_month; 
+							?>
+							<br>
+							<hr width="95%">
+							<?
+							} else {
+								if($member_end->sub_length != "F"){
+							?>
+							<b><a href="renew_full.php" class="search_bar_links"><?PHP echo $left_renew; ?></a></b><br>
+							<hr width="95%">
+							<?
+						} 
+					}
+							if($member_end->sub_length == "F"){ 
+							?>
+							<?PHP echo $left_account_free; ?><? if($setting->allow_subs == 1 or $setting->allow_subs_month == 1){ ?><br /><a href="renew_full.php"><?PHP echo $left_upgrade; ?></a><? } ?><br>
+							<hr width="95%">
+							<? 
+						}
+						if(file_exists("lightbox.php")){
+							?>
+							<a href="lightbox.php" class="search_bar_links"><?PHP echo $left_lightbox; ?></a>
+							<? 
+						}
+						$order_status_results = mysql_query("SELECT id FROM visitors where member_id = '" . $_SESSION['sub_member'] . "'", $db);
+						$order_status_rows = mysql_num_rows($order_status_results);
+						if($order_status_rows > 0){
+							?>
+							<br><a href="order_status.php" class="search_bar_links"><?PHP echo $left_orders; ?></a>
+							<? 
+						}
+							?>
+					    <br><a href="my_details.php" class="search_bar_links"><?PHP echo $left_details; ?></a>
+							<?
+							 if($member_end->info != ""){
+							?>
+							<br><a href="my_info.php" class="search_bar_links"><?PHP echo $left_info; ?></a>
+							<?
+						}
+					}
+					?>    
+                      
                   		<div class="left">
                         	<div><strong class="yellow">Subscrib today?</strong></div>
                             we have packages starting at 49$.

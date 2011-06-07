@@ -1,43 +1,70 @@
-<?php
-/**
- * The template for displaying the footer.
- *
- * Contains the closing of the id=main div and all content
- * after.  Calls sidebar-footer.php for bottom widgets.
- *
- * @package WordPress
- * @subpackage Twenty_Ten
- * @since Twenty Ten 1.0
- */
-?>
-	</div><!-- #main -->
 
 	<div id="footer" role="contentinfo">
-		<div id="colophon">
 
-<?php
-	/* A sidebar in the footer? Yep. You can can customize
-	 * your footer with four columns of widgets.
-	 */
-	get_sidebar( 'footer' );
-?>
+    <div class="container">
+      
+        	<div class="top-footer">
+            	<div class="logo"><a href="index.php"><img src="images/logo.png"></a></div>
+             
+            </div>
+            <div class="contents">
+                	<div class="left">
+                    	
+                        	                        
+                        <?php
+                          // A second sidebar for widgets, just because.
+                          if ( is_active_sidebar( 'first-footer-widget-area' ) ) : ?>
 
-			<div id="site-info">
-				<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-					<?php bloginfo( 'name' ); ?>
-				</a>
-			</div><!-- #site-info -->
+                                <?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
+                  
 
-			<div id="site-generator">
-				<?php do_action( 'twentyten_credits' ); ?>
-				<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'twentyten' ) ); ?>" title="<?php esc_attr_e( 'Semantic Personal Publishing Platform', 'twentyten' ); ?>" rel="generator"><?php printf( __( 'Proudly powered by %s.', 'twentyten' ), 'WordPress' ); ?></a>
-			</div><!-- #site-generator -->
+                          <?php endif; ?>
+                      
+                         <?php
+                          // A second sidebar for widgets, just because.
+                          if ( is_active_sidebar( 'second-footer-widget-area' ) ) : ?>
 
-		</div><!-- #colophon -->
-	</div><!-- #footer -->
+                                <?php dynamic_sidebar( 'second-footer-widget-area' ); ?>
 
+
+                        <?php endif; ?>
+                    </div>
+                    <div class="right">
+                    	<?php
+                          // A second sidebar for widgets, just because.
+                          if ( is_active_sidebar( 'third-footer-widget-area' ) ) : ?>
+
+                                <?php dynamic_sidebar( 'third-footer-widget-area' ); ?>
+
+
+                        <?php endif; ?>
+                        
+                         <?php
+                          // A second sidebar for widgets, just because.
+                          if ( is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>
+
+                                <?php dynamic_sidebar( 'fourth-footer-widget-area' ); ?>
+
+
+                        <?php endif; ?>
+                        
+                    </div>
+                </div>
+                
+                
+        </div>
 </div><!-- #wrapper -->
-
+<!--
+<?php
+                  include('../database.php'); 
+                  include('../functions.php');
+                  //include('../config_public.php');
+                  //$lang_path = "../language/";
+                  //$ses_lang = $_SESSSION['lang'];
+                  include("../language/English".".php");
+                  //include('../footer.php');
+                
+                ?>-->
 <?php
 	/* Always have wp_footer() just before the closing </body>
 	 * tag of your theme, or you will break many plugins, which

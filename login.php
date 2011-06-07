@@ -1,4 +1,5 @@
 <?
+  header("Location: subscribe.php");
 	session_start();
 
 	$page_title       = ""; // PAGE TITLE FOR THIS PAGE - IF BLANK USE DEFAULT TITLE	
@@ -24,9 +25,11 @@
 ?>
 <html>
 	<head>
+    <?php echo $script1; ?>
 		<? print($head); ?>
-	 <div class="container">
     <? include("header.php"); ?>
+	 <div class="container">
+    
 		<div id="main">
 			<? include("i_gallery_nav.php"); ?>
       <div class="right-main">
@@ -125,6 +128,7 @@
 				</td>
 			</tr>		
 		</table>
+    </div>
 		  </div> <!-- end class right-main -->
       </div><!-- end main id-->
       </div> <!-- end container class -->

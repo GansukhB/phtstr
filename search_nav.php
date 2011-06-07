@@ -30,14 +30,10 @@ return false;
                 	<div class="top-bg"></div>
                     <!--left search main ehlel-->
                     <div class="main">
+                      <!--
                     	<form name="search" action="search.php" method="link" onSubmit="return validateForm(search);" style="margin: 0px; padding: 0px;">
-                        	  <label>
-                            	<div class="title"><? echo $search_search; ?></div>
-                                <div>
-                                  <input type="textbox" class="text" name="search" class="search_box">
-                                </div>
-                            </label>
-                            <!--
+                        	  
+                            
                             <label>
                             	<div class="title">Зурагны төрөл</div>
                                 <div>
@@ -51,7 +47,17 @@ return false;
                                       <option>Premium Templates</option>
                                     </select>
                                 </div>
-                            </label>-->
+                            </label>
+                            
+                            
+                            
+                            <label>
+                            	<div class="title"><? echo $search_search; ?></div>
+                                <div>
+                                  <input type="textbox" class="text" name="search" class="search_box">
+                                </div>
+                            </label>
+                            
                             <input type="radio" name="match_type" value="all" <? if($_SESSION['search_match_type'] == "all"){ echo "checked"; } ?>> 
                               <? echo $search_match_all; ?> <br />
                             <input type="radio" name="match_type" value="any" <? if($_SESSION['search_match_type'] == "any"){ echo "checked"; } ?>> 
@@ -64,6 +70,67 @@ return false;
                             <label>
                             	<button>хайх</button>
                                 <button class="clear">арилгах</button>
+                            </label>
+                        </form>onSubmit="return validateForm(search);" 
+                        -->
+                        
+                        <form name="search" method="post" action="search.php" style="margin: 0px; padding: 0px;">
+                        	  
+                            <label>	<div class="title">Type of pictures</div></label>
+                            <label>
+                              <div class="label"><input type="checkbox" name="type[]" value="photo"><div class="type">Photo</div></div>
+                            </label>
+                            <label>
+                              <div class="label"><input type="checkbox" name="type[]" value="vector"><div class="type">Vector</div></div>
+                            </label>
+                            
+                            <label>	<div class="title">Orientation</div></label>
+                            <label>
+                                <div class="label"><input type="checkbox" name="orient[]" value="vertical"><div class="type">Vertical</div></div>
+                            </label>
+                            <label>
+                                <div class="label"><input type="checkbox" name="orient[]" value="horizontal"><div class="type">Horizontal</div></div>
+                            </label>
+                            <label>
+                            	<div class="title">Category</div>
+                                <div>
+                                	<select name="category">
+                                    <option value="0">Any category</option>
+                                    <?php
+                                      $result1 = mysql_query($query); 
+                                      while($item = mysql_fetch_object($result1)):
+                                    ?>
+                                      <option value="<?php echo $item->id; ?>">
+                                        <?php 
+                                          if($_SESSION['lang'] != 'English'){
+                                            if(trim($item->{ 'title_'.$_SESSION['lang']}) != "")
+                                              echo $item->{ 'title_'.$_SESSION['lang']};
+                                            else echo $item->title;
+                                          }
+                                          else echo $item->title;
+                                        ?>
+                                      </option>
+                                    <?php 
+                                      endwhile; 
+                                    ?>     
+                                  </select>
+                                </div>
+                            </label>
+                            <label>
+                            	<div class="title">Keywords</div>
+                                <div>
+                                	<input class="text" type="text" name="keyword">
+                                </div>
+                            </label>
+                            <label>
+                            	<div class="title">Contributor</div>
+                                <div>
+                                	<input class="text" type="text" name="contributor">
+                                </div>
+                            </label>
+                            <label>
+                            	<button>Search</button>
+                                <button class="clear" onclick="this.form.reset();">Clear</button>
                             </label>
                         </form>
                     </div>

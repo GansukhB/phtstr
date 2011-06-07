@@ -129,8 +129,10 @@
 		
 	/* LOGOUT */	
 		case "logout":
-			session_unregister("access_status");
-			session_unregister("access_type");
+			//session_unregister("access_status");
+			//session_unregister("access_type");
+      $_SESSION['access_status'] = null;
+      $_SESSION['access_type'] = null;
 			header("location: login.php?logout=1");
 			exit;
 		break;

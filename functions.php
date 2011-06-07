@@ -1690,14 +1690,16 @@
        $txt_x = 10;
        $txt_y = $height + 15;
        $txt_color = $white;
-       $txt_font = "./fonts/Ubuntu-L.ttf";
-       $txt = "www.photobank.mn ID:".$_GET['i'];
+       $txt_font = "./fonts/Ubuntu-L.ttf"; $package_id = get_pkg_id_by_img_id($_GET['i']);
+       $txt = "www.photobank.mn ID:".$package_id;
        
        $white = imagecolorallocate($dst_img, 255, 255, 255);
        $black = imagecolorallocate($dst_img, 0, 0, 0);
        
        //$txt_bg_img = ImageCreateFromPNG("./images/watermark_txt_bg.png");
        
+       $query = "update photo_package set width = '$width', height = '$height' where id = '$package_id'";
+       $result = mysql_query($query);
       //imagettftext($dist_img, $txt_angle, $txt_x, $txt_y, $txt_color, $txt_font, $txt);
       //imagecopy($dst_img, $txt_bg_img, $txt_x - 10, $txt_y - 15, 0, 0, $logowidth, 20); //backgroung of text
       
@@ -1709,6 +1711,17 @@
 			
       //imagecopyresized($dst_img, $logoImage, 0, 0, 0, 0, $width, $height, imagesx($logoImage), imagesy($logoImage));
       imagecopyresampled($dst_img, $logoImage, 0, 0, 0, 0, $width, $height, imagesx($logoImage), imagesy($logoImage));
+      
+      $logoImage = ImageCreateFromPNG("./images/watermark_logo.png");
+      $logoinfo = getimagesize($logoImage);
+			$logowidth = $logoinfo[0];
+			$logoheight = $logoinfo[1];
+      
+      $startx = ($width - imagesx($logoImage))/2;
+      $starty = ($height - imagesy($logoImage))/2;
+      
+      imagecopyresampled($dst_img, $logoImage, $startx, $starty, 0, 0, imagesx($logoImage),imagesy($logoImage), imagesx($logoImage), imagesy($logoImage));
+      
       //imagecopy($dst_img, $logoImage, 0, 0, 0, 0, $width, $height);
 			           
       imagejpeg($dst_img,"",$quality); // output to browser 
@@ -2072,5 +2085,13 @@
       array_push($photographer, $user_name);
       
       return $photographer;
+    }
+    function get_pkg_id_by_img_id($img_id)
+    {
+      $query = "SELECT reference_id FROM uploaded_images WHERE id='$img_id' ";
+      $result = mysql_query($query);
+      $id = mysql_fetch_object($result);
+      
+      return $id->reference_id; 
     }
 ?>

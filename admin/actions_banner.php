@@ -37,8 +37,8 @@
         
         $title = $_POST['banner_title'];
         $link = $_POST['banner_link'];
-        
-        $query = "INSERT INTO banner (title, link, file) VALUES ('$title', '$link', '$banner_name')";
+        $area = $_POST['banner_area'];
+        $query = "INSERT INTO banner (title, link, area, file) VALUES ('$title', '$link', '$area','$banner_name')";
         $result  = mysql_query($query);
         if($result){
           echo "database changed";

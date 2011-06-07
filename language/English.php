@@ -774,7 +774,7 @@ $left_year3 = "</i></span> /year! "; // This is made up of three parts due to co
 $left_signup1 = "Create an account to use special features like lightbox, email to a friend, and much more!";
 $left_photogsignup = "Sell Your Photos!<br /><br />Photographers can now sell their photos thru our site.";
 $left_go_button = "GO";
-$left_select_language = "<b>Select Language:</b>";
+$left_select_language = "Select Language";
 
 //PHOTO DETAIL PAGE
 $detail_inactive = "Sorry this photo is currently not active.";

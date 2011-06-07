@@ -24,10 +24,9 @@
 	<head>
     <?php echo $script1; ?>
 		<? print($head); ?>
-
-    <div class="container">
-    <? include("header.php"); ?>
-		<div id="main">
+<? include("header.php"); ?>
+<div class="container">
+  <div id="main">
 			<? include("i_gallery_nav.php"); ?>
       <div class="right-main">
         <?php 
@@ -41,30 +40,84 @@
           
             //str_replace('<strong>', '',  $article);
           //echo $article; 
+          
+            $query = "select * from faq_type  ";
+            $types = mysql_query($query);
         ?>
           
           <div class="r-left-main">
-            <div class="r-news-content">
+              <a name="top"></a>
+              <?php while($type = mysql_fetch_object($types)): ?>
+                <div class="r-news-content">
+                    <div class="header1">
+                      <div class="icon" align="center">
+                      Q
+                      </div>
+                      <div class="text">
+                      <?php
+                        $cat_id = $type->id;
+                        $category = $type->title;
+                        //if($_SESSION['lang'] != 'English')
+                        
+                        echo $category;
+                      ?>
+                      
+                      </div>
+                    </div>
+                    <ul class="main">
+                      <?php 
+                        $query = "select * from faqs where type='$cat_id'";
+                        $faq = mysql_query($query);
+                        $faqa = $faq;
+                        while($q = mysql_fetch_object($faq)):
+                      ?>
+                          <li><a href="#answer<?php echo $q->id; ?>"><?php echo $q->title; ?></a></li>
+                      <?php
+                        endwhile;
+                      ?>
+                    </ul>
+                </div>
+              <?php endwhile;?>
+              
+              
               <?php 
-                $article = str_replace("<span style=\"font-weight: bold;\">", "<div class=\"header1\"><div class=\"icon\" align=\"center\">
-<img src=\"images/icon.jpg\">
-</div>
-<div class=\"text\">", $article);
-                $article = str_replace("</span>", "</div></div>", $article);
-
-                echo $article; 
+                $query = "select * from faqs order by sort ";
+                $faq = mysql_query($query);
+                while($ans = mysql_fetch_object($faq)):
               ?>
-            </div>
+                  <div class="r-news-content">
+                    <div class="header2 ">
+                      <a name="answer<?php echo $ans->id; ?>"></a>
+                      <div class="icon" align="center">
+                      A
+                      </div>
+                      <div class="text">
+                        <?php
+                          echo $ans->title;
+                        ?>
+                         
+                      </div>
+                    </div>
+                    <ul class="main">
+                      <?php 
+                        echo $ans->{'article'};
+                      ?>
+                      <a href="#top">Go to top</a> 
+                    </ul>
+                </div>              
+              <?php 
+                endwhile;
+              ?>
           </div>
+          
           <div class="r-right-main">
-            
           </div>
 		</div> <!-- end class right-main -->
     
     <?php include('i_banner.php'); ?>
     
-      </div><!-- end main id-->
-      </div> <!-- end container class -->
+  </div><!-- end main id-->
+</div> <!-- end container class -->
       <? include("footer.php"); ?>
 	</body>
 </html>

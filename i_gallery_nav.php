@@ -579,6 +579,8 @@ function onItemSelectHandler (o_item) {
                     <?php endwhile; ?>
                   </ul>
                 </div>
+                
+                <!--
                 <div class="left-search-main">
                   <div class="top-bg"></div>
                     <div class="main">
@@ -611,13 +613,11 @@ function onItemSelectHandler (o_item) {
                       }
                       ?>
                       </select>
-                      <!--<input type="submit" value="<?PHP echo $left_go_button; ?>" class="go_button2">-->
                       </form>
                     </div>
                   <div class="bottom-bg"></div>
-                </div>
+                </div>-->
                 <!--left menu tugsgul-->
-                <div style="clear:both; height: 10px;"></div>
                 <!--left search ehlel-->
                 <?php include('search_nav.php');?>
             </div>

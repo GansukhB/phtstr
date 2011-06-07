@@ -31,10 +31,10 @@
 ?>
 
 <?php if ( have_comments() ) : ?>
-			<h3 id="comments-title"><?php
+			<h2 id=""><?php
 			printf( _n( 'One Response to %2$s', '%1$s Responses to %2$s', get_comments_number(), 'twentyten' ),
 			number_format_i18n( get_comments_number() ), '<em>' . get_the_title() . '</em>' );
-			?></h3>
+			?></h2>
 
 <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
 			<div class="navigation">

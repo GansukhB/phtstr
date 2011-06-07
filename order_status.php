@@ -24,8 +24,9 @@
 	<head>
     <?php echo $script1; ?>
 		<? print($head); ?>
+     <? include("header.php"); ?>
 <div class="container">
-    <? include("header.php"); ?>
+   
 		<div id="main">
 			<? include("i_gallery_nav.php"); ?>
       <div class="right-main">
@@ -71,9 +72,10 @@
 			</div> <!-- end class right-main -->
       
       <?php include('i_banner.php'); ?>
-      
+      </div>
       </div><!-- end main id-->
       </div> <!-- end container class -->
+      
       <? include("footer.php"); ?>
 	</body>
 </html>

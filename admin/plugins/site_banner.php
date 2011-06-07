@@ -29,6 +29,9 @@
         File Name
       </td>
       <td>
+        Show on area
+      </td>
+      <td>
         Show on site
       </td>
       <td></td>
@@ -42,6 +45,9 @@
         </td>
         <td>
           <?php echo $banner->link; ?>
+        </td>
+        <td>
+          <?php echo $banner->area; ?>
         </td>
         <td>
           <?php echo $banner->file; ?>
@@ -78,6 +84,10 @@
       <tr>
         <td>Link url banner</td>
         <td><input type="text" name="banner_link" /></td>
+      </tr>
+      <tr>
+        <td>Show area</td>
+        <td><input type="text" name="banner_area" /></td>
       </tr>
       <tr>
         <td>Choose</td>

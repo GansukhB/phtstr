@@ -16,10 +16,21 @@
 			
 	switch($pmode){
 		case "select_lang":
+    if(isset($_GET['lang']))
+    {
+      $lang = $_GET['lang'];
+      if(isset($_GET['return'])) 
+        $return = $_GET['return'];
+      //else $return = 'ind'
+    }
 		if($lang != ""){
-		session_register("lang");
-		$_SESSION['lang'] = $lang;
+      session_register("lang");
+      $_SESSION['lang'] = $lang;
+      $expire=time()+60*60;
+      setcookie("lang", $lang, $expire);
 		}
+    
+    $return = str_replace(array("and"), array("&"), $return);
 		header("location: " . $return);
 		exit;
 		break;
@@ -1416,7 +1427,7 @@ echo ("<input type=\"hidden\" name=\"x_receipt_link_url\" value=\"" . $setting->
 							header("location: cart.php");
 							exit;
 						} else {
-							header("location: login.php?message=logged");
+							header("location: index.php");
 							exit;
 						}
 					}					
@@ -1427,11 +1438,11 @@ echo ("<input type=\"hidden\" name=\"x_receipt_link_url\" value=\"" . $setting->
 						exit;
 					}				
 				} else {
-					header("location: login.php?message=pending");
+					header("location: subscribe.php?message=pending");
 					exit;
 				}
 			} else {
-				header("location: login.php?message=login_failed");
+				header("location: subscribe.php?message=login_failed");
 				exit;
 			}
 		break;
@@ -1631,7 +1642,7 @@ echo ("<input type=\"hidden\" name=\"x_receipt_link_url\" value=\"" . $setting->
 			unset($_SESSION['mem_name']);
 			unset($_SESSION['mem_down_limit']);
 			unset($_SESSION['sub_type']);
-			header("location: login.php?message=logged_out");
+			header("location: index.php");
 			exit;
 		break;
 		
@@ -1892,7 +1903,10 @@ echo ("<input type=\"hidden\" name=\"x_receipt_link_url\" value=\"" . $setting->
 		
 		case "add_lightbox":
 			$added = date("Ymd");
-				$lightbox_result = mysql_query("SELECT id FROM lightbox where member_id = '" . $_SESSION['sub_member'] . "' and reference_id = '" . $_SESSION['lightbox_id'] . "' and photo_id = '$pid'", $db);
+        //$lightbox_id = $_SESSION['lightbox_id'];
+        if(isset($_GET['lb_id'])) $lightbox_id = $_GET['lb_id'];
+        else $lightbox_id = $_SESSION['lightbox_id'];
+				$lightbox_result = mysql_query("SELECT id FROM lightbox where member_id = '" . $_SESSION['sub_member'] . "' and reference_id = '" . $lightbox_id . "' and photo_id = '$pid'", $db);
 				$lightbox_rows = mysql_num_rows($lightbox_result);
 				$lightbox = mysql_fetch_object($lightbox_result);
 				
@@ -1903,8 +1917,8 @@ echo ("<input type=\"hidden\" name=\"x_receipt_link_url\" value=\"" . $setting->
 					$package_result = mysql_query("SELECT id FROM photo_package where id = '" . $_GET['pid'] . "'", $db);
 					$package = mysql_fetch_object($package_result);
 		
-					if($_SESSION['sub_member'] AND $_SESSION['lightbox_id']){
-						$sql = "INSERT INTO lightbox (member_id,photo_id,ptype,prid,reference_id) VALUES ('" . $_SESSION['sub_member'] . "',$package->id,'$ptype','$prid','" . $_SESSION['lightbox_id'] . "')";
+					if($_SESSION['sub_member'] AND $lightbox_id){
+						$sql = "INSERT INTO lightbox (member_id,photo_id,ptype,prid,reference_id) VALUES ('" . $_SESSION['sub_member'] . "',$package->id,'$ptype','$prid','" . $lightbox_id . "')";
 						$result = mysql_query($sql);
 					} else {
 						header("location: lightbox.php?message=select");
@@ -1951,7 +1965,18 @@ echo ("<input type=\"hidden\" name=\"x_receipt_link_url\" value=\"" . $setting->
 			header("location: lightbox.php?message=created");
 			exit;
 		break;
+    
+		case "rename_lightbox":
+		  $name = $_POST['name'];
+		  $name = addslashes($name);
+      $id = $_GET['id'];
+			$sql="UPDATE lightbox_group SET name = '$name' WHERE member_id='" . $_SESSION['sub_member'] . "' AND id='$id' ";
+			$result = mysql_query($sql);
 		
+			header("location: lightbox.php?lightbox=$id&message=renamed");
+			exit;
+		break;
+    
 		case "delete_lightbox_group":
 		
 			$sql="DELETE FROM lightbox_group WHERE id = '" . $_SESSION['lightbox_id'] . "'";

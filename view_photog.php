@@ -29,8 +29,10 @@
 		<script language=JavaScript src='./js/xns.js'></script>
     <?php echo $script1; ?>
 				<? print($head); ?>
+        
+        <? include("header.php"); ?>
       <div class="container">
-			<? include("header.php"); ?>
+			
 			
       <div id="main">
 				
@@ -81,6 +83,7 @@
 					</table>				
 				</td>
 			</tr>
+      </div>
 			</div> <!-- end class right main -->
       </div> <!-- end id main -->
     </div> <!-- end container -->

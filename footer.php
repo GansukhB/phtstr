@@ -89,14 +89,24 @@
                 	<div class="left">
                     	<!--content ehlel-->
                     	<div class="content">
-                        	<div class="title">MONGOLPHOT.COM</div>
+                        	<div class="title">MONGOLPHOTo.COM</div>
                             <ul>
-                                <li><a href="#">Нүүр хуудас</a></li> 
-                                <li><a href="#">Тусламж</a></li>  
-                                <li><a href="#">Блог</a></li>  
-                                <li><a href="#">Уралдаан</a></li>  
-                                <li><a href="#">Захиалга</a></li>  
-                                <li><a href="#">Нэвтрэх</a></li> 
+                              <li><a href="index.php"><?php echo $top_home; ?></a></li> 
+                                <li><a href="faqs.php"><?php echo $top_faq; ?></a></li>  
+                                <li><a href="news.php"><?php echo $top_news; ?></a></li>
+                                
+                                <li><a href="./blog/">Tutorial</a></li>  
+                                <!--
+                                <li><a href="order_status.php"><?php echo $order_crumb_link; ?></a></li>  
+                                -->
+                                <?php if(trim($_SESSION['mem_name'])!=""): ?>
+                                  <li><a href="lightbox.php"><?php echo $left_lightbox; ?></a></li>
+                                <?php endif; ?>
+                                <?php if(!$_SESSION['mem_name']): ?>
+                                  <li><a href="subscribe.php"><?php echo $left_login; ?></a></li>
+                                <?php else: ?>
+                                  <li><a href="public_actions.php?pmode=logout"><?php echo $left_logout ?></a></li>
+                                <?php endif; ?>
                             </ul>
                         </div>
                         <!--content tugsgul-->
@@ -119,12 +129,37 @@
                     <div class="right">
                     	<!--content ehlel-->
                     	<div class="content">
-                        	<div class="title">ХЭЛНИЙ СОНГОЛТ</div>
+                        	<div class="title"><?php echo $left_select_language; ?></div>
                             <ul>
-                                <li><a href="#">English</a></li> 
-                                <li><a href="#">Russia</a></li>  
-                                <li><a href="#">Mongolia</a></li>  
-                            </ul>
+                                  <!--
+                                    <li><a href="#">English</a></li>
+                                    <li><a href="#">English</a></li>
+                                    <li><a href="#">English</a></li>
+                                  -->
+                                     <?
+                                        $language_dir = "language";
+                                        $l_real_dir = realpath($language_dir);
+                                        $l_dir = opendir($l_real_dir);
+                                        // LOOP THROUGH THE PLUGINS DIRECTORY
+                                        $lfile = array();
+                                        while(false !== ($file = readdir($l_dir))){
+                                          $lfile[] = $file;
+                                        }
+                                        //SORT THE CSS FILES IN THE ARRAY
+                                        sort($lfile);
+                                        //GO THROUGH THE ARRAY AND GET FILENAMES
+                                        $return =  selfurl();
+                                        foreach($lfile as $key => $value){
+                                        //IF FILENAME IS . OR .. DO NO SHOW IN THE LIST
+                                          $fname = strip_ext($lfile[$key]);
+                                          if($fname != ".." && $fname != "."){
+                                            if(trim($fname) != '')
+                                                echo "<li><a href=\"public_actions.php?pmode=select_lang&lang=$fname&return=$return\">" . $fname . "</a></li>";
+                                              
+                                          }
+                                        }
+                                    ?>
+                              </ul>
                         </div>
                         <!--content tugsgul-->
                         <!--content ehlel-->

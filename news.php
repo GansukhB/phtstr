@@ -22,110 +22,189 @@
 ?>
 <html>
 	<head>
+    <?php echo $script1; ?>
 		<? print($head); ?>
-		<center>
-        <table cellpadding="0" cellspacing="0"><tr><td valign="top">
-		<table cellpadding="0" cellspacing="0" width="765" class="main_table" style="border: 5px solid #<? echo $border_color; ?>;">
-			<? include("header.php"); ?>
-			<tr>
-				<td class="left_nav_header"><? echo $misc_photocat; ?></td>
-				<td></td>
-				<? include("search_bar.php"); ?>
-			</tr>
-			<tr>
-				<td rowspan="1" valign="top"><? include("i_gallery_nav.php"); ?></td>
-				<td background="images/col2_shadow.gif" valign="top"><img src="images/col2_white.gif"></td>
-				<td valign="top" height="18">
-					<table cellpadding="0" cellspacing="0" width="560" height="100%">
-						<tr>
-							<td colspan="3" height="5"></td>
-						</tr>
-						<?php
-							$crumb = $news_crumb_link;
-							include("crumbs.php");
-						?>
-						<tr>
-							<td class="index_copy_area" colspan="3" height="4"></td>
-						</tr>						
-						<tr>
-							<td colspan="3" valign="top" height="100%" class="homepage_line">
-								<table width="100%" border="0">
-									<tr>
-										<td height="6"></td>
-									</tr>
-									<tr>
-										<td class="gallery_copy">
-											<? copy_area(27,1); ?>
-										</td>
-									</tr>
-									<tr>
-										<td style="padding-left: 10px;">
-											<table>
-											<?
-								
-												$news_result = mysql_query("SELECT id,title,article,publish_date FROM news where active = '1' order by publish_date desc", $db);
-												while($news = mysql_fetch_object($news_result)){
-													$posted = round(substr($news->publish_date, 4, 2)) . "/" . round(substr($news->publish_date, 6, 2)) . "/" . round(substr($news->publish_date, 0, 4));
-													$posted_short = round(substr($news->publish_date, 4, 2)) . "/" . round(substr($news->publish_date, 6, 2));
-													
-													$short_article = strip_tags($news->article);
-													
-													if(strlen($short_article) > 150){
-														$trim_article = substr($short_article, 0, 150) . "...";
-													}
-													else {
-														$trim_article = $short_article;
-													}
-													
-													if(strlen($news->title) > 150){
-														$trim_title = substr($news->title, 0, 150) . "...";
-													}
-													else {
-														$trim_title = $news->title;
-													}
-											?>
-												<tr>
-													<td><b><? echo $posted_short; ?></font></b><br><a href="news_details.php?id=<? echo $news->id; ?>"><? echo $trim_title; ?></a><br><font style="font-size: 11;"><? echo $trim_article; ?></td>
-												</tr>
-												<tr>
-													<td height="8"></td>
-												</tr>
-											<?
-												}
-											?>
-											</table>
-										</td>
-									</tr>
-                                    <?php
-										if(file_exists('rss.php')){
-											include('rss.php');
-											if($news_feed){
-									?>
-                                        <tr>
-                                            <td align="right"><a href="rss.php?show=news"><img src="images/rss.gif" border="0" /></a></td>
-                                        </tr>
-                                    <?php
-											}
-										}
-									?>
-								</table>
-							</td>
-						</tr>
-					</table>				
-				</td>
-			</tr>
-			<? include("footer.php"); ?>			
-		</table>
-        </td>
-        <td valign="top">
-			<?php
-				if($pf_feed_status){
-					include('pf_feed.php');
-				}
-			?>
-        </td>
-        </tr></table>
-		</center>
+    
+    <?php include('header.php');?>
+	<div class="container">
+			
+				<? //include("search_bar.php"); ?>
+      <div id="main">
+			<? include("i_gallery_nav.php"); ?>
+      <div class="right-main">
+           	<!--news main ehlel-->
+            	<div class="news-main">
+                	<!--news header ehlel-->
+                  <?php 
+                    $query = "SELECT * FROM news where active = '1' and homepage='1' order by publish_date desc";
+                    
+                    $years = array();
+                    $news_result = mysql_query($query, $db);
+                    $news_result1 = mysql_query($query, $db);
+                    $isadded; 
+                    $news_list = array();
+                    while($news = mysql_fetch_object($news_result1)){
+                      array_push($news_list, $news);
+                      $posted = round(substr($news->publish_date, 4, 2)) . "/" . round(substr($news->publish_date, 6, 2)) . "/" . round(substr($news->publish_date, 0, 4));
+                      $posted_short = round(substr($news->publish_date, 4, 2)) . "/" . round(substr($news->publish_date, 6, 2));
+                      
+                      list($day, $month, $year) = explode("/", $posted);
+                      
+                      if(!$isadded[$year]){
+                        $isadded[$year] = true;
+                        array_push($years, $year);
+                      }
+                      
+                    }
+                    if(isset($_GET['year']))
+                    {
+                      $show_year = $_GET['year'];                        
+                    }
+                    else $show_year = $years[0];
+                    
+                    
+                    $month_list = array();
+                    $isaddedmonth;
+                    
+                    foreach($news_list as $news):
+                      $posted = round(substr($news->publish_date, 4, 2)) . " " . round(substr($news->publish_date, 6, 2)) . " " . round(substr($news->publish_date, 0, 4));
+                      $posted_short = round(substr($news->publish_date, 4, 2)) . "/" . round(substr($news->publish_date, 6, 2));
+                      list($month, $day, $year) = explode(" ", $posted);
+                      if($year == $show_year && !$isaddedmonth[$month])
+                      {
+                        $isaddedmonth[$month] = true;
+                        array_push($month_list, $month);
+                      }
+                    endforeach;
+                  ?>
+                	  <div class="news-header">
+                    	<div class="left"><?php echo $top_news; ?></div>
+                        <div class="left tab-menu">
+                        	<ul>
+                            <?php foreach($years as $y): ?>
+                              <li><a href="news.php?year=<?php echo $y?>"><?php echo $y; ?></a></li>
+                            <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <?php 
+                      foreach($month_list as $i):
+                      
+                    ?>
+                        <div class="news-content-main">
+                          <div class="left"><?php echo "$i / $show_year"?><br /></div>
+                            <div class="right">
+                    <?php 
+                              foreach($news_list as $news):
+                                $posted = round(substr($news->publish_date, 4, 2)) . " " . round(substr($news->publish_date, 6, 2)) . " " . round(substr($news->publish_date, 0, 4));
+                                $posted_short = round(substr($news->publish_date, 4, 2)) . "/" . round(substr($news->publish_date, 6, 2));
+                                list($month, $day, $year) = explode(" ", $posted);
+                                
+                                $short_article = strip_tags($news->article);
+                                
+                                if(strlen($short_article) > 150){
+                                  $trim_article = substr($short_article, 0, 150) . "...";
+                                }
+                                else {
+                                  $trim_article = $short_article;
+                                }
+                                
+                                if(strlen($news->title) > 150){
+                                  $trim_title = substr($news->title, 0, 150) . "...";
+                                }
+                                else {
+                                  $trim_title = $news->title;
+                                } 
+                                if($show_year == $year && $i == $month):
+                    ?>
+                                  <div class="news-content">
+                                    <h1>
+                                      <?php 
+                                        $title = $news->title; 
+                                        if($_SESSION['lang'] != 'English')
+                                        {
+                                          $title = $news->{'title_'.$_SESSION['lang']};
+                                        }
+                                        if($title) echo stripslashes($title);
+                                        else echo stripslashes($news->title);
+                                      ?>
+                                    </h1>
+                                      <?php 
+                                        $article = $news->article; 
+                                        if($_SESSION['lang'] != 'English')
+                                        {
+                                          $article = $news->{'article_'.$_SESSION['lang']};
+                                        }
+                                        if($article) echo stripslashes($article);
+                                        else echo stripslashes($news->article);
+                                      ?>
+                                      <a class="news-more" href="news_details.php?id=<?php echo $news->id; ?>"> <?php echo $news_details_crumb_link ; ?>&gt;&gt;</a>
+                                  </div>
+                    <?php 
+                                endif; 
+                              endforeach;
+                    ?>
+                          </div>
+                        </div>
+                    <?php 
+                      endforeach;
+                    ?>
+                    <?
+                        
+                      
+                      while($news = mysql_fetch_object($news_result)){
+                        $posted = round(substr($news->publish_date, 4, 2)) . " " . round(substr($news->publish_date, 6, 2)) . " " . round(substr($news->publish_date, 0, 4));
+                        $posted_short = round(substr($news->publish_date, 4, 2)) . "/" . round(substr($news->publish_date, 6, 2));
+                        list($day, $month, $year) = explode($posted, " ");
+                        
+                        $short_article = strip_tags($news->article);
+                        
+                        if(strlen($short_article) > 150){
+                          $trim_article = substr($short_article, 0, 150) . "...";
+                        }
+                        else {
+                          $trim_article = $short_article;
+                        }
+                        
+                        if(strlen($news->title) > 150){
+                          $trim_title = substr($news->title, 0, 150) . "...";
+                        }
+                        else {
+                          $trim_title = $news->title;
+                        }
+                        //echo $posted. ' '.$posted_short; 
+                    ?>
+                    <!--
+                        <div class="news-content-main">
+                          <div class="left">DECEMBER 2010 <br> NEWSLETER</div>
+                            <div class="right">
+                              <div class="news-content">
+                                  <h1><?php echo $news->title; ?></h1>
+                                    <?php echo $news->article; ?><a class="news-more" href="#"> <?php echo $news_details_crumb_link ; ?>&gt;&gt;</a>
+                                </div>
+                                <div class="news-content">
+                                  <h1>news title</h1>
+                                    Premium Templates, Dynamic Swish, Last added, Full site, Flash Site, Dynamic Flash, Full package, Low budget, Zero Downloads, Most Popular, osCommerce Templates, 3 colors, 3D style, Adult, 			Agriculture, Alternative Power, Animals &amp; Pets, Architecture, Art &amp; Photography
+                                    <a class="news-more" href="#"> more... &gt;&gt;</a>
+                                </div>
+                                <div class="news-content">
+                                  <h1>news title</h1>
+                                    Premium Templates, Dynamic Swish, Last added, Full site, Flash Site, Dynamic Flash, Full package, Low budget, Zero Downloads, Most Popular, osCommerce Templates, 3 colors, 3D style, Adult, 			Agriculture, Alternative Power, Animals &amp; Pets, Architecture, Art &amp; Photography
+                                    <a class="news-more" href="#"> more... &gt;&gt;</a>
+                                </div>
+                            </div>
+                        </div>-->
+                    <?php 
+                      }
+                    ?>
+                    
+                </div>
+                <!--news main tugsgul-->
+                  </div> <!-- end class right main -->
+      </div> <!-- end id main -->
+    </div> <!-- end container -->
+    <? include("footer.php"); ?>	
 	</body>
 </html>
 <?

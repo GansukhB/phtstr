@@ -153,8 +153,16 @@
 			$price = price_cleanup($price);
 			
 			// SAVE DATA
+      if($_FILES['image_vector']['name'] != "")
+      {
+        $type = 'vector';
+      }
+      else
+      {
+        $type = 'photo';  
+      }
 			$publish_date = $s_year . $s_month . $s_day;
-			$sql = "INSERT INTO photo_package (title,gallery_id,keywords,active,added,photographer,description,prod,sizes,update_29,all_prints,all_sizes,other_galleries,act_download,featured) VALUES ('$title','$gallery_id','$keywords','$active','$added','$photographer','$description','$prod','$size','1','$all_prints','$all_sizes','$other_galleries2','$act_download','$featured')";
+			$sql = "INSERT INTO photo_package (image_type, title,gallery_id,keywords,active,added,photographer,description,prod,sizes,update_29,all_prints,all_sizes,other_galleries,act_download,featured) VALUES ('$type', '$title','$gallery_id','$keywords','$active','$added','$photographer','$description','$prod','$size','1','$all_prints','$all_sizes','$other_galleries2','$act_download','$featured')";
 			$result = mysql_query($sql);
 			
 			$last_result = mysql_query("SELECT id FROM photo_package order by id desc", $db);
@@ -191,7 +199,20 @@
 					$result = mysql_query($sql);
 				}
 			}
-					
+				
+      // UPLOAD VECTOR_IMAGE
+      
+			if($_FILES['image_vector']['name'] != ""){
+				if(move_uploaded_file($_FILES['image_vector']['tmp_name'],  $image_path.$new_image_name."eps"))
+        {             
+          echo "success";
+        }
+        else
+        {
+          echo "not";
+        }
+			}
+      	
 			$get_size = getimagesize($image_path . $image_details[1]);
 			
 			if($_POST['aprofile']){

@@ -38,32 +38,286 @@
         if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
     	}
 	</script>
+    <?php echo $script1; ?>
 		<? print($head); ?>
-		<center>
-        <table cellpadding="0" cellspacing="0"><tr><td valign="top">
-		<table cellpadding="0" cellspacing="0" width="765" class="main_table" style="border: 5px solid #<? echo $border_color; ?>;">
-			<? include("header.php"); ?>
-			<tr>
-				<td class="left_nav_header"><? echo $misc_photocat; ?></td>
-				<td></td>
-				<? include("search_bar.php"); ?>
-			</tr>
-			<tr>
-				<td rowspan="1" valign="top"><? include("i_gallery_nav.php"); ?></td>
-				<td background="images/col2_shadow.gif" valign="top"><img src="images/col2_white.gif"></td>
-				<td valign="top" height="18">
-					<table cellpadding="0" cellspacing="0" width="560" height="100%">
-						<tr>
-							<td colspan="3" height="5"></td>
-						</tr>
-						<?php
-							$crumb = $cart_my_cart;
-							include("crumbs.php");
-						?>
-						<tr>
-							<td class="index_copy_area" colspan="3" height="4"></td>
-						</tr>						
-						<tr>
+    <? include("header.php"); ?>
+<div class="container">
+    
+		<div id="main">
+			<? include("i_gallery_nav.php"); ?>
+      <div class="right-main">
+        
+            	<!--r-left-main ehlel-->
+            	<div class="r-left-main">
+                  <div class="r-content-main">
+                    	<div align="center"><h2><?php echo $cart_my_cart; ?></h2></div>
+                      
+                        <ul class="menu1">
+                        	<li><a href="#">Send</a></li>
+                            <li><a href="#">Share</a></li>
+                            <li><a href="#">Rename</a></li>
+                            <li><a href="#">Delete</a></li>
+                            <li><a href="#">Remove</a></li>
+                            <li><a href="#">Copy</a></li>
+                            <li><a href="#">Move</a></li>
+                        </ul>
+                        <div class="lighbox-main">
+                          <style>
+                            
+                          </style>
+												<?
+													$total = 0;
+													$shipping = 0;
+													$cart_result = mysql_query("SELECT id,ptype,prid,sid,photo_id,quantity FROM carts where visitor_id = '" . $_SESSION['visitor_id'] . "'", $db);
+													$cart_rows = mysql_num_rows($cart_result);
+													while($cart = mysql_fetch_object($cart_result)){
+														
+														if($cart->ptype == "d"){
+															$photo_result = mysql_query("SELECT id,reference_id,price FROM uploaded_images where id = '$cart->photo_id'", $db);
+															$photo = mysql_fetch_object($photo_result);	
+															//$info_result = mysql_query("SELECT * FROM photo_package where id = '$photo->reference_id'", $db);
+															//$info = mysql_fetch_object($info_result);														
+														}
+														
+														if($cart->ptype == "s"){
+															$photo_s_result = mysql_query("SELECT reference_id,id FROM uploaded_images where id = '$cart->photo_id'", $db);
+															$photo_s = mysql_fetch_object($photo_s_result);	
+															//$info_s_result = mysql_query("SELECT * FROM photo_package where id = '$photo_s->reference_id'", $db);
+															//$info_s = mysql_fetch_object($info_s_result);												
+														}
+												?>
+                        <div class="box-content">
+                        <?php
+                              if($cart->ptype == "d"){
+																		$price = "0.00";
+																		$prices = "0.00";
+																		$minus_ship = "0.00";
+																		if($setting->show_watermark_thumb == 1){
+																			?>
+																		<a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo->reference_id; ?>"><img src="thumb_mark.php?i=<? echo $photo->id; ?>"  class="photos" border="0"></a>
+																     <? } else { ?>
+																    <a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo->reference_id; ?>"><img src="image.php?src=<? echo $photo->id; ?>"  class="photos" border="0"></a>
+																     	<? } ?>
+                                    
+                                      <?
+                                        //echo $cart_digital_price;						
+                                        if($photo->price){
+                                          $price_down = $photo->price;	
+                                        } else {
+                                          $price_down = $setting->default_price;	
+                                        }
+                                        if($setting->tax_download == 0){
+                                          $minus_tax = $price_down;
+                                        } else {
+                                          $minus_tax = "0.00";
+                                        }
+                                        echo $currency->sign . $price_down;
+                                        
+                                      ?>
+                                      <!--
+                                      <a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo->reference_id; ?>" class="photo_links"><?PHP echo $cart_details_link; ?></a> | <a href="public_actions.php?pmode=delete_cart&gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&cid=<? echo $cart->id; ?>&prid=<? echo $cart->prid; ?>" class="photo_links"><?PHP echo $cart_remove_from_cart; ?></a>
+                                      -->
+																<?
+																	} else {
+																	if($cart->ptype == "s"){
+																		$price_down = "0.00";
+																		$price = "0.00";
+																		$minus_ship = "0.00";
+																	if($setting->show_watermark_thumb == 1){
+																			?>
+																	<a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo_s->reference_id; ?>"><img src="thumb_mark.php?i=<? echo $photo_s->id; ?>"  class="photos" border="0"></a>
+																	<?php } else { ?>
+																	<a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo_s->reference_id; ?>"><img src="image.php?src=<? echo $photo_s->id; ?>"  class="photos" border="0"></a>
+																	<?php } ?>
+																	
+																		<?
+																		$sizes_result = mysql_query("SELECT price FROM sizes where id = '$cart->sid'", $db);
+																		$sizes = mysql_fetch_object($sizes_result);
+																			echo $cart_digital_price;
+																			if($sizes->price){
+																				$prices = $sizes->price;	
+																			} else {
+																				$prices = $setting->default_price;	
+																			}
+																			if($setting->tax_download == 0){
+																				$minus_tax = $prices;
+																			} else {
+																				$minus_tax = "0.00";
+																			}
+																			echo $currency->sign . $prices ;
+																			
+																		?>
+																		<a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo_s->reference_id; ?>" class="photo_links"><?PHP echo $cart_details_link; ?></a> | <a href="public_actions.php?pmode=delete_cart&gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&cid=<? echo $cart->id; ?>&prid=<? echo $cart->prid; ?>" class="photo_links"><?PHP echo $cart_remove_from_cart; ?></a>
+																	
+																<?
+																	} else {
+																		$print_result = mysql_query("SELECT id,name,ship_price1,ship_price2,price,quan_avail,bypass,taxable FROM prints where id = '$cart->prid'", $db);
+																		$print = mysql_fetch_object($print_result);
+																		
+																		$pg_result = mysql_query("SELECT id,reference_id FROM uploaded_images where reference = 'photo_package' and id = '$cart->photo_id'", $db);
+																		$pg = mysql_fetch_object($pg_result);
+																		
+																		$price_down = "0.00";
+																		$prices = "0.00";
+																		
+																		if($print->bypass == 1){
+																			$minus_ship = $print->price;
+																			$minus_ship = $minus_ship * $cart->quantity;
+																		} else {
+																			$minus_ship = "0.00";
+																		}
+																		if($print->taxable == 0){
+																			$minus_tax = $print->price;
+																			$minus_tax = $minus_tax * $cart->quantity;
+																		} else {
+																			$minus_tax = "0.00";
+																		}
+																		for($x = 1; $x <= $cart->quantity; $x++){																		
+																			if(!in_array($print->id,$product_array)){
+																				$product_array[] = $print->id;
+																				$product_prices[] = $print->ship_price1;
+																			} else {
+																				$product_array[] = $print->id;
+																				if(!$print->ship_price2){
+																					$product_prices[] = $print->ship_price1;
+																				} else {
+																					$product_prices[] = $print->ship_price2;
+																				}
+																			}	
+																		}																										
+																																			
+																	if($setting->show_watermark_thumb == 1){
+																 	?>
+																 	<a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $pg->reference_id; ?>"><img src="thumb_mark.php?i=<? echo $pg->id; ?>"  class="photos" border="0"></a>
+																 	<?php } else { ?>
+																	<a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $pg->reference_id; ?>"><img src="image.php?src=<? echo $pg->id; ?>"  class="photos" border="0"></a>
+																	<?php } ?>
+																	<?
+																					
+																				
+																					echo $print->name;
+																					echo $cart_print_price;						
+																					if($print->price){
+																						$price1 = $print->price;
+																						$price = $print->price * $cart->quantity;
+																					} else {
+																						$price1 = "5.00";
+																						$price = "5.00" * $cart->quantity;
+																					}
+																					echo $currency->sign . dollar2($price1) . " (each)";
+																					if($print->bypass == 1){
+																						echo "<br>" . $misc_pickup . "<br>";
+																					}
+																					if($setting->fix_price1 == "0.00" & $setting->fix_price2 == "0.00" & $setting->fix_price3 == "0.00" & $setting->fix_price4 == "0.00"){
+																						$shipping = array_sum($product_prices);
+																					
+																						if($print->ship_price1 != "0.00"){
+																							echo $cart_shipping . $currency->sign . $print->ship_price1;
+																							if($print->ship_price1 == $print->ship_price2){
+																								echo " (each)";
+																							} else {
+																								echo $cart_shipping2 . $currency->sign . $print->ship_price2 . $cart_shipping3;
+																							}
+																						}
+																					
+																					} else {
+																																
+																					}	
+																				?>
+																		<!--		<a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $pg->reference_id; ?>" class="photo_links"><?PHP echo $cart_details_link; ?></a> | <a href="public_actions.php?pmode=delete_cart&gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&cid=<? echo $cart->id; ?>&prid=<? echo $cart->prid; ?>" class="photo_links"><?PHP echo $cart_remove_from_cart; ?></a> -->
+																		
+                                    <div class="box-content"></div>
+                            <div class="box-content"></div>
+                            <div class="box-content"></div>
+                            <div class="box-content"></div>
+                            <div class="box-content"></div>
+                            <div class="box-content"></div>
+                            <div class="box-content"></div>
+                            <div class="box-content"></div>
+                            <div class="box-content"></div>
+                            <div class="box-content"></div>
+                        </div>		
+                        <!--
+																				<form action="public_actions.php?pmode=update_quantity" method="post">
+																				<input type="hidden" name="cid" value="<?php echo $cart->id; ?>">
+																				<input type="hidden" name="quan_avail" value="<?php echo $print->quan_avail; ?>">
+																				<input type="hidden" name="prid" value="<?php echo $print->id; ?>">
+																				<div valign="top" align="left" style="padding-left: 10px;" nowrap>
+																					Quantity:<br><input type="text" value="<?php echo $cart->quantity; ?>" style="width: 50px;" name="quantity"> <input type="submit" value="Update">
+																					<?php
+																						if($print->quan_avail != "999"){ 
+																							echo  $cart_quantity . $print->quan_avail;
+																						}
+																					?>
+																				</div>
+																				</form>-->
+																			
+  
+																<?
+																	}
+																}
+																?>
+                              </div>
+                        <?php 
+                          }  
+                        ?>
+                    
+                        
+                        	
+                  </div>
+                </div>
+                <!--r-left-main tugsgul-->
+                <!--r-right-main ehlel-->
+                <div class="r-right-main">
+                	
+                </div>
+                <!--r-right-main tugsgul-->
+                <!--content ehlel-->
+                <div class="content">
+                	<img class="image" src="images/image2.jpg">
+                	Template Monster website templates, Flash templates and other web design products are famous for being top quality solution for a quick, easy and affordable website production. The best part about our templates is the simplicity - you purchase the template package, customize it a little bit and upload it to your hosting. And there you have it - your website is up and running within as little as several hours from the moment you've been choosing a website template! So when
+                </div>
+                <!--content tugsgul-->
+                <!--content ehlel-->
+                <div class="content">
+                	<!-- video-content ehlel-->
+                	<div class="video-content line">
+                    	<h1>7 ХОНОГИЙН ҮНЭГҮЙ ЗУРАГ</h1>
+                        <img class="image" src="images/image2.jpg">
+                        <div class="copyright">by <a href="#">miamore</a></div>
+                        <div><span>web design colection</span></div>
+                        <div class="download">
+                        	<a href="#">татах</a>
+                        </div>
+                    </div>
+                    <!-- video-content tugsgul-->
+                    <!-- video-content ehlel-->
+                    <div class="video-content line">
+                    	<h1>7 ХОНОГИЙН ҮНЭГҮЙ ЗУРАГ</h1>
+                        <img class="image" src="images/image2.jpg">
+                        <div class="copyright">by <a href="#">miamore</a></div>
+                        <div><span>web design colection</span></div>
+                        <div class="download">
+                        	<a href="#">татах</a>
+                        </div>
+                    </div>
+                    <!-- video-content tugsgul-->
+                    <!-- video-content ehlel-->
+                    <div class="video-content">
+                    	<h1>7 ХОНОГИЙН ҮНЭГҮЙ ЗУРАГ</h1>
+                        <img class="image" src="images/image2.jpg">
+                        <div class="copyright">by <a href="#">miamore</a></div>
+                        <div><span>web design colection</span></div>
+                        <div class="download">
+                        	<a href="#">татах</a>
+                        </div>
+                    </div>
+                    <!-- video-content tugsgul-->
+                </div>
+                <!--content tugsgul-->
+                <?php include('i_nav_photo.php'); ?>
+            
+        <tr>
 							<td colspan="3" valign="top" height="100%" class="homepage_line">
 								<table width="100%" border="0">
 									<tr>
@@ -76,27 +330,7 @@
 									</tr>
 									<tr>
 										<td>
-											<? if($_GET['message'] == "coupon_good"){
-												echo $cart_coupon_good;
-											}
-												if($_GET['message'] == "coupon_bad"){
-												echo $cart_coupon_bad;
-											}
-											if($_GET['message'] == "reset"){
-												unset($_SESSION['type']);
-												unset($_SESSION['percent']);
-												unset($_SESSION['amount']);
-												unset($_SESSION['item_free']);
-												unset($_SESSION['free_ship']);
-												unset($_SESSION['no_tax']);
-												unset($_SESSION['coupon_id']);
-												unset($savings);
-											}											
-											if($_GET['message'] == "already_added"){
-												echo "<span style=\"color: #ff0000; font-weight: bold;\">" . $cart_already_added . "</span><br /><br />";
-											}
 											
-											?>
 											<table width="100%">
 												<?
 													$total = 0;
@@ -131,13 +365,13 @@
 																		$minus_ship = "0.00";
 																		if($setting->show_watermark_thumb == 1){
 																			?>
-																		<td><a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo->reference_id; ?>"><img src="thumb_mark.php?i=<? echo $photo->id; ?>" width="75" class="photos" border="0"></a></td>
+																		<td><a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo->reference_id; ?>"><img src="thumb_mark.php?i=<? echo $photo->id; ?>"  class="photos" border="0"></a></td>
 																     <? } else { ?>
-																    <td><a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo->reference_id; ?>"><img src="image.php?src=<? echo $photo->id; ?>" width="75" class="photos" border="0"></a></td>
+																    <td><a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo->reference_id; ?>"><img src="image.php?src=<? echo $photo->id; ?>" class="photos" border="0"></a></td>
 																     	<? } ?>
 																	<td>
 																		<?
-																			echo $cart_digital_price;						
+																			//echo $cart_digital_price;						
 																			if($photo->price){
 																				$price_down = $photo->price;	
 																			} else {
@@ -161,9 +395,9 @@
 																		$minus_ship = "0.00";
 																	if($setting->show_watermark_thumb == 1){
 																			?>
-																	<td><a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo_s->reference_id; ?>"><img src="thumb_mark.php?i=<? echo $photo_s->id; ?>" width="75" class="photos" border="0"></a></td>
+																	<td><a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo_s->reference_id; ?>"><img src="thumb_mark.php?i=<? echo $photo_s->id; ?>"  class="photos" border="0"></a></td>
 																	<?php } else { ?>
-																	<td><a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo_s->reference_id; ?>"><img src="image.php?src=<? echo $photo_s->id; ?>" width="75" class="photos" border="0"></a></td>
+																	<td><a href="details.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $photo_s->reference_id; ?>"><img src="image.php?src=<? echo $photo_s->id; ?>" class="photos" border="0"></a></td>
 																	<?php } ?>
 																	<td>
 																		<?
@@ -608,18 +842,11 @@
 					</table>				
 				</td>
 			</tr>
-			<? include("footer.php"); ?>			
-		</table>
-        </td>
-        <td valign="top">
-			<?php
-				if($pf_feed_status){
-					include('pf_feed.php');
-				}
-			?>
-        </td>
-        </tr></table>
-		</center>
+			</div> <!-- end class right-main -->
+      </div><!-- end main id-->
+      </div> <!-- end container class -->
+      </div>
+      <? include("footer.php"); ?>
 	</body>
 </html>
 <?

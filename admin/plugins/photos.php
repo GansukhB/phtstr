@@ -1135,6 +1135,9 @@
 										<font face="arial" color="#ffffff" style="font-size: 11;"><b><? echo $image_area_name; ?>:</b> (JPG files only.)<br>
 										<input type="file" name="image" style="font-size: 11; width: 287; border: 1px solid #000000;">
 										<br>
+                    <font face="arial" color="#ffffff" style="font-size: 11;"><b><? echo $image_area_name; ?>:</b> (EPS files only. If vector image)<br>
+										<input type="file" name="image_vector" style="font-size: 11; width: 287; border: 1px solid #000000;">
+										<br>
 										<table style="border: 1px solid #1A4188; margin: 10px; background-color: #7296D7;">
 											<tr>
 												<td style="padding: 10px;">

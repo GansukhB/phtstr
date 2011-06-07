@@ -1,6 +1,12 @@
 <div class="banner-main">
   <?php 
-    $qry = "SELECT * FROM banner ORDER BY rand() ";
+    $currentFile = $_SERVER["SCRIPT_NAME"];
+    $parts = Explode('/', $currentFile);
+    $currentFile = $parts[count($parts) - 1];
+
+  
+    $qry = "SELECT * FROM banner WHERE area='$currentFile' ORDER BY rand() ";
+    
     $rslt = mysql_query($qry);
     //echo mysql_num_rows($rslt).'hehe';
   ?>
@@ -15,13 +21,13 @@
           <div class="banner"><a href="<?php echo $banner->link; ?>" target="_blank">
             <img src="banner/<?php echo $banner->file; ?>" /></a></div>
         <?php else: ?>
-        <div class="banner">
-          <object width="320" height="182">
-              <param name="movie" value="banner/<?php echo $banner->file; ?>">
-              <embed src="banner/<?php echo $banner->file; ?>" width="320" height="182">
-              </embed>
-          </object>
-        </div>
+          <div class="banner">
+            <object width="320" height="182">
+                <param name="movie" value="banner/<?php echo $banner->file; ?>">
+                <embed src="banner/<?php echo $banner->file; ?>" width="320" height="182">
+                </embed>
+            </object>
+          </div>
       <?php endif; ?>
     <?php $count++;  endif; ?>
   <?php endwhile; ?>

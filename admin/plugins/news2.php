@@ -612,8 +612,8 @@
 												<td>
 												<select name="s_year" style="font-size: 11; font-weight: bold; width: 110;">
 													<?
-													$year_x = 2004;
-													while($year_x <= 2010){
+													$year_x = 2011;
+													while($year_x <= 2020){
 													?>
 														<option value="<? echo $year_x; ?>" <? if($year_x == $this_year){ echo "selected"; } ?>><? echo $year_x; ?></option>
 													<?
@@ -638,7 +638,7 @@
 								<? if($homepage_option == 1){ ?>
 									<tr>
 										<td bgcolor="#5E85CA" class="data_box">
-											<input type="checkbox" name="homepage" value="1" <? if($news->homepage == 1){ echo "checked"; } ?>><font face="arial" color="#ffffff" style="font-size: 11;"><b>Home Page</b> (Display on the home page)<br>
+											<input type="checkbox" name="homepage" value="1" <? if($news->homepage == 1){ echo "checked"; } ?>><font face="arial" color="#ffffff" style="font-size: 11;"><b>List in news page</b> (Display on the news page)<br>
 										</td>
 									</tr>
 								<? } ?>

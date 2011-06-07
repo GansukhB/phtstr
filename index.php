@@ -9,6 +9,10 @@
 	include( "functions.php" );
 	include( "config_public.php" );
 	
+  if(!isset($_COOKIE['lang']))
+  {
+    header('location: home.inc.php');
+  }
   //session_destroy();
 	// VISITOR ID
 	if(!$_SESSION['visitor_id']){
@@ -27,13 +31,20 @@
 <html>
 	<head>
 		<script language=JavaScript src='./js/xns.js'></script>
-    <?php echo $script1; ?>
     
+    <?php echo $script1; ?>
+    <script language=JavaScript src='./slide/coin-slider.min.js'></script>
+<script type="text/javascript">
+	    $(document).ready(function() {
+		    $('#coin-slider').coinslider({ width: 675, navigation: false, links : true, delay: 2000 });
+	    });
+    </script>    <link rel="stylesheet" href="slide/coin-slider-styles.css" />
 	<? print($head); ?>
 
 <body>
+  <? include("header.php"); ?>
   <div class="container">
-			<? include("header.php"); ?>
+			
 			
       <div id="main">
 				
@@ -44,17 +55,70 @@
         
         <div class="right-main">
           <?php if(!$_SESSION['mem_name']): ?>
+             
             	<div class="slider">
-                	<img src="images/image1.jpg">
-                </div>
+                <div id='coin-slider' >
+                  <?php 
+                    $query = " select id, title, gallery_id from photo_package where featured='1' order by id desc limit 0, 6";
+                    $featured_result = mysql_query($query);
+                    function get_img_ids($pckg_id){
+                      $query = "select id from uploaded_images where reference_id='$pckg_id' ";
+                      $result = mysql_query($query);
+                      $id = mysql_fetch_object($result);
+                      return $id->id;
+                    }
+                  ?>
+                  <?php while($thmb = mysql_fetch_object($featured_result) ): ?>
+
+                    <a href="details.php?gid=<?php echo $thmb->gallery_id; ?>&pid=<?php echo $thmb->id;  ?>" target="_blank" >
+                        <!--<img src="watermark_slide.php?i=<?php echo get_img_ids($thmb->id); ?>" class="image" >-->
+                        <img src="wh_image.php?i=<?php echo get_img_ids($thmb->id); ?>&width=675&height=290" class="image" >
+                         <div class="title"><?php echo $thmb->title; ?></div>
+                      </a>
+                  <?php endwhile; ?>
+                  <!--
+                      <a href="slide/1.jpg" target="_blank">
+                        <img  src='slide/1.jpg' class='image' >
+                        
+                      </a>
+                      <a href="slide/2.jpg" target="_blank">
+                        <img  src='slide/2.jpg' class='image'>
+                        
+                      </a>
+                      <a href="slide/3.jpg" target="_blank">
+                        <img  src='slide/3.jpg' class='image'>
+                        
+                      </a>
+                  -->
+                    </div>                
+                  </div>
                 <!--content ehlel-->
                 <div class="content">
                 	<!--left content ehlel-->
                 	<div class="left-content">
-                    	<h1>20000 ГАРУЙ ЗУРГИЙН САНГААС ХУДАЛДАЖ АВАХЫГХҮСВЭЛ</h1>
-                        Template Monster website templates, Flash templates and other web design products are famous for being top quality solution for a quick, easy and affordable website production. The best part about our templates is the simplicity - you purchase the template package, customize it a little bit and upload it to your hosting. And there you have it - your website is up and running within as little as several hours from the moment you've been choosing a website template! So when
+                      <?php 
+                          $query = "select * from news where id='104'";
+                          $result = mysql_query($query);
+                          
+                          $obj = mysql_fetch_object($result);
+                          
+                          $text = $obj->article;
+                          $title = $obj->title; 
+                          if($_SESSION['lang'] != 'English')
+                          {
+                            $title = $obj->{ 'title_'.$_SESSION['lang'] };
+                            $text = $obj->{ 'article_'.$_SESSION['lang'] };
+                          }
+                          
+                          
+                        ?>
+                      <h1><?php echo $title; ?></h1>
+                      <div>
+                        <?php echo $text; ?>
+                      </div>
+                        
                         <div class="more" align="center">
-                        	<a href="#">Захиалах</a>
+                        	<a href="subscribe.php"><?php echo $subscribe_crumb_link; ?></a>
                         </div>
                     </div>
                     <!--left content tugsgul-->
@@ -72,13 +136,7 @@
                               </label>
                           </form>-->
                           
-                          <script>
-                            function clearText(field){
-                                if (field.defaultValue == field.value) field.value = '';
-                                else if (field.value == '') field.value = field.defaultValue;
-                            }
-
-                          </script>
+                          
                           <form action="public_actions.php?pmode=login" method="post">
                             
                                 <label><input type="text" name="email" value="<?php echo $form_email; ?>" onFocus="clearText(this)" onBlur="clearText(this)"></label>
@@ -107,9 +165,29 @@
                 <!--content tugsgul-->
                 <!--content ehlel-->
                 <div class="content">
-                	<img class="image" src="images/image2.jpg">
-                	Template Monster website templates, Flash templates and other web design products are famous for being top quality solution for a quick, easy and affordable website production. The best part about our templates is the simplicity - you purchase the template package, customize it a little bit and upload it to your hosting. And there you have it - your website is up and running within as little as several hours from the moment you've been choosing a website template! So when
-                </div>
+                  
+                  <h2><?php echo $homepage_welcome_to_message; ?></h2>
+                      <div>
+                        <?php 
+                          $query = "select * from news where id='105'";
+                          $result = mysql_query($query);
+                          
+                          $obj = mysql_fetch_object($result);
+                          
+                          $text = $obj->article;
+                          
+                          if($_SESSION['lang'] != 'English')
+                          {
+                            $text = $obj->{ 'article_'.$_SESSION['lang'] };
+                          }
+                          $query = "select * from ";
+                        ?>
+                      </div>
+                      <img class="image" src="images/image2.jpg">
+                      <div>
+                        <?php echo $text; ?>
+                      </div>
+                  </div>
                 <!--content tugsgul-->
           <?php else: ?>   
                 <div class="r-left-main">
@@ -117,7 +195,7 @@
                     	<h2><?php echo $homepage_welcome_to_message; ?></h2>
                       <div>
                         <?php 
-                          $query = "select * from copy_areas where id='102' ";
+                          $query = "select * from news where id='103'";
                           $result = mysql_query($query);
                           
                           $obj = mysql_fetch_object($result);
@@ -135,95 +213,97 @@
                   </div>
                   <div class="r-content-main">
                   		<h2><?php echo $left_details; ?></h2>
-                      
-                      
-                  <?php if($_SESSION['sub_member']){
-							$member_end_result = mysql_query("SELECT added,sub_length,info FROM members where id = '" . $_SESSION['sub_member'] . "'", $db);
-							$member_end = mysql_fetch_object($member_end_result);
-							
-							$this_day = substr($member_end->added, 6, 2);
-							$this_month = substr($member_end->added, 4, 2);
-							$this_year = substr($member_end->added, 0, 4);
-							
-														
-							if($member_end->sub_length == "Y"){
-								$addmonths = 12;
-							} else {
-								$addmonths = 1;
-							}
-							
-							$basedate = strtotime($member_end->added);
-							$mydate = strtotime("+$addmonths month", $basedate);							
-							$future_month = date("m/d/Y", $mydate);	
-						}		
-	?>
-<?php
-							if($_SESSION['sub_member']){
-							?>
-							<?PHP echo $left_logged; ?><? echo $_SESSION['mem_name']; ?><br>
-							<?
-						}
-						 if($_SESSION['sub_member']){
-							if($_SESSION['mem_down_limit'] > 0 && $member_end->sub_length != "F"){
-							?>
-							<?PHP echo $left_download; ?>
-							<?
-							if($_SESSION['mem_down_limit'] == 99999){
-							?>
-							<?PHP echo $left_unlimited; ?>
-							<? 
-							} else { 
-							echo $_SESSION['mem_down_limit'];
-							}
-							?>
-							<br>
-							<?PHP echo $left_expired; ?>
-							<? 
-							echo $future_month; 
-							?>
-							<br>
-							<hr width="95%">
-							<?
-							} else {
-								if($member_end->sub_length != "F"){
-							?>
-							<b><a href="renew_full.php" class="search_bar_links"><?PHP echo $left_renew; ?></a></b><br>
-							<hr width="95%">
-							<?
-						} 
-					}
-							if($member_end->sub_length == "F"){ 
-							?>
-							<?PHP echo $left_account_free; ?><? if($setting->allow_subs == 1 or $setting->allow_subs_month == 1){ ?><br /><a href="renew_full.php"><?PHP echo $left_upgrade; ?></a><? } ?><br>
-							<hr width="95%">
-							<? 
-						}
-						if(file_exists("lightbox.php")){
-							?>
-							<a href="lightbox.php" class="search_bar_links"><?PHP echo $left_lightbox; ?></a>
-							<? 
-						}
-						$order_status_results = mysql_query("SELECT id FROM visitors where member_id = '" . $_SESSION['sub_member'] . "'", $db);
-						$order_status_rows = mysql_num_rows($order_status_results);
-						if($order_status_rows > 0){
-							?>
-							<br><a href="order_status.php" class="search_bar_links"><?PHP echo $left_orders; ?></a>
-							<? 
-						}
-							?>
-					    <br><a href="my_details.php" class="search_bar_links"><?PHP echo $left_details; ?></a>
-							<?
-							 if($member_end->info != ""){
-							?>
-							<br><a href="my_info.php" class="search_bar_links"><?PHP echo $left_info; ?></a>
-							<?
-						}
-					}
-					?>    
-                      
+ 
                   		<div class="left">
+                         <?php if($_SESSION['sub_member']){
+                              $member_end_result = mysql_query("SELECT added,sub_length,info FROM members where id = '" . $_SESSION['sub_member'] . "'", $db);
+                              $member_end = mysql_fetch_object($member_end_result);
+                              
+                              $this_day = substr($member_end->added, 6, 2);
+                              $this_month = substr($member_end->added, 4, 2);
+                              $this_year = substr($member_end->added, 0, 4);
+                              
+                                            
+                              if($member_end->sub_length == "Y"){
+                                $addmonths = 12;
+                              } else {
+                                $addmonths = 1;
+                              }
+                              
+                              $basedate = strtotime($member_end->added);
+                              $mydate = strtotime("+$addmonths month", $basedate);							
+                              $future_month = date("m/d/Y", $mydate);	
+                            }		
+                        ?>
                         	<div><strong class="yellow">Subscrib today?</strong></div>
-                            we have packages starting at 49$.
+                          
+                          <?php if($_SESSION['sub_member']){ ?>
+                            <?PHP //echo $left_logged; ?><? //echo $_SESSION['mem_name']; ?><br>
+                          <?php } ?>
+                <?php
+                              
+                            
+                            
+                             if($_SESSION['sub_member']){
+                              if($_SESSION['mem_down_limit'] > 0 && $member_end->sub_length != "F"){
+                              ?>
+                              <?PHP echo $left_download; ?>
+                              <?
+                              if($_SESSION['mem_down_limit'] == 99999){
+                              ?>
+                              <?PHP echo $left_unlimited; ?>
+                              <? 
+                              } else { 
+                              echo $_SESSION['mem_down_limit'];
+                              }
+                              ?>
+                              <br>
+                              <?PHP echo $left_expired; ?>
+                              <? 
+                              echo $future_month; 
+                              ?>
+                              <br>
+                              
+                              <?
+                              } else {
+                                if($member_end->sub_length != "F"){
+                              ?>
+                              <b><a href="renew_full.php" class="search_bar_links"><?PHP echo $left_renew; ?></a></b>
+                              
+                              <?
+                            } 
+                          }
+                              if($member_end->sub_length == "F"){ 
+                              ?>
+                              <?PHP echo $left_account_free; ?><? if($setting->allow_subs == 1 or $setting->allow_subs_month == 1){ ?><br /><a href="renew_full.php"><?PHP echo $left_upgrade; ?></a><? } ?><br>
+                              
+                              <? 
+                            }
+                            
+                            /*
+                            if(file_exists("lightbox.php")){
+                              ?>
+                              <a href="lightbox.php" class="search_bar_links"><?PHP echo $left_lightbox; ?></a>
+                              <? 
+                            }
+                            $order_status_results = mysql_query("SELECT id FROM visitors where member_id = '" . $_SESSION['sub_member'] . "'", $db);
+                            $order_status_rows = mysql_num_rows($order_status_results);
+                            if($order_status_rows > 0){
+                              ?>
+                              <br><a href="order_status.php" class="search_bar_links"><?PHP echo $left_orders; ?></a>
+                              <? 
+                            }
+                              ?>
+                              <br><a href="my_details.php" class="search_bar_links"><?PHP echo $left_details; ?></a>
+                              <?
+                               if($member_end->info != ""){
+                              ?>
+                              <br><a href="my_info.php" class="search_bar_links"><?PHP echo $left_info; ?></a>
+                              <?
+                            }*/
+                          }
+                          ?>    
+                            
                         </div>
                         <div class="right">
                         	<div class="s-price-main">
@@ -251,25 +331,12 @@
                         </div>
                   </div>
                   <div class="r-content-main">
-                    	<h2>Your lighboxes</h2>
-                        <div class="lighbox-main">
-                        	<div class="box-content"></div>
-                            <div class="box-content"></div>
-                            <div class="box-content"></div>
-                            <div class="box-content"></div>
-                            <div class="box-content"></div>
-                            <div class="box-content"></div>
-                            <div class="box-content"></div>
-                            <div class="box-content"></div>
-                            <div class="box-content"></div>
-                            <div class="box-content"></div>
-                        </div>
+                    	<?php include("i_lightbox_user.php"); ?>
                   </div>
                 </div>
           <?php endif; ?>
-                <!--content ehlel-->
+                <!--content ehlel
                 <div class="content">
-                	<!-- video-content ehlel-->
                 	<div class="video-content line">
                     	<h1>7 ХОНОГИЙН ҮНЭГҮЙ ЗУРАГ</h1>
                         <img class="image" src="images/image2.jpg">
@@ -279,8 +346,6 @@
                         	<a href="#">татах</a>
                         </div>
                     </div>
-                    <!-- video-content tugsgul-->
-                    <!-- video-content ehlel-->
                     <div class="video-content line">
                     	<h1>7 ХОНОГИЙН ҮНЭГҮЙ ЗУРАГ</h1>
                         <img class="image" src="images/image2.jpg">
@@ -290,8 +355,6 @@
                         	<a href="#">татах</a>
                         </div>
                     </div>
-                    <!-- video-content tugsgul-->
-                    <!-- video-content ehlel-->
                     <div class="video-content">
                     	<h1>7 ХОНОГИЙН ҮНЭГҮЙ ЗУРАГ</h1>
                         <img class="image" src="images/image2.jpg">
@@ -301,108 +364,9 @@
                         	<a href="#">татах</a>
                         </div>
                     </div>
-                    <!-- video-content tugsgul-->
-                </div>
+                </div>-->
                 <!--content tugsgul-->
-                <!--most content ehlel-->
-                <div class="most-content">
-                	 <!--most content tab ehlel-->
-                	<ul class="tab">
-                    	<li class="active"><a href="#tab1">FEUTURED PHOTOS</a></li>
-                        <li><a href="#tab2">NEWEST PHOTOS</a></li>
-                        <li><a href="#tab3">MOST POPULAR PHOTOS</a></li>
-                    </ul>
-                    <!--most content tab tugsgul-->
-                    <!--tab container ehlel-->
-                    <div class="tab-container">
-                    	<!--tab1 ehlel-->
-                    	<div id="tab1" style="" class="tab-content">
-                        	<div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand</a></div>
-                            </div>
-                        </div>
-                        <!--tab1 tugsgul-->
-                        <!--tab2 ehlel-->
-                        <div id="tab2" style="display:none;" class="tab-content">
-                        	<div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand6</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand5</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand4</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand3</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand2</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand1</a></div>
-                            </div>
-                        </div>
-                        <!--tab2 tugsgul-->
-                        <!--tab3 ehlel-->
-                        <div id="tab3" style="display:none;" class="tab-content">
-                        	<div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand1</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand2</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand3</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand4</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand5</a></div>
-                            </div>
-                            <div class="most" align="center">
-                            	<img class="image" src="images/image2.jpg">
-                                <div class="title"><a href="#">miamore khand6</a></div>
-                            </div>
-                        </div>
-                        <!--tab3 tugsgul-->
-                    </div>
-                    <!--tab container tugsgul-->
-                </div>
-                 <!--most content tugsgul-->
+                <?php include("i_nav_photo.php"); ?>
             
             
           <!--

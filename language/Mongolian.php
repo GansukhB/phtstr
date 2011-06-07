@@ -60,7 +60,7 @@ $support_enter_below = " Комэнтийг доор бичнэ үү:";
 //SUBSCRIBE PAGE
 $subscribe_cartsignup = "Бүртгэл шинээр үүсгэхийн тулд доорхи анкетыг бөглөнө үү.";
 $subscribe_cartsignup_title = "Дууслаа";
-$subscribe_crumb_link = "Нгдэх";
+$subscribe_crumb_link = "Элсэх";
 $subscribe_bad_email = "<b>Энэ мэйл хаягаар урьд нь бүртгэгдсэн байна. Өөр мэйл хаяг оруулна уу.";
 $subscribe_one_month = " 1 сараар";
 $subscribe_one_year = "  1 жилээр";
@@ -166,7 +166,7 @@ $pri_gal_sort_by = "<b>Эрэмбэлэх</b>:";
 $pri_gal_sort_id = "Зургийн ID";
 $pri_gal_order_title = "Зургийн гарчиг";
 $pri_gal_order_date = "Нэмэгдсэн / зассан огноо";
-$pri_gal_order_popular = "Олонд танигдсан";
+$pri_gal_order_popular = "Их үзсэн";
 $pri_gal_order_asc = "Өсөхөөр";
 $pri_gal_order_desc = "Буурахаар";
 $pri_gal_order_by = "<b>Эрэмбэлэх</b>: ";
@@ -236,7 +236,7 @@ $pp_order_form_submit = "Оруулах";
 
 
 //POPULAR PAGE
-$popular_crumb_link = "Олонд танигдсан";
+$popular_crumb_link = "Их үзсэн";
 
 //PAYPAL SUBSCRIPTION RETURN PAGE
 $paypal_sub_return_crumb_link = "Subscription";
@@ -263,7 +263,7 @@ $news_details_crumb_link = "Мэдээний дэлгэрэнгүй";
 $news_details_back_button = "[Буцах]";
 
 //NEWS PAGE
-$news_crumb_link = "Мэдээ";
+$news_crumb_link = "Мэдээнүүд";
 
 //NEWEST PHOTOS PAGE
 $newest_crumb_link = "Шинэ зургууд";
@@ -367,10 +367,10 @@ $lightbox_delete_this_lightbox = "Цомгийг устгах ";
 $license_crumb = "Licensing";
 
 //HOME PAGE
-$homepage_news = "&nbsp; Latest News";
+$homepage_news = " Сүүлийн мэдээ";
 $homepage_featured = "Онцлох зургууд";
 $homepage_newest = "Шинэ зургууд";
-$homepage_popular = "Олонд танигдсан зургууд";
+$homepage_popular = "Их үзсэн";
 
 //IMAGE DISPLAY MESSAGES
 $image_no_access = "Sorry image can't be shown because watermarking is turned on for thumbnail display.";
@@ -539,8 +539,8 @@ $cart_subtotal = "Sub Total: ";
 $cart_shipping4 = "Илгээх: ";
 $cart_coupon = "Купон: ";
 $cart_free_shipping = "-Үнэгүй хүргэж өгөх-";
-$cart_no_tax = "-No Tax-";
-$cart_grandtotal = ": ";
+$cart_no_tax = "-Таксгүй-";
+$cart_grandtotal = "Нийт дүн: ";
 $cart_empty = "<tr><td align=\"center\"><font color=\"#ff0000\"><b>Your cart is empty</b></font></td></tr>";
 $cart_coupon_box = "<b>Coupon or Promo Code:</b>";
 $cart_buy = "<b>Яг одоо худалдаж авах:</b>";
@@ -563,14 +563,14 @@ $auth_ipn_sub_pending2 = "Алдааы мэдээлэл:";
 
 //Rating area
 $rating_vote = "санал";
-$rating_votes = "саналууд";
+$rating_votes = "санал";
 $rating_currently = "Одоогор ";
 $rating_rating = " Чансаа: ";
 $rating_static = "This is \'static\'.";
-$rating_cast = "cast";
+$rating_cast = "өгсөн";
 $rating_sorry_invalid = "Sorry, vote appears to be invalid.";
 $rating_thanks = "Санал өгсөнд баярлалаа!";
-$rating_cast = "cast";
+$rating_cast = "өгсөн";
 $rating_current_rating = "Одоогийн үнэлгээ.";
 
 // Search box area
@@ -753,7 +753,7 @@ $left_expired = "<b>хугацаа:</b>";
 $left_renew = "шинэчлэх үү??";
 $left_account_free = "Бүртгэл: Энгийн ";
 $left_upgrade = "Бүртгэлээ сайжруулах уу?";
-$left_lightbox = "My Lightbox";
+$left_lightbox = "Миний цуглуулга";
 $left_orders = "Миний захиалгууд";
 $left_details = "Миний бүртгэл";
 $left_info = "Миний мэдээлэл";
@@ -774,7 +774,7 @@ $left_year3 = "</i></span> /year! "; // This is made up of three parts due to co
 $left_signup1 = "Create an account to use special features like lightbox, email to a friend, and much more!";
 $left_photogsignup = "Sell Your Photos!<br /><br />Photographers can now sell their photos thru our site.";
 $left_go_button = "ЦААШ";
-$left_select_language = "<b>Хэл сонгох:</b>";
+$left_select_language = "Хэл сонгох";
 
 //PHOTO DETAIL PAGE
 $detail_inactive = "Уучлаарай энэ зураг хараахан идэвхитэй биш байна.";
@@ -783,7 +783,7 @@ $detail_gallery_id = "Цомгийн ID: ";
 $detail_title = "<b>Зургийн нэр:</b> ";
 $detail_previous = "<b>Өмнөх</b>";
 $detail_next = "<b>Дараах</b>";
-$detail_digital = "<b>Digital Items</b>";
+$detail_digital = "<b>Дижитал зураг</b>";
 $detail_quality = "<b>Чанар: </b>";
 $detail_filesize = "<b>Файлын хэмжээ:</b> ";
 $detail_dimension = "<b>Харьцаа:</b> ";

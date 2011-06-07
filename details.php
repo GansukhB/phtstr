@@ -58,12 +58,13 @@ if($package1->description != ""){
 	<script type="text/javascript" language="javascript" src="js/behavior.js"></script>
 	<script type="text/javascript" language="javascript" src="js/rating.js"></script>
 		<?php echo $script1; ?>
-    <? print($head); ?>
+    <?php print($head); ?>
     
   </head>
 <body>    
+<? include("header.php"); ?>
 <div class="container">
-			<? include("header.php"); ?>
+			
 				<? //include("search_bar.php"); ?>
       <div id="main">
 			<? include("i_gallery_nav.php"); ?>

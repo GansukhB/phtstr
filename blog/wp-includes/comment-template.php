@@ -1075,7 +1075,7 @@ function get_comment_reply_link($args = array(), $comment = null, $post = null) 
  * @return string|bool|null Link to show comment form, if successful. False, if comments are closed.
  */
 function comment_reply_link($args = array(), $comment = null, $post = null) {
-	echo get_comment_reply_link($args, $comment, $post);
+	//echo get_comment_reply_link($args, $comment, $post);
 }
 
 /**
@@ -1366,10 +1366,11 @@ class Walker_Comment extends Walker {
 		</div>
 
 		<?php comment_text() ?>
-
+<!--
 		<div class="reply">
 		<?php comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
-		</div>
+		</div>-->
+    
 		<?php if ( 'div' != $args['style'] ) : ?>
 		</div>
 		<?php endif; ?>

@@ -139,15 +139,71 @@
       $allphotos = mysql_fetch_assoc($rslt);
       $allphotos = $allphotos['cnt'];
       ?>
+    <div id="header">
+      <div class="header-top">
+        	<div class="left"><?php echo $allphotos; ?> Stock photos</div>
+            <div class="right">
+            	<div class="language">
+                  
+                        <ul class="nav">
+                            <li><a href="#"><?Php echo $_SESSION['lang']; ?></a>
+                                <ul>
+                                  <!--
+                                    <li><a href="#">English</a></li>
+                                    <li><a href="#">English</a></li>
+                                    <li><a href="#">English</a></li>
+                                  -->
+                                     <?
+                                        $language_dir = "language";
+                                        $l_real_dir = realpath($language_dir);
+                                        $l_dir = opendir($l_real_dir);
+                                        // LOOP THROUGH THE PLUGINS DIRECTORY
+                                        $lfile = array();
+                                        while(false !== ($file = readdir($l_dir))){
+                                          $lfile[] = $file;
+                                        }
+                                        //SORT THE CSS FILES IN THE ARRAY
+                                        sort($lfile);
+                                        //GO THROUGH THE ARRAY AND GET FILENAMES
+                                        $return =  selfurl();
+                                        $return = str_replace(array("&"), array("and"), $return);
+                                        
+                                        foreach($lfile as $key => $value){
+                                        //IF FILENAME IS . OR .. DO NO SHOW IN THE LIST
+                                          $fname = strip_ext($lfile[$key]);
+                                          if($fname != ".." && $fname != "."){
+                                            if(trim($fname) != '')
+                                                echo "<li><a href=\"public_actions.php?pmode=select_lang&lang=$fname&return=".$return."\">" . $fname . "</a></li>";
+                                              
+                                          }
+                                        }
+                                    ?>
+                              </ul>
+                            </li>
+                        </ul>
+                </div>
+                <div class="login">| 
+                  <strong>
+                    <?php if(!$_SESSION['mem_name']): ?>
+                      <a href="subscribe.php"><?php echo $left_login; ?></a>
+                    <?php else: ?>
+                      <a href="cart.php"><?php echo $cart_my_cart; ?></a> | 
+                      <a href="public_actions.php?pmode=logout"><?php echo $left_logout ?></a>
+                    <?php endif; ?>
+                  </strong>
+                </div>
+            </div>
+        </div>
+        
         <div class="header">
         	<div class="top-header">
             	<div class="logo"><a href="index.php"><img src="images/logo.png"></a></div>
-                <div class="text"><?php echo $allphotos; ?> Stock photos</div>
+                <div class="text"></div>
                 <div class="search-main">
                 	<form action="search.php" id="SearchForm">
                         <div>
-                            <label>
-                            <input type="textbox" value="Search..." name="search" class="input">
+                            <label class="input-bg" >
+                            <input type="text" value="Search..." onblur="clearText(this)" onfocus="clearText(this)" name="search" class="input">
                             </label>
                             <input type="image" src="images/input-img.gif" class="button">
                         </div>
@@ -160,15 +216,25 @@
             	<ul>
                 	<li><a href="index.php"><?php echo $top_home; ?></a></li> 
                     <li><a href="faqs.php"><?php echo $top_faq; ?></a></li>  
-                    <li><a href="./blog"><?php echo $top_news; ?></a></li>  
-                    <li><a href="#">Уралдаан</a></li>  
+                    <li><a href="news.php"><?php echo $top_news; ?></a></li>
+                    
+                    <li><a href="contest.php">Уралдаан</a></li> 
+                    <li><a href="./blog">Блог</a></li>  
+                    <!--
                     <li><a href="order_status.php"><?php echo $order_crumb_link; ?></a></li>  
+                    -->
+                    <?php if(trim($_SESSION['mem_name'])!=""): ?>
+                      <li><a href="lightbox.php"><?php echo $left_lightbox; ?></a></li>
+                    <?php endif; ?>
                     <?php if(!$_SESSION['mem_name']): ?>
-                      <li><a href="subscribe.php"><?php echo $left_login; ?></a></li> 
+                      <li><a href="subscribe.php"><?php echo $left_login; ?></a></li>
                     <?php else: ?>
-                      <li><a href="public_actions.php?pmode=logout"><?php echo $left_logout ?></a>
+                      <li><a href="public_actions.php?pmode=logout"><?php echo $left_logout ?></a></li>
                     <?php endif; ?>
                 </ul>
             </div>
             <!--menu tugsgul-->
         </div>
+    </div>
+    
+   

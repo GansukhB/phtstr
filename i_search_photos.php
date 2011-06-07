@@ -1,6 +1,85 @@
 <?php  if($setting->flashthumbs == 1){ ?><script type="text/javascript" src="js/swfobject.js"></script><?php } ?>
-<table border="0" callspacing="3" width="100%">
-	<tr>
+<div class="g-header bg">
+                	<div class="left">
+                    	<ul class="tabs">
+                        	<li <?php if($_GET['sort_by'] == 'date' || !isset($_GET['sort_by'])) echo 'class="active"' ?> >
+                            <a href="<?php if($_GET['sort_by'] == 'date' || !isset($_GET['sort_by'])) echo selfURL(); else echo selfURL().'&sort_by=date'?>"><?php echo $homepage_newest; ?></a>
+                          </li>
+                          <li <?php if($_GET['sort_by'] == 'popular') echo ' class="active"';?> >
+                            <a href="<?php if($_GET['sort_by'] == 'popular') echo selfURL(); else echo selfURL().'&sort_by=popular'?>"><?php echo  $homepage_popular; ?></a>
+                          </li>
+                          <li <?php if($_GET['sort_by'] == 'random') echo ' class="active"';?>>
+                            <a href="<?php if($_GET['sort_by'] == 'random') echo selfURL(); else echo selfURL().'&sort_by=random'?>">Random view</a>
+                          </li>
+                        </ul>
+                    </div>
+                    <div class="right">
+                    	<div class="left">
+                        <!--
+                        	Pages: <div class="page">1</div>
+                        </div>
+                        <div class="left">
+                        	All Pages 1500:  <a class="next" href="#"></a><a class="prev" href="#"></a>
+                          -->
+                          
+					<?php echo "<b>" . $gallery_page . "</b>"; ?> 
+                    <select style="font-size: 11px" id="page" onChange="location.href=document.getElementById('page').options[document.getElementById('page').selectedIndex].value">
+						<?php
+                            for($x=1;$x<=$pages;$x++){
+                                $selected = ($x == $page_num) ? "selected" : "";
+                                if($setting->modrw){
+									echo "<option value=\"gallery_" . $curgal . "_m" . $_GET['gid'] . "-sb_" . $sort_by . "-so_" . $sort_order . "-page" . $x . ".html\" $selected>$x</option>";
+								} else {
+									echo "<option value=\"gallery.php?gid=$gid&page_num=$x&sort_by=$sort_by&sort_order=$sort_order\" $selected>$x</option>";
+								}
+                            }
+                        ?>										
+                    </select>
+                     <?php echo " | "; ?> <?php echo "<b>" . $pages . "</b> " . $gallery_pages . " | "; ?> (<strong><?php echo $package_rows; ?></strong> <?php echo $gallery_photo; ?>)
+                     |
+                     <span style="font-weight: bold; color: #CCCCCC">
+					<?php
+                    	if($page_num > 1){
+							if($setting->modrw){
+                    ?>
+                    		<a href="gallery_<?php echo $curgal; ?>_m<?php echo $_GET['gid']; ?>-sb_<?php echo $sort_by; ?>-so_<?php echo $sort_order; ?>-page<?php echo ($page_num - 1); ?>.html">
+                    	<?php
+							} else {
+						?>
+                        	<a class="prev" href="gallery.php?gid=<?php echo $gid; ?>&page_num=<?php echo ($page_num-1); ?>&sort_by=<?php echo $sort_by; ?>&sort_order=<?php echo $sort_order; ?>">
+						<?php
+							}
+						?>
+                    		<?php //echo $gallery_previous; ?></a>
+                    <?php
+						} else {
+							//echo "$gallery_previous"; 
+						}
+						echo " : ";
+						if($page_num != $pages){
+							if($setting->modrw){
+                    ?>
+                        	<a href="gallery_<?php echo $curgal; ?>_m<?php echo $_GET['gid']; ?>-sb_<?php echo $sort_by; ?>-so_<?php echo $sort_order; ?>-page<?php echo ($page_num + 1); ?>.html">
+						<?php
+							} else {
+						?>
+                        	<a class="next" href="gallery.php?gid=<?php echo $gid; ?>&page_num=<?php echo ($page_num+1); ?>&sort_by=<?php echo $sort_by; ?>&sort_order=<?php echo $sort_order; ?>">
+                        <?php
+							}
+						?>
+							<?php //echo $gallery_next; ?></a>
+                    <?php
+						} else {
+							//echo "$gallery_next";
+						}
+                    ?>
+                    
+                    </strong>
+				
+			 <!--end of div naviga tion -->
+                        </div>
+                    </div>
+                </div>
 	<?
 	if($_GET['startat'] == "") {
 		$startat = 0;
@@ -114,7 +193,67 @@
 	$search_display_limit = $setting->search;
 	$searcher.= " order by cart_count desc LIMIT $search_display_limit";
 	}
-	
+  
+  
+  //echo $_POST['category'];
+	if($search_form_method == 'post'){
+    $types = $_POST['type'];
+    //print_r($types);
+    $orient = $_POST['orient'];
+    //print_r($orient);
+    $category = $_POST['category'];
+    $keywords = explode(" ", $_POST['keyword']);  
+    $contributor = addslashes($_POST['contributor']);
+    
+    $g_query = "select * from photographers where name like '%$contributor%'";
+    $g_result = mysql_query($g_query);
+    $g_list = array();
+    
+    while($g = mysql_fetch_object($g_result))
+    {
+      array_push($g_list, $g->id);
+    }
+    $g_list = implode(",", $g_list);
+    if($contributor == '')
+      $g_list .= ", 0";
+    
+    //echo $category.' '.$keywords.' '.$contributor;
+    
+    $searcher = " SELECT * FROM photo_package WHERE ";
+    if($category != "0")
+    {
+      $searcher .= " gallery_id = '$category' AND ";
+    }
+    if(count($types) == 1)
+    {
+      if($types[0] == 'photo')
+      {
+        $searcher .= " gallery_id != 54 AND ";
+      }
+      else $searcher .= " gallery_id = 54 AND ";  
+    }
+    if(count($orient) == 1)
+    {
+      if($orient[0] == 'vertical')
+      {
+        $searcher .= " height >= width AND ";
+      }
+      else $searcher .= " height <= width AND ";  
+    }
+    if(count($keywords))
+    foreach($keywords as $word)
+    {
+      $searcher .= " keywords like '%$word%' AND";
+    }
+    if(count($g_list))
+    {
+      $searcher .= " user_uploaded in ($g_list) AND";
+    }
+    
+    $searcher .= " 1=1";
+  }
+  //echo $searcher;
+  
 	$package_result = mysql_query($searcher, $db);
 	$package_rows = mysql_num_rows($package_result);
 	
@@ -226,16 +365,14 @@
 				<?
 					if($photocount == 1){
 				?>
-				</tr><tr>
 				<?
 					} else {
 				?>
 				
 				<?
 					}
-				?>
-					<td align="center" valign="middle" bgcolor="#F9F9F9" style="border: 1px solid #eeeeee; padding: 5px 0px 5px 0px;">
-						    
+				?>					
+        	    
                <?php
                	$sample_video_path = "./" . $setting->sample_dir . "/";
                 if($photo_rows > 0){
@@ -252,13 +389,13 @@
 								if($setting->show_watermark_thumb == 1){
 									$imagepage = "thumb_mark.php?i=";
 								} else {
-									$imagepage = "image.php?src=";
+									$imagepage = "image.php?gal_size=".$_SESSION['gal_size']."&src=";
 								}
 								
 							if(!file_exists("swf/photoloader.swf") or $setting->flashthumbs == 0 or $_SESSION['visitor_flash'] == 1){                            
 							mod_photolink($package->id,$package->gallery_id,$title2,"","");
 						?>
-							<img src="<? echo $imagepage . $photo->id; ?>" <? if($setting->hover_on == 1 && !$_SESSION['visitor_hover']){ ?><? if($setting->show_watermark_hover == 1){ ?> onmouseover="trailOn('hover_mark.php?i=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } else { ?> onmouseover="trailOn('image_pop.php?src=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } ?> onmouseout="hidetrail();" <? } ?> class="photos" border="0"></a><br>
+							<img src="<? echo $imagepage . $photo->id; ?>" <? if($setting->hover_on == 1 && !$_SESSION['visitor_hover']){ ?><? if($setting->show_watermark_hover == 1){ ?> onmouseover="trailOn('hover_mark.php?i=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } else { ?> onmouseover="trailOn('image_pop.php?src=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } ?> onmouseout="hidetrail();" <? } ?> class="photos" border="0"></a>
 						<?php
 						  } else {
 						  		// GET WIDTH AND HEIGHT FOR FLASH FILE
@@ -305,13 +442,11 @@
 								echo "<img src=\"images/no_photo.gif\" border=\"0\">";
 							}
 						?>
-							<br>
-						<font color="#A4A4A4">
 						<? if($photo_rows > 0){ ?>
 						<?php
 							mod_photolink($package->id,$package->gallery_id,$title2,"","photo_links");
 						?>
-						<?PHP echo $gallery_details; ?></a><?php if($setting->dis_title_gallery == 1){ ?><? if($setting->dis_filename == 1){ echo "<br>" . $photo->filename; } else { if(trim($package->title) != ""){ echo "<br>" . $package->title; } }?><? } ?><?php if($setting->show_views == "1"){ ?><br><?PHP echo $gallery_viewed; ?><? echo $clicks; ?><? } if($setting->sr_gallery == 1){ ?><? echo $rate_it; } } else { ?><a href="#" class="photo_links"><?PHP echo $gallery_details; ?></a><? } ?>
+						<?PHP echo $gallery_details; ?></a><?php if($setting->dis_title_gallery == 1){ ?><? if($setting->dis_filename == 1){ echo  $photo->filename; } else { if(trim($package->title) != ""){ echo  $package->title; } }?><? } ?><?php if($setting->show_views == "1"){ ?><?PHP echo $gallery_viewed; ?><? echo $clicks; ?><? } if($setting->sr_gallery == 1){ ?><? echo $rate_it; } } else { ?><a href="#" class="photo_links"><?PHP echo $gallery_details; ?></a><? } ?>
 						<? 
 										if($_SESSION['sub_member']){
 												$lightbox1_result = mysql_query("SELECT id FROM lightbox where member_id = '" . $_SESSION['sub_member'] . "' and reference_id = '" . $_SESSION['lightbox_id'] . "' and photo_id = '$package->id'", $db);
@@ -319,9 +454,9 @@
 												$lightbox1 = mysql_fetch_object($lightbox1_result);
 												if($lightbox1_rows > 0){ 
 										?>
-															<br /><a href="public_actions.php?pmode=remove_lightbox&lid=<? echo $lightbox1->id; ?>&cur=<? echo $cur_page; ?>" class="photo_links"><img src="images/sm_rem_lightbox.gif" border="0" alt="<?PHP echo $search_gal_alt_remlightbox; ?>"></a>
+															<a href="public_actions.php?pmode=remove_lightbox&lid=<? echo $lightbox1->id; ?>&cur=<? echo $cur_page; ?>" class="photo_links"><img src="images/sm_rem_lightbox.gif" border="0" alt="<?PHP echo $search_gal_alt_remlightbox; ?>"></a>
 										<? } else { ?>
-															<br /><a href="public_actions.php?pmode=add_lightbox&ptype=d&gid=<? echo $package->gallery_id; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $package->id; ?>&cur=<? echo $cur_page; ?>" class="photo_links"><img src="images/sm_add_lightbox.gif" border="0" alt="<?PHP echo $search_gal_alt_addlightbox; ?>"></a>
+															<a href="public_actions.php?pmode=add_lightbox&ptype=d&gid=<? echo $package->gallery_id; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $package->id; ?>&cur=<? echo $cur_page; ?>" class="photo_links"><img src="images/sm_add_lightbox.gif" border="0" alt="<?PHP echo $search_gal_alt_addlightbox; ?>"></a>
 										<? } }?>
 						<!--|
 						<?
@@ -336,7 +471,6 @@
 							}
 						?>
 						-->
-					</td>
 	<?
 					if($photocount == $setting->dis_columns){
 						$photocount = 1;
@@ -360,7 +494,6 @@
 					$templine++;
 				if($photocount == 1){
 				?>
-				</tr><tr>
 				<?PHP
 					} else {
 				?>
@@ -368,11 +501,9 @@
 				<?PHP
 					}
 				?>
-				<td align="center" valign="middle" bgcolor="#F9F9F9" style="border: 1px solid #eeeeee; padding: 5px 0px 5px 0px;">
 				<?PHP
 				echo "<a href=\"pri.php?gid=" . $pgal->id . "&gal=" . $pgal->rdmcode . "&pid=" . $package->id . "\"><img src=\"images/private_photo.gif\" border=\"0\" alt=\"" . $search_gal_alt_private . "\" title=\"" . $search_gal_alt_private . "\"></a>";
 				?>
-				</td>
 				<?PHP
 				if($photocount == $setting->dis_columns){
 						$photocount = 1;
@@ -388,6 +519,7 @@
 			
 		}
 	} else {
+    
 		while($package = mysql_fetch_object($package_result)){
 		//ADDED IN PS350 FOR PRIVATE GALLERY SEARCH	
 			$gal_result = mysql_query("SELECT id,pub_pri,rdmcode,password FROM photo_galleries where id = '$package->gallery_id'", $db);
@@ -483,7 +615,6 @@
 				<?
 					if($photocount == 1){
 				?>
-				</tr><tr>
 				<?
 					} else {
 				?>
@@ -491,7 +622,6 @@
 				<?
 					}
 				?>
-					<td align="center" valign="middle" bgcolor="#F9F9F9" style="border: 1px solid #eeeeee; padding: 5px 0px 5px 0px;">
 						<?php
 								$sample_video_path = "./" . $setting->sample_dir . "/";
                 if($photo_rows > 0){
@@ -506,13 +636,40 @@
 								if($setting->show_watermark_thumb == 1){
 									$imagepage = "thumb_mark.php?i=";
 								} else {
-									$imagepage = "image.php?src=";
+									$imagepage = "image.php?gal_size=".$_SESSION['gal_size']."&src=";
 								}
 								
 								if(!file_exists("swf/photoloader.swf") or $setting->flashthumbs == 0 or $_SESSION['visitor_flash'] == 1){                            
-								mod_photolink($package->id,$package->gallery_id,$title2,"","");
+								//mod_photolink($package->id,$package->gallery_id,$title2,"","");
 						?>
-							<img src="<? echo $imagepage . $photo->id; ?>" <? if($setting->hover_on == 1 && !$_SESSION['visitor_hover']){ ?><? if($setting->show_watermark_hover == 1){ ?> onmouseover="trailOn('hover_mark.php?i=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } else { ?> onmouseover="trailOn('image_pop.php?src=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } ?> onmouseout="hidetrail();" <? } ?> class="photos" border="0"></a><br>
+            
+            <div class="galery-content">
+                	<div align="center" class="image">
+                    <!--
+                    <a href="#">-->
+                    <?php
+                      mod_photolink($package->id,$package->gallery_id,$title2,"","photo_links"); ?>
+                      <img src="<? echo $imagepage . $photo->id; ?>" <? if($setting->hover_on == 1 && !$_SESSION['visitor_hover']){ ?><? if($setting->show_watermark_hover == 1){ ?> onmouseover="trailOn('hover_mark.php?i=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } else { ?> onmouseover="trailOn('image_pop.php?src=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } ?> onmouseout="hidetrail();" <? } ?> class="photos" border="0" class="images">
+                    </a>
+                    
+                    </div>
+                    <div class="image-hover-main" style="display: none;">
+                    	<div align="center" class="image-hover">
+                          
+                        	<img src="<? echo $imagepage . $photo->id; ?>" <? if($setting->hover_on == 1 && !$_SESSION['visitor_hover']){ ?><? if($setting->show_watermark_hover == 1){ ?> onmouseover="trailOn('hover_mark.php?i=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } else { ?> onmouseover="trailOn('image_pop.php?src=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } ?> onmouseout="hidetrail();" <? } ?> class="photos" border="0">
+                          
+                        </div>
+                    </div>
+                    <div align="center" class="title"><?php echo $package->title; ?></div>
+                    <div class="descreption">
+                    	<div align="right" class="left"><img src="images/icon-show1.png"></div>
+                        <div align="left" class="right"><img src="images/icon-show2.png"></div>
+                    </div>
+                </div>
+                <!--
+							<img src="<? echo $imagepage . $photo->id; ?>" <? if($setting->hover_on == 1 && !$_SESSION['visitor_hover']){ ?><? if($setting->show_watermark_hover == 1){ ?> onmouseover="trailOn('hover_mark.php?i=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } else { ?> onmouseover="trailOn('image_pop.php?src=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } ?> onmouseout="hidetrail();" <? } ?> class="photos" border="0"></a>
+              -->
+              
 						<?php
 							} else {
 									// GET WIDTH AND HEIGHT FOR FLASH FILE
@@ -539,6 +696,7 @@
 								//echo $width . "x" . $height;
 								//watermark.php?i=<?php echo $photo->id;
 							?>
+              
 								<?php mod_photolink($package->id,$package->gallery_id,$title2,"",""); ?>
 								<div id="photoloaddiv<?php echo $photo->id; ?>" style="background-color: #e6e6e6; padding: 4px; width: <?php echo $width2; ?>px; background-image: url(images/img_load.gif); background-repeat: no-repeat;" <? if($setting->hover_on == 1 && !$_SESSION['visitor_hover']){ ?><? if($setting->show_watermark_hover == 1){ ?> onmouseover="trailOn('hover_mark.php?i=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } else { ?> onmouseover="trailOn('image_pop.php?src=<? echo $photo->id; ?>','<? echo $title2; ?>','<? echo $trim_scription; ?>','','','','1','<? echo $width; ?>','<? echo $height; ?>','<?php echo $flvsample; ?>','<?php echo $sample_video_path; ?>');"<? } ?> onmouseout="hidetrail();" <? } ?>>
 								<?PHP echo $no_flashplayer; ?>
@@ -558,24 +716,24 @@
 								echo "<img src=\"images/no_photo.gif\" border=\"0\">";
 							}
 						?>
-							<br>
-						<font color="#A4A4A4">
 						<? if($photo_rows > 0){ ?>
 						<?php
-							mod_photolink($package->id,$package->gallery_id,$title2,"","photo_links");
+							//mod_photolink($package->id,$package->gallery_id,$title2,"","photo_links");
 						?>
-						<?PHP echo $gallery_details; ?></a><?php if($setting->dis_title_gallery == 1){ ?><? if($setting->dis_filename == 1){ echo "<br>" . $photo->filename; } else { if(trim($package->title) != ""){ echo "<br>" . $package->title; } }?><? } ?><?php if($setting->show_views == "1"){ ?><br><?PHP echo $gallery_viewed; ?><? echo $clicks; ?><? } if($setting->sr_gallery == 1){ ?><? echo $rate_it; } } else { ?><a href="#" class="photo_links"><?PHP echo $gallery_details; ?></a><? } ?>
-						<? 
+            <!--
+						<?PHP echo $gallery_details; ?></a><?php if($setting->dis_title_gallery == 1){ ?><? if($setting->dis_filename == 1){ echo  $photo->filename; } else { if(trim($package->title) != ""){ echo  $package->title; } }?><? } ?><?php if($setting->show_views == "1"){ ?><?PHP echo $gallery_viewed; ?><? echo $clicks; ?><? } if($setting->sr_gallery == 1){ ?><? echo $rate_it; } } else { ?><a href="#" class="photo_links"><?PHP echo $gallery_details; ?></a><? } ?>
+						
+            <? 
 										if($_SESSION['sub_member']){
 												$lightbox1_result = mysql_query("SELECT id FROM lightbox where member_id = '" . $_SESSION['sub_member'] . "' and reference_id = '" . $_SESSION['lightbox_id'] . "' and photo_id = '$package->id'", $db);
 												$lightbox1_rows = mysql_num_rows($lightbox1_result);
 												$lightbox1 = mysql_fetch_object($lightbox1_result);
 												if($lightbox1_rows > 0){ 
 										?>
-															<br /><a href="public_actions.php?pmode=remove_lightbox&lid=<? echo $lightbox1->id; ?>&cur=<? echo $cur_page; ?>" class="photo_links"><img src="images/sm_rem_lightbox.gif" border="0" alt="<?PHP echo $search_gal_alt_remlightbox; ?>"></a>
+															<a href="public_actions.php?pmode=remove_lightbox&lid=<? echo $lightbox1->id; ?>&cur=<? echo $cur_page; ?>" class="photo_links"><img src="images/sm_rem_lightbox.gif" border="0" alt="<?PHP echo $search_gal_alt_remlightbox; ?>"></a>
 										<? } else { ?>
-															<br /><a href="public_actions.php?pmode=add_lightbox&ptype=d&gid=<? echo $package->gallery_id; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $package->id; ?>&cur=<? echo $cur_page; ?>" class="photo_links"><img src="images/sm_add_lightbox.gif" border="0" alt="<?PHP echo $search_gal_alt_addlightbox; ?>"></a>
-										<? } }?>
+															<a href="public_actions.php?pmode=add_lightbox&ptype=d&gid=<? echo $package->gallery_id; ?>&sgid=<? echo $_GET['sgid']; ?>&pid=<? echo $package->id; ?>&cur=<? echo $cur_page; ?>" class="photo_links"><img src="images/sm_add_lightbox.gif" border="0" alt="<?PHP echo $search_gal_alt_addlightbox; ?>"></a>
+										<? } }?>-->
 						<!--|
 						<?
 							if($_SESSION['sub_member']){
@@ -589,7 +747,7 @@
 							}
 						?>
 						-->
-					</td>
+					
 	<?
 					if($photocount == $setting->dis_columns){
 						$photocount = 1;
@@ -608,7 +766,6 @@
 					$templine++;
 				if($photocount == 1){
 				?>
-				</tr><tr>
 				<?PHP
 					} else {
 				?>
@@ -616,11 +773,9 @@
 				<?PHP
 					}
 				?>
-				<td align="center" valign="middle" bgcolor="#F9F9F9" style="border: 1px solid #eeeeee; padding: 5px 0px 5px 0px;">
 				<?PHP
 				echo "<a href=\"pri.php?gid=" . $pgal->id . "&gal=" . $pgal->rdmcode . "&pid=" . $package->id . "\"><img src=\"images/private_photo.gif\" border=\"0\" alt=\"" . $search_gal_alt_private . "\" title=\"" . $search_gal_alt_private . "\"></a>";
 				?>
-				</td>
 				<?PHP
 				if($photocount == $setting->dis_columns){
 						$photocount = 1;
@@ -650,9 +805,6 @@
 				$result_pages = 1;
 			}
 	?>
-		</tr>
-		<tr>
-			<td colspan="4" align="right">
 	
 		<div name="result_details" id="result_details" style="padding-left: 10px;padding-right: 10px;padding-bottom: 10px;padding-top: 30px;width: 100%; clear: both;">
 			<?php echo "<b>" . $search_gal_page . "</b>"; ?> 
@@ -673,7 +825,7 @@
            <?
 				if($startat == 0){
 			?>
-				<font color="#B0B0B0"><?PHP echo $search_gal_previous; ?></font>
+				<?PHP echo $search_gal_previous; ?>
 			<?
 				}
 				else{
@@ -693,7 +845,7 @@
 			
 				if(($startat + $perpage) >= $recordnum){
 			?>
-				<font color="#B0B0B0"><?PHP echo $search_gal_next; ?></font>
+				<?PHP echo $search_gal_next; ?>
 			<?
 				}
 				else{
@@ -721,7 +873,7 @@
 			}		
 			while($sub_gallery = mysql_fetch_object($sub_gallery_result)){
 	?>
-				<br><span style="padding-left: 8px;"><a href="search.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $sub_gallery->id; ?>" class="sub_gallery_nav"><? echo $sub_gallery->title; ?></a></span>
+				<span style="padding-left: 8px;"><a href="search.php?gid=<? echo $_GET['gid']; ?>&sgid=<? echo $sub_gallery->id; ?>" class="sub_gallery_nav"><? echo $sub_gallery->title; ?></a></span>
 	<?
 			}		
 			if($recordnum < 1 and $sub_gallery_rows < 1){
@@ -729,6 +881,3 @@
 			}
 		}
 	?>
-		</td>
-	</tr>
-</table>

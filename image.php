@@ -1,7 +1,7 @@
 <?php
   //INCLUDE FILES NEED TO GET INFO
 	include( "database.php" );
-	
+	session_start();
 	//DECLARE THIS AS AN IMAGE
 	header("Content-type: image/jpeg");
 	
@@ -25,9 +25,16 @@
 	
 	//THUMBNAIL QUALITY, SIZE, & FILENAME
 	$default_size = $setting->thumb_width;
+  
 	$imgquality = $setting->thumb_display_quality;
-	$src = $stock_photo_path . "i_" . $photo->filename;
 	
+  $src = $stock_photo_path . "i_" . $photo->filename;
+  
+  if($_GET['gal_size'] == 'large')
+  {
+    $src = $stock_photo_path . "m_" . $photo->filename;
+    $default_size *= 2;
+  }
 	//GET THE SIZE OF THE PHOTO
 	$imageInfo = getimagesize($src);
 	

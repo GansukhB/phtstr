@@ -95,8 +95,10 @@ if($message != "galfree" && $message != "galmonthly" && $message != "yearly"){
 		</script>
     <?php echo $script1 ?>
 				<? print($head); ?>
+        
+        <? include("header.php"); ?>
 <div class="container">
-			<? include("header.php"); ?>
+			
 				<? //include("search_bar.php"); ?>
       <div id="main">
 			<? include("i_gallery_nav.php"); ?>
@@ -317,8 +319,20 @@ if($message != "galfree" && $message != "galmonthly" && $message != "yearly"){
                             }
 
                           </script>
-                        <form action="public_actions.php?pmode=login" name="loginform" method="post"> 
-                                                    
+                        <form action="public_actions.php?pmode=login" name="loginform" method="post">
+                                <label> 
+                                  <div style="margin-left: 10px;">
+                                    <? if($_GET['message'] == "login_failed"){ ?>
+                                      <? echo $login_login_failed; ?>
+                                    <? } ?>
+                                    <? if($_GET['message'] == "pending"){ ?>
+                                      <? echo $login_pending; ?>
+                                    <? } ?>
+                                    <? if($_GET['message'] == "logged_out"){ ?>
+                                      <? echo $login_logged_out; ?>
+                                    <? } ?>     
+                                  </label>              
+                                </label>
                                 <label>
                                   <div class="lb" valign="middle">
                                     <div class="title"><?php echo $form_email; ?></div>
@@ -328,7 +342,7 @@ if($message != "galfree" && $message != "galmonthly" && $message != "yearly"){
                                 
                                 <label>
                                   <div class="lb">
-                                    <div class="title"><?php echo $form_pass1; ?></div>
+                                    <div class="title"><?php echo $form_pass3; ?></div>
                                     <input class="text1" type="password" name="password" value="password" onFocus="clearText(this)" onBlur="clearText(this)">
                                   </div>
                                 </label>
@@ -528,9 +542,10 @@ if($message != "galfree" && $message != "galmonthly" && $message != "yearly"){
 				</td>
 			</tr>
       -->
-      
+      </div>
 			</div> <!-- end class right main -->
       </div> <!-- end id main -->
+      <?php include('i_banner.php'); ?>
     </div> <!-- end container -->
     <? include("footer.php"); ?>	
 	</body>

@@ -72,8 +72,9 @@
 		}
 		
 		// STYLE SHEET
-		$style = "\t\t<link rel=\"stylesheet\" href=\"./styles/" . $setting->style . "\">\n";
-		$style.= "\t\t</head>\n";
+    $metatags .= "\t\t<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"images/icon1.png\" />";
+		$style .= "\t\t<link rel=\"stylesheet\" href=\"./styles/" . $setting->style . "\">\n";
+		$style .= "\t\t</head>\n";
 		
 		// BODY
 		if($setting->no_right_click == 1){
@@ -86,11 +87,14 @@
 		//$head = $page_title . $metatags . $style . $body;
     $style1 = "<link rel=\"stylesheet\" href=\"blueprint/screen.css\" media=\"screen\"/>
                 <link rel=\"stylesheet\" href=\"blueprint/print.css\" media=\"print\"/>
-                <link rel=\"stylesheet\" href=\"styles/css.css\" />";
-    $script1 = "<script src=\"js/js/jquery-1.5.js\" type=\"text/javascript\"></script>";            
+                <link rel=\"stylesheet\" href=\"styles/css.css\" />
+                ";
+    $script1 = "<script type=\"text/JavaScript\" src='js/xns.js'></script>";
+    $script1 .= "<script src=\"js/js/jquery-1.5.js\" type=\"text/javascript\"></script>";            
     
-    /*
-    $script1 .= "<script type=\"text/javascript\" >
+    
+    $script1 .= "
+    <script type=\"text/javascript\">
       $(document).ready(function() {
         $(\".tab-content\").hide();
         $(\"ul.tab li:first\").addClass(\"active\").show(); 
@@ -103,9 +107,94 @@
           $(activeTab).fadeIn();
           return false;
         });
-      });
-    </script>"; */
-		$head = $page_title. $metatags. $style1 ;//. $script1;
+     
+                  $(\".nav li a\").hover(function(){
+                    $(\".nav li ul\").show();
+                  });
+                  $(\".nav li ul a\").mouseout(function(){
+                    $(\".nav li ul\").hide();
+                  });
+                  
+                  
+                                  $(\"body\").click(function(event){
+                                    if(!$(event.target).closest(\".icon\").length && !$(event.target).closest(\".share-main .share .pop-up\").length) {
+                                    $(\".share-main .share .pop-up\").hide();
+                                    };
+                                  });
+                                  $(\".share-main1 .share1 .icon\").click(function(){
+
+                                      $(\".share-main1 .share1 .pop-up\").show();
+                                  
+                                    });
+                                    
+                                    
+                                  $(\"body\").click(function(event){
+                                    if(!$(event.target).closest(\".share-main1 .share1 .icon\").length && !$(event.target).closest(\".share-main1 .share1 .pop-up\").length) {
+                                    $(\".share-main1 .share1 .pop-up\").hide();
+                                    };
+                                  });
+                                  
+                                  $(\".share-main .share .icon\").click(function(){
+
+                                      $(\".share-main .share .pop-up\").show();
+                                  
+                                    });
+                                    
+                                    
+                                  $(\"body\").click(function(event){
+                                    if(!$(event.target).closest(\".share-main .share .icon\").length && !$(event.target).closest(\".share-main .share .pop-up\").length) {
+                                    $(\".share-main .share .pop-up\").hide();
+                                    };
+                                  });
+                                  
+                  });
+                var i = 0;
+                function show_light(area){
+                    if(i==0){
+                         document.getElementById('popup').style.display = 'inline';
+                      
+                        i = 1;         
+                    }else{
+                      document.getElementById('popup').style.display = 'none';
+                      i = 0;  
+                    }
+                  }
+                function hide_light(area){
+                        if(area=='popup'){
+                          document.getElementById('popup').style.display = 'none';
+                        }
+                        if(area == 'link')
+                        {
+                          
+                        }
+                  }
+                  function clearText(field){
+                                if (field.defaultValue == field.value) field.value = '';
+                                else if (field.value == '') field.value = field.defaultValue;
+                            }
+                </script>";
+
+    $script1 .= "
+    
+    <style>
+    .clipwrapper
+ {
+  float: left;
+  position: relative;
+  height: 100px;
+  width: 100px;
+  border: solid 2px #fff;
+  overflow: hidden;
+ }
+ 
+ .clip
+ {
+  position: absolute;
+  float: left;
+  clip: rect(0px 200px 100px 30px);
+  left: -30px;
+  }</style>";
+		$head = $page_title. $metatags. $style1 .'</head><body>';//. $script1;
 		// PUT CHECKOUT SYSTEM INTO TEST/DEMO MODE BY SETTING $checkout_demo_mode = 1
 		$checkout_demo_mode = 0;
 		

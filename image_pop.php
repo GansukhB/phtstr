@@ -58,6 +58,16 @@
   
 	imagecopyresampled($dst_img, $logoImage, 0, 0, 0, 0, $width, $height, imagesx($logoImage), imagesy($logoImage));
   
+    $logoImage = ImageCreateFromPNG("./images/watermark_logo.png");
+    $logoinfo = getimagesize($logoImage);
+    $logowidth = $logoinfo[0];
+    $logoheight = $logoinfo[1];
+    
+    $startx = ($width - imagesx($logoImage))/2;
+    $starty = ($height - imagesy($logoImage))/2;
+    
+    imagecopyresampled($dst_img, $logoImage, $startx, $starty, 0, 0, imagesx($logoImage),imagesy($logoImage), imagesx($logoImage), imagesy($logoImage));
+      
 	imagejpeg($dst_img,'', $imgquality);
 	imagedestroy($photoImage); 
 	imagedestroy($dst_img);

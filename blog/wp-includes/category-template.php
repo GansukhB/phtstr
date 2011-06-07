@@ -452,7 +452,7 @@ function wp_list_categories( $args = '' ) {
 
 	$categories = get_categories( $r );
 
-	$output = '';
+	//$output = '<div class="left-menu">';
 	if ( $title_li && 'list' == $style )
 			$output = '<li class="' . esc_attr( $class ) . '">' . $title_li . '<ul>';
 
@@ -486,7 +486,8 @@ function wp_list_categories( $args = '' ) {
 
 	if ( $title_li && 'list' == $style )
 		$output .= '</ul></li>';
-
+  //$output .= '</div>';
+  
 	$output = apply_filters( 'wp_list_categories', $output, $args );
 
 	if ( $echo )
@@ -878,7 +879,7 @@ class Walker_Category extends Walker {
 
 		if ( 'list' == $args['style'] ) {
 			$output .= "\t<li";
-			$class = 'cat-item cat-item-' . $category->term_id;
+			$class = 'cat-item ' . $category->term_id;
 			if ( !empty($current_category) ) {
 				$_current_category = get_term( $current_category, $category->taxonomy );
 				if ( $category->term_id == $current_category )
@@ -886,7 +887,7 @@ class Walker_Category extends Walker {
 				elseif ( $category->term_id == $_current_category->parent )
 					$class .=  ' current-cat-parent';
 			}
-			$output .=  ' class="' . $class . '"';
+			//$output .=  ' class="' . $class . '"';
 			$output .= ">$link\n";
 		} else {
 			$output .= "\t$link<br />\n";

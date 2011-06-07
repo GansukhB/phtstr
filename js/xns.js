@@ -31,10 +31,13 @@ function hidetrail()
 	gettrailobject().innerHTML=" ";
 	document.onmousemove='';
 	gettrailobj().visibility="hidden";
+	/**/
+
 	}
 
 function trailOn(thumbimg,imgtitle,imgscription,imgsize,filesize,credit,level,thw,thh,flvvid,samplepath)
 	{
+	    
 	//if(ua.indexOf('opera') == -1 && ua.indexOf('safari') == -1)
 		//{
 		gettrailobj().left="-500px";
@@ -54,6 +57,7 @@ function trailOn(thumbimg,imgtitle,imgscription,imgsize,filesize,credit,level,th
 			gettrailobject().innerHTML = newHTML;
 		} else {
 			gettrailobject().innerHTML = '<table><tr><td><div style="background-color: #000000; layer-background-color: #000000; border: 0pt none #000000; padding: 0pt; width:'+divthw+'px;"><div style="background-color: #FFFFFF; layer-background-color: #FFFFFF; border: 1px solid #000000; background-image: url(images/img_load.gif); background-repeat: no-repeat;"><center><img src="'+thumbimg+'" border="0" width="'+thw+'" height="'+thh+'"></center><div style="padding:3px"><b>Title: </b>'+imgtitle+'<br><b>Description: </b>'+imgscription+'<br></div></div></div></td></tr></table>';
+			//alert('called');
 		}
 		
 		

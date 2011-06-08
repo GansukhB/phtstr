@@ -18,6 +18,7 @@
 
 <html>
 	<head>
+	
 <script language=JavaScript>
 /**
 This is a JavaScript library that will allow you to easily add some basic DHTML

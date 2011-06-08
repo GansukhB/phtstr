@@ -6,7 +6,6 @@
 		$nav_name = "FAQ"; // name of the nav that will appear on the page
 	}else {
 ?>
-<h3>Contest</h3>
 <div style="text-align: left; margin-left: 20px;">
 <table  border="1px solid gray">
   <?

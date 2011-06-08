@@ -626,11 +626,12 @@
 																	
 																	echo "<option value=\"";
 																	
+                                  /*
 																	if($ca->id == $item_id){
 																		echo $nest_under . "\"";
-																	} else {
+																	} else { */
 																		echo $ca->id . "\"";
-																	}
+																	//}
 																	
 																	if($gid == $ca->id){
 																		echo " selected";

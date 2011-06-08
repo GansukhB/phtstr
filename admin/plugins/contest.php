@@ -1,4 +1,3 @@
-
 <?php 
   $nav = $_GET['nav'];
 	if($execute_nav == 1){
@@ -7,7 +6,6 @@
 		$nav_name = "Contest"; // name of the nav that will appear on the page
 	}else {
 ?>
-  <h3>Contest</h3>
 <div style="text-align: left; margin-left: 20px;">
 <table  border="1px solid gray">
   <?

@@ -214,7 +214,12 @@
 			}
       	
 			$get_size = getimagesize($image_path . $image_details[1]);
-			
+      $width = $get_size[0];
+      $height = $get_size[1];
+      
+			$query = "update photo_package set width='$width', height='$height' where id='$last->id' ";
+      @mysql_query($query);
+      
 			if($_POST['aprofile']){
 				foreach($_POST['aprofile'] as $key => $value){
 					if($get_size[0] > $p_size[$value]){
@@ -255,7 +260,6 @@
 					
 				}
 			}
-			//exit;
 			header("location: " . $_POST['return']);
 		break;
 		

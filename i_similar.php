@@ -44,7 +44,7 @@
     <?php foreach($similar_result as $thmb): ?>
       <div class="image-content">
         <div class="image"><a href="details.php?gid=<?php $gallery_id; ?>&pid=<?php echo $thmb->id; ?>"><img src="image_sq.php?src=<?php echo get_img_id($thmb->id); ?>"></a></div>
-        <div align="center" class="title"><?php echo $thmb->title; ?></div>
+        <div align="center" class="title-image"><?php echo $thmb->title; ?></div>
       </div>
     <?php endforeach; ?>
     

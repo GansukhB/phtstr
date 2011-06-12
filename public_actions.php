@@ -26,7 +26,7 @@
 		if($lang != ""){
       session_register("lang");
       $_SESSION['lang'] = $lang;
-      $expire=time()+60*60;
+      $expire=time()+10*60*60;
       setcookie("lang", $lang, $expire);
 		}
     
@@ -1469,12 +1469,14 @@ echo ("<input type=\"hidden\" name=\"x_receipt_link_url\" value=\"" . $setting->
 		case "hover_on":
 			session_register($_SESSION['visitor_hover']);
 	    $_SESSION['visitor_hover'] = 1;
+      $return = str_replace(array("and"), array("&"), $return);
 			header("location: " . $return);
 			exit;
 		break;
 		
 		case "hover_off":
 			unset($_SESSION['visitor_hover']);
+      $return = str_replace(array("and"), array("&"), $return);
 			header("location: " . $return);
 			exit;
 		break;

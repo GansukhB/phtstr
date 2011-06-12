@@ -24,8 +24,10 @@
 	<head>
     <?php echo $script1; ?>
 		<? print($head); ?>
-<? include("header.php"); ?>
+
+<?php include("head_navbar.php");?>
 <div class="container">
+  <? include("header.php"); ?>
   <div id="main">
 			<? include("i_gallery_nav.php"); ?>
       <div class="right-main">

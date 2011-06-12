@@ -25,9 +25,9 @@
     <?php echo $script1; ?>
 		<? print($head); ?>
     
-    <?php include('header.php');?>
+    <?php include('head_navbar.php'); ?>
 	<div class="container">
-			
+<?php include('header.php');?>
 				<? //include("search_bar.php"); ?>
       <div id="main">
 			<? include("i_gallery_nav.php"); ?>

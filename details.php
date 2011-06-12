@@ -62,9 +62,9 @@ if($package1->description != ""){
     
   </head>
 <body>    
-<? include("header.php"); ?>
+<?php include("head_navbar.php"); ?>
 <div class="container">
-			
+			<? include("header.php"); ?>
 				<? //include("search_bar.php"); ?>
       <div id="main">
 			<? include("i_gallery_nav.php"); ?>

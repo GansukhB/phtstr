@@ -27,9 +27,9 @@
 		<script language=JavaScript src='./js/xns.js'></script>
     <?php echo $script1; ?>
 	<? print($head); ?>
-  <? include("header.php"); ?>
+  <? include("head_navbar.php"); ?>
   <div class="container">
-			
+			 <? include("header.php"); ?>
 			
       <div id="main">
 				

@@ -1,3 +1,4 @@
+<div class="clear"></div>
 <div class="banner-main">
   <?php 
     $currentFile = $_SERVER["SCRIPT_NAME"];

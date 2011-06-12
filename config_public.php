@@ -74,7 +74,7 @@
 		// STYLE SHEET
     $metatags .= "\t\t<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"images/icon1.png\" />";
 		$style .= "\t\t<link rel=\"stylesheet\" href=\"./styles/" . $setting->style . "\">\n";
-		$style .= "\t\t</head>\n";
+		//$style .= "\t\t</head>\n";
 		
 		// BODY
 		if($setting->no_right_click == 1){

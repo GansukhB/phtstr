@@ -96,9 +96,9 @@ if($message != "galfree" && $message != "galmonthly" && $message != "yearly"){
     <?php echo $script1 ?>
 				<? print($head); ?>
         
-        <? include("header.php"); ?>
+<?php include("head_navbar.php"); ?>
 <div class="container">
-			
+			<? include("header.php"); ?>
 				<? //include("search_bar.php"); ?>
       <div id="main">
 			<? include("i_gallery_nav.php"); ?>
@@ -330,8 +330,7 @@ if($message != "galfree" && $message != "galmonthly" && $message != "yearly"){
                                     <? } ?>
                                     <? if($_GET['message'] == "logged_out"){ ?>
                                       <? echo $login_logged_out; ?>
-                                    <? } ?>     
-                                  </label>              
+                                    <? } ?>                
                                 </label>
                                 <label>
                                   <div class="lb" valign="middle">
@@ -542,11 +541,11 @@ if($message != "galfree" && $message != "galmonthly" && $message != "yearly"){
 				</td>
 			</tr>
       -->
-      </div>
+      
 			</div> <!-- end class right main -->
       </div> <!-- end id main -->
       <?php include('i_banner.php'); ?>
-    </div> <!-- end container -->
+    </div> <!-- end container --></div>
     <? include("footer.php"); ?>	
 	</body>
 </html>

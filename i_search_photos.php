@@ -232,13 +232,23 @@
       }
       else $searcher .= " gallery_id = 54 AND ";  
     }
+    /*
     if(count($orient) == 1)
     {
       if($orient[0] == 'vertical')
       {
         $searcher .= " height >= width AND ";
       }
-      else $searcher .= " height <= width AND ";  
+      else $searcher .= " height >= width AND ";  
+    }*/
+    foreach($orient as $or)
+    {
+      if($or == 'vertical')
+        $searcher .= " height >= width AND ";
+      elseif($or == 'horizontal')
+        $searcher .= " height <= width  AND "; 
+      else
+        $searcher .= " width >= height*2 AND ";
     }
     if(count($keywords))
     foreach($keywords as $word)

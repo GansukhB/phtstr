@@ -92,6 +92,9 @@ return false;
                                 <div class="label"><input type="checkbox" name="orient[]" value="horizontal"><div class="type">Horizontal</div></div>
                             </label>
                             <label>
+                                <div class="label"><input type="checkbox" name="orient[]" value="panaroma"><div class="type">Panaroma</div></div>
+                            </label>
+                            <label>
                             	<div class="title">Category</div>
                                 <div>
                                 	<select name="category">

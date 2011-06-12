@@ -31,9 +31,12 @@
               <div align="center" class="most">
                 <a href="details.php?gid=<?php echo $thmb->gallery_id; ?>&pid=<?php echo $thmb->id;  ?>">
                   <img src="image_sq.php?src=<?php echo get_img_id($thmb->id); ?>" class="image" >
-                  
-                  <div class="title"><?php echo $thmb->title; ?></div>
-                </a>
+                </a>  
+                  <div class="title-image">
+                      <?php echo $thmb->title; ?>
+                
+                  </div>
+                
               </div>
             <?php endwhile; ?>
         </div>
@@ -44,9 +47,8 @@
               <div align="center" class="most">
                 <a href="details.php?gid=<?php echo $thmb->gallery_id; ?>&pid=<?php echo $thmb->id;  ?>">
                   <img src="image_sq.php?src=<?php echo get_img_id($thmb->id); ?>" class="image">
-                  
-                  <div class="title"><?php echo $thmb->title; ?></div>
-                </a>
+                </a>  
+                  <div class="title-image"><?php echo $thmb->title; ?></div>
               </div>
             <?php endwhile; ?>
         </div>
@@ -57,8 +59,9 @@
               <div align="center" class="most">
                 <a href="details.php?gid=<?php echo $thmb->gallery_id; ?>&pid=<?php echo $thmb->id;  ?>">
                   <img src="image_sq.php?src=<?php echo get_img_id($thmb->id); ?>" class="image">
-                  <div class="title"><?php echo $thmb->title; ?></div>
                 </a>
+                  <div class="title-image"><?php echo $thmb->title; ?></div>
+                
               </div>
             <?php endwhile; ?>
         </div>

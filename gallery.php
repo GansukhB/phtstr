@@ -153,7 +153,8 @@
   });
 </script>
 	<? print($head); ?>
-
+  
+  <?php include("head_navbar.php"); ?>
   <? include("header.php"); ?>
   
     
@@ -230,14 +231,16 @@
               
               <div align="right">Hover image view:
               <?php 
+                $return = selfURL();
+                $return = str_replace(array("&"), array("and"), $return);
                   if($setting->hover_usr == 1 && $setting->hover_on == 1){
                     if(!$_SESSION['visitor_hover']){
                       ?>
-                      <a href="public_actions.php?pmode=hover_on&return=<?php echo selfURL(); ?>" style="color: yellow;">OFF</a>
+                      <a href="public_actions.php?pmode=hover_on&return=<?php echo $return; ?>" style="color: #ffd400;">OFF</a>
                       <?
                     } else {
                       ?>
-                      <a href="public_actions.php?pmode=hover_off&return=<?php echo selfURL(); ?>" style="color: yellow;">ON</a>
+                      <a href="public_actions.php?pmode=hover_off&return=<?php echo $return; ?>" style="color: #ffd400;">ON</a>
                       <?
                     }
                   } ?>
@@ -260,17 +263,17 @@
                   <?php if($perpage == 50){ ?>
                     50  
                   <?php } else { ?>
-                    <a href="<?php echo selfURL().'&perpage=50'?>" style="color: yellow;"> 50</a>
+                    <a href="<?php echo selfURL().'&perpage=50'?>" style="color: #ffd400;"> 50</a>
                   <?php }?>|
                   <?php if($perpage == 100){ ?>
                     100 
                   <?php } else { ?>
-                    <a href="<?php echo selfURL().'&perpage=100'?>" style="color: yellow;"> 100</a>
+                    <a href="<?php echo selfURL().'&perpage=100'?>" style="color: #ffd400;"> 100</a>
                   <?php }?>|
                    <?php if($perpage == 150){ ?>
                     150 | 
                   <?php } else { ?>
-                    <a href="<?php echo selfURL().'&perpage=150'?>" style="color: yellow;"> 150</a>
+                    <a href="<?php echo selfURL().'&perpage=150'?>" style="color: #ffd400;"> 150</a>
                   <?php }?>
                      Size:                      
                        <?php 
@@ -289,12 +292,12 @@
                         <?php if($multi == 1){ ?>
                           Small
                         <?php } else { ?>
-                          <a href="<?php echo selfURL().'&gal_size=small'?>" style="color: yellow;"> Small</a>
+                          <a href="<?php echo selfURL().'&gal_size=small'?>" style="color: #ffd400;"> Small</a>
                         <?php }?> | 
                         <?php if($multi == 2){ ?>
                           Large
                         <?php } else { ?>
-                          <a href="<?php echo selfURL().'&gal_size=large'?>" style="color: yellow;"> Large</a>
+                          <a href="<?php echo selfURL().'&gal_size=large'?>" style="color: #ffd400;"> Large</a>
                         <?php }?>
                         
                 </div>
@@ -348,7 +351,7 @@
 								  	$order_by = "title";
 								  }
 								  if($sort_by == "date"){
-								  	$order_by = "added";
+								  	$order_by = "id";
 								  }
 								  if($sort_by == "popular"){
 								  	$order_by = "code";

@@ -141,16 +141,16 @@
                     }
                     
                     $width+=2;
-                    $height+=2;
+                    $height--;
 		?>
   
 
 <!--r-left-main ehlel-->
-<div class="r-left-main">
+<div class="r-left-main" style="width: 510px;">
     <!--photo ehlel-->
-      <div class="photo" align="center" style="width: 475px; overflow:hidden; align:center;">
+      <div class="photo" align="center" style="overflow:hidden; align:center;">
         <div style="height: <?php echo $height; ?>; width: <?php echo $width; ?>; overflow: hidden; text-align:center;" >
-          <img src="watermark.php?i=<?php echo $photo->id ?>" class="photos" > </div>
+          <img src="watermark.php?i=<?php echo $photo->id ?>" > </div>
         
         <!--<img src="images/image3.jpg">-->
       </div>

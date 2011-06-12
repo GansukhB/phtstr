@@ -36,15 +36,15 @@
     <script language=JavaScript src='./slide/coin-slider.min.js'></script>
 <script type="text/javascript">
 	    $(document).ready(function() {
-		    $('#coin-slider').coinslider({ width: 675, navigation: false, links : true, delay: 2000 });
+		    $('#coin-slider').coinslider({ width: 728, height: 300, navigation: false, links : true, delay: 2000 });
 	    });
     </script>    <link rel="stylesheet" href="slide/coin-slider-styles.css" />
 	<? print($head); ?>
 
 <body>
-  <? include("header.php"); ?>
+ <?php include('head_navbar.php'); ?> 
   <div class="container">
-			
+			<? include("header.php"); ?>
 			
       <div id="main">
 				
@@ -59,7 +59,7 @@
             	<div class="slider">
                 <div id='coin-slider' >
                   <?php 
-                    $query = " select id, title, gallery_id from photo_package where featured='1' order by id desc limit 0, 6";
+                    $query = " select id, title, gallery_id from photo_package where featured='1' and width > height order by id desc limit 0, 6";
                     $featured_result = mysql_query($query);
                     function get_img_ids($pckg_id){
                       $query = "select id from uploaded_images where reference_id='$pckg_id' ";
@@ -72,24 +72,11 @@
 
                     <a href="details.php?gid=<?php echo $thmb->gallery_id; ?>&pid=<?php echo $thmb->id;  ?>" target="_blank" >
                         <!--<img src="watermark_slide.php?i=<?php echo get_img_ids($thmb->id); ?>" class="image" >-->
-                        <img src="wh_image.php?i=<?php echo get_img_ids($thmb->id); ?>&width=675&height=290" class="image" >
+                        <img src="wh_image.php?i=<?php echo get_img_ids($thmb->id); ?>&width=728&height=300" >
                          <div class="title"><?php echo $thmb->title; ?></div>
                       </a>
                   <?php endwhile; ?>
-                  <!--
-                      <a href="slide/1.jpg" target="_blank">
-                        <img  src='slide/1.jpg' class='image' >
-                        
-                      </a>
-                      <a href="slide/2.jpg" target="_blank">
-                        <img  src='slide/2.jpg' class='image'>
-                        
-                      </a>
-                      <a href="slide/3.jpg" target="_blank">
-                        <img  src='slide/3.jpg' class='image'>
-                        
-                      </a>
-                  -->
+                  
                     </div>                
                   </div>
                 <!--content ehlel-->
@@ -181,12 +168,20 @@
                             $text = $obj->{ 'article_'.$_SESSION['lang'] };
                           }
                           $query = "select * from ";
+                          
+                          $text = strip_tags($text);
+                          $text = substr($text, 0, 350);
+                          
+                          $query = "select id, filename from uploaded_images where reference = 'news' and reference_id = '105' ";
+                          $result = mysql_query($query);
+                          $thmb_image = mysql_fetch_object($result);
                         ?>
                       </div>
-                      <img class="image" src="images/image2.jpg">
+                      <img class="image" src="uploaded_images/i_<?php echo $thmb_image->filename; ?>">
                       <div>
                         <?php echo $text; ?>
                       </div>
+                      <a href="news_details.php?id=105" style="color:#FFD400;"><?php echo $news_read_more; ?></a>
                   </div>
                 <!--content tugsgul-->
           <?php else: ?>   
@@ -458,13 +453,10 @@
             							?>-->
                   	
               
-                  <?php
-                    if($pf_feed_status){
-                      include('pf_feed.php');
-                    }
-                  ?>
+            
       
       </div><!-- end right main-->
+      <div class="clear"></div>
       <?php include('i_banner.php'); ?>
       
       

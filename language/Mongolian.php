@@ -14,7 +14,7 @@ $photog_rotate_cw = "Цагийн зүүний дагуу 90\' эргүүлэх"
 $photog_rotate_ccw = "Цагийн зүүний эсрэг 90\' эргүүлэх";
 $slideshow_image_alt = "Дараалуулж слайд болгож харах";
 $album_image_alt = "Дарвал цомгийг харна";
-$photog_area_batch_add_photos = "Batch Upload Photos";
+$photog_area_batch_add_photos = "Бөөнөөр аплоод хийх";
 $photog_area_import_photos = "Гаднаас зураг оруулж ирэх";
 $photog_area_batch_add_copy = "<b>Info on uploading and importing</b><br><br><b>Uploading:</b><br>Make sure that you upload photos in batches you want to work with (similar photos that you want to have the same titles, keywords, descriptions, categories, etc..).<br>Example: If you have a bunch of dog photos upload those first and process them using the import photo page, and then upload another batch of photos related to cats and process those.<br><br><b>Import:</b><br>After Uploading the photos click on the \"Import Photos\" link in the above menu to import the photos into your store and assign titles, descriptions, keywords, and many more options to the photos.<br>";
 $photog_import_import = "<b>ЗУРАГ ОРУУЛЖ ИРЭХ</b>";
@@ -118,12 +118,12 @@ $public_pnp_sub_form_submit = "Оруулах";
 $public_authorize_sub_redirect = "<img src=\"images/img_load.gif\" border=\"0\" alt=\"loading\" title=\"loading\"><br>Please wait while we send your order to authorize.net for processing.<br>If you see this page longer than 5 seconds <a href=\"#\" onClick=\"document.order_form.submit();\">click here</a>.";
 $public_twoco_sub_redirect = "<br><br><center>You will be forwarded to the payment page in a few seconds. If you are not taken to the payment page <a href=\"#\" onClick=\"document.order_form.submit();\">click here</a> to complete signup.</center>";
 $public_paypal_sub_renewal_redirect = "<br><br><center>You will be forwarded to the payment page in a few seconds. If you are not taken to the payment page <a href=\"#\" onClick=\"document.order_form.submit();\">click here</a> to complete signup.</center>";
-$public_your_password = "Your password is ";
-$public_password_for = "Your Password For ";
-$public_already_added = "You already have that item added to your lightbox";
+$public_your_password = "Таны нууц үг ";
+$public_password_for = "Таны нууц үг ";
+$public_already_added = "Энэ зургийг урьд нь цуглуулгад хийсэн байна";
 
 //PRIVACY POLICY PAGE
-$pri_p_crumb_link = "Privacy Policy";
+$pri_p_crumb_link = "Хэрэглэх нөхцөл";
 
 //PRINTS AND PRODUCTS INFO PAGE
 $pap_crumb_link = "Prints & Products";
@@ -239,10 +239,10 @@ $pp_order_form_submit = "Оруулах";
 $popular_crumb_link = "Их үзсэн";
 
 //PAYPAL SUBSCRIPTION RETURN PAGE
-$paypal_sub_return_crumb_link = "Subscription";
+$paypal_sub_return_crumb_link = "Бүртгэл";
 
 //PLUGNPAY IPN
-$plugnpay_ipn_sub_thank_you = "Thank you for your subscription order, we will contact you shortly by email.<br>You may return to our main site by clicking here <a href=\"index.php\">[Home]</a>.";
+$plugnpay_ipn_sub_thank_you = "Бүртгүүлсэнд баярлалаа..<br><a href=\"index.php\">Энд</a> дарж нүүр хуудас руу очно уу.";
 
 //PHOTOGRAPHERS GALLERY
 $photog_list_crumb_link = "Гэрэл зурагчид";
@@ -269,14 +269,14 @@ $news_crumb_link = "Мэдээнүүд";
 $newest_crumb_link = "Шинэ зургууд";
 
 //MYGATE IPN
-$mygate_ipn_failed_message = "Sorry but the transaction failed for some unknown reason.";
-$mygate_ipn_thank_you = "Thank you for your order. You can view your purchase and download your photos ";
-$mygate_ipn_thank_you2 = "here";
-$mygate_ipn_status = "Completed";
-$mygate_ipn_pending = "Your payment has either been denied or is still pending. We will contact you shortly. Return to our <a href=\"index.php\">home page</a>";
-$mygate_ipn_sub_failed_message = "Sorry but the transaction failed for some unknown reason.";
-$mygate_ipn_sub_thank_you = "Thank you for your subscription order. You will be notified shortly by email.<br>You can return to our site here <a href=\"index.php\">[Home]</a>.";
-$mygate_ipn_sub_pending = "Your payment has either been denied or is still pending. We will contact you shortly. Return to our <a href=\"index.php\">home page</a>";
+$mygate_ipn_failed_message = "Уучлаарай, ямар нэг шалтгаанаар гүйлгээ хийгдэж чадсангүй.";
+$mygate_ipn_thank_you = "Захиалга өгсанд баярлалаа. You can view your purchase and download your photos ";
+$mygate_ipn_thank_you2 = "энд";
+$mygate_ipn_status = "Дууссан";
+$mygate_ipn_pending = "Төлбөр тооцоо хийхэд алдаа гарлаа <a href=\"index.php\">нүүр хуудас</a> руу очно уу.";
+$mygate_ipn_sub_failed_message = "Үл мэдэгдэх шалтгаанаар гүйлгээ хийхэд алдаа гарлаа.";
+$mygate_ipn_sub_thank_you = "Бүртгүүлсэнд баярлалаа <a href=\"index.php\">[Нүүр хуудас]</a> руу очно уу.";
+$mygate_ipn_sub_pending = "Төлбөр хийхэд алдаа гарлаа. <a href=\"index.php\">нүүр хуудас</a> руу очно уу.";
 
 //MY INFO PAGE
 $my_info_crumb_link = "Миний мэдээлэл";
@@ -485,7 +485,7 @@ $footer_we_accept = "WE ACCEPT ";
 $footer_we_accept_alt = "Credit Cards";
 $footer_license = "Licensing";
 $footer_privacy = "Privacy Policy";
-$footer_terms = "Terms of Use";
+$footer_terms = "Үйлчилгээний нөхцөл";
 $footer_all_rights = ". All Rights Reserved.";
 $footer_copyright = "Copyright &copy; 2007";
 
@@ -552,11 +552,11 @@ $twoco_ipn_pending = "Your payment has either been denied or is still pending. W
 $twoco_ipn_pending_sub = "Your payment has either been denied or is still pending. We will contact you shortly.";
 
 //AUTHORIZE NET IPN
-$auth_ipn_thank_you = "Thank you for your order. You can view your purchase and download your photos";
+$auth_ipn_thank_you = "Захиалга өгсөнд баярлалаа. Та одоо зураг татах боломжтой.";
 $auth_ipn_thank_you2 ="энд байна";
-$auth_ipn_pending = "Your payment has either been denied or is still pending. We will contact you shortly.<br><br>";
+$auth_ipn_pending = "Төлбөр хийхэд асуудал гарлаа.<br><br>";
 $auth_ipn_pending2 = "алдааны мэдээлэл:";
-$auth_ipn_sub_thanks = "Thank you for your subscription order, we will contact you shortly by email.<br>You may return to our main site by clicking here ";
+$auth_ipn_sub_thanks = "Бүртгүүлсэнд баярлалаа.<br>энд дарж үндсэн сайт руу очно уу. ";
 $auth_ipn_sub_thanks2 = "[Нүүр]";
 $auth_ipn_sub_pending = "Таны төлбөр цуцлагдсан, эсвэл төлбөр хийгдээгүй байна.<br><br>";
 $auth_ipn_sub_pending2 = "Алдааы мэдээлэл:";
@@ -764,15 +764,15 @@ $left_photographers = "Гэрэл зурагчид";
 $left_photos = "Зургууд";
 $left_visitors = "зочид";
 $left_featured_photogs = "Онцлох гэрэл зурагчид";
-$left_month1 = "Sign up for a monthly subscription and get ";
+$left_month1 = "Сараар бүртгүүлэх ";
 $left_month2 = " downloads for <br /><span class=\"sub_price\"><i>Only ";
 $left_month3 = "</i></span> /сар! "; // This is made up of three parts due to codes in between the to get prices, and downloads for the sub
 $left_signup = "<br>Бүртгүүлэх";
 $left_year1 = "Sign up for a one year subscription and get ";
 $left_year2 = " downloads for <br /><span class=\"sub_price\"><i>Only ";
 $left_year3 = "</i></span> /year! "; // This is made up of three parts due to codes in between them to get prices, and downloads for the sub
-$left_signup1 = "Create an account to use special features like lightbox, email to a friend, and much more!";
-$left_photogsignup = "Sell Your Photos!<br /><br />Photographers can now sell their photos thru our site.";
+$left_signup1 = "Бүртгүүлээд цуглуулгаа үүсгэн нөхөдтэйгөө хуваалц!";
+$left_photogsignup = "Зургаа худалд!<br /><br />Зурагчид зургаа зарах боломжтой.";
 $left_go_button = "ЦААШ";
 $left_select_language = "Хэл сонгох";
 

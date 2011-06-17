@@ -239,7 +239,7 @@ if($message != "galfree" && $message != "galmonthly" && $message != "yearly"){
                             </label>
                             
                             
-                            
+                          <!--  
                         <? if($message != "cart"){ ?>
 												  <? if($setting->allow_subs == 1 or $setting->allow_subs_month == 1){ ?>
 												  <? if($cycle_time == "f"){ ?>
@@ -253,7 +253,7 @@ if($message != "galfree" && $message != "galmonthly" && $message != "yearly"){
                                   <? if($setting->use_paypal == 1 && $setting->sub_paypal == 1){ ?><input type="radio" name="p_method" value="paypal" > PayPal (Mastercard, Visa, Discover)<? } ?><? if($setting->use_2checkout == 1 && $setting->sub_2co == 1){ ?><br><input type="radio" name="p_method" value="2checkout"> 2Checkout (Mastercard, Visa, Discover)<? } ?><? if($setting->pnpstatus == 1 && $setting->sub_pnp == 1){ ?><br><input type="radio" name="p_method" value="plugnpay"> Plug N Pay (Mastercard, Visa, Discover)<? } ?><? if($setting->use_authorize_net == 1 && $setting->sub_auth == 3){ ?><br><input type="radio" name="p_method" value="authorize"> Authorize.net (Mastercard, Visa, Discover)<? } ?><? if($setting->mygatesupport == 1 && $setting->sub_mygate == 1){ ?><br><input type="radio" name="p_method" value="mygate"> MyGate (Mastercard, Visa, Discover)<? } ?><? if($setting->use_money == 1 && $setting->sub_cmo == 1){ ?><br><input type="radio" name="p_method" value="checkmoney"> Check or Money Order<? } ?></td>
                                 </tr>
                                 <? } } }?>
-												<br />
+												<br /> -->
 												<?
 													if(!$_GET['t']){
 														$cycle_time = "m";
@@ -285,18 +285,18 @@ if($message != "galfree" && $message != "galmonthly" && $message != "yearly"){
 												  <? if($message != "cart"){ ?>
 													<b><? echo $form_billing; ?>:</b><br>
 													<? if($setting->allow_subs_month == 1 && $message != "cart"){ ?>
-														<input type="radio" name="cycle_time" value="month" <?php if($cycle_time == "m"){ echo "checked"; } ?>> <? echo $currency->sign; ?><? echo $setting->sub_price_month; ?><? if($tax_amount_month > 0){ ?> + Tax: (<? echo $tax_amount_month; ?>)<? } ?><?PHP echo $subscribe_one_month; ?><br>
+														<input type="radio" name="cycle_time" value="month" disabled <?php if($cycle_time == "m"){ echo "checked"; } ?>> <? echo $currency->sign; ?><? echo $setting->sub_price_month; ?><? if($tax_amount_month > 0){ ?> + Tax: (<? echo $tax_amount_month; ?>)<? } ?><?PHP echo $subscribe_one_month; ?><br>
 													<? } ?>
 													<? if($setting->allow_subs == 1 && $message != "cart"){ ?>
-														<input type="radio" name="cycle_time" value="year" <?php if($cycle_time == "y"){ echo "checked"; } ?>> <? echo $currency->sign; ?><? echo $setting->sub_price; ?><? if($tax_amount_year > 0){ ?> + Tax: (<? echo $tax_amount_year; ?>)<? } ?><?PHP echo $subscribe_one_year; ?>
+														<input type="radio" name="cycle_time" value="year"  disabled <?php if($cycle_time == "y"){ echo "checked"; } ?>> <? echo $currency->sign; ?><? echo $setting->sub_price; ?><? if($tax_amount_year > 0){ ?> + Tax: (<? echo $tax_amount_year; ?>)<? } ?><?PHP echo $subscribe_one_year; ?>
 													<? } ?>
 													<? if($setting->allow_sub_free == 1){ ?>
 													<br>													
-														<input type="radio" name="cycle_time" value="free" <?php if($cycle_time == "f"){ echo "checked"; } ?>><?PHP echo $subscribe_free_account; ?>
+														<input type="radio" name="cycle_time" value="free" checked <?php if($cycle_time == "f"){ echo "checked"; } ?>><?PHP echo $subscribe_free_account; ?>
 													<? } }?>
 													</td>
 												</tr>
-                        
+                      Банкны төлбөр тооцооны систем ажиллагаанд хараахан ороогүй байгаа тул энгийн гишүүнчлэлээр бүртгүүлнэ үү.
                             <label class="label1">
                             	<div align="center" onClick="js_signup();"><button><?PHP echo $subscribe_form_button; ?></button></div>
                             </label>

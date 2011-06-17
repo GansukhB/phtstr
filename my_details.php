@@ -67,36 +67,15 @@
 		
 		</script>
 				<? print($head); ?>
-		<center>
-		<table cellpadding="0" cellspacing="0" width="765" class="main_table" style="border: 5px solid #<? echo $border_color; ?>;">
-			<? include("header.php"); ?>
-			<tr>
-				<td class="left_nav_header"><? echo $misc_photocat; ?></td>
-				<td></td>
-				<? include("search_bar.php"); ?>
-			</tr>
-			<tr>
-				<td rowspan="1" valign="top"><? include("i_gallery_nav.php"); ?></td>
-				<td background="images/col2_shadow.gif" valign="top"><img src="images/col2_white.gif"></td>
-				<td valign="top" height="18">
-					<table cellpadding="0" cellspacing="0" width="560" height="100%">
-						<tr>
-							<td colspan="3" height="5"></td>
-						</tr>
-						<?php
-							$crumb = $my_details_profile;
-							include("crumbs.php");
-						?>
-						<tr>
-							<td class="index_copy_area" colspan="3" height="4"></td>
-						</tr>						
-						<tr>
-							<td colspan="3" valign="top" height="100%" class="homepage_line">
-								<table width="100%" border="0">
-									<tr>
-										<td height="6"></td>
-									</tr>
-									<tr>
+ <?php include('head_navbar.php'); ?>
+	<div class="container">
+<?php include('header.php');?>
+				<? //include("search_bar.php"); ?>
+      <div id="main">
+			<? include("i_gallery_nav.php"); ?>
+      <div class="right-main">
+        
+        <!--
 										<td class="gallery_copy">
 										<?
 										echo $my_details_profile_text . "<br>";
@@ -106,12 +85,7 @@
 												}
 									  ?>
 										</td>
-									</tr>
-									<tr>	
-										<td height="10">&nbsp;</td>
-									</tr>
-									<tr>
-										<td style="padding-left: 10px;">
+									
 											<table>
 												<form method="post" name="signup">
 													<input type="hidden" name="name" value="<? echo $member->name; ?>">
@@ -177,18 +151,115 @@
 													<td align="right"><input type="button" value="<?PHP echo $my_details_save_button; ?>" onClick="js_signup();"></td>
 												</tr>												
 												</form>
-											</table>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>				
-				</td>
-			</tr>
-			<? include("footer.php"); ?>			
-		</table>
-		</center>
+                      </table>
+          -->
+          <div class="login-main">
+                	<div class="login-left">
+                    	<h3 align="center">Шинээр бүртгүүлэх</h3>
+                      
+                      
+                      
+										  
+										                          
+                      
+                      	
+                        &nbsp;
+                      
+                                                                                                                              <form name="signup" method="post">
+                            <label>
+                            	<div class="lb"><div class="title">Нэр</div>
+                              <input type="text" value="" name="name" class="text1">
+													                                  </div>
+                            </label>
+                            
+                            
+                            <label>
+                            	<div class="lb"><div class="title">Имэйл</div>
+                              <input type="email" name="email" class="text1">
+													
+                              </div>
+                            </label>
+                            
+                            <label>
+                            	<div class="lb"><div class="title">Утас</div>
+                              <input type="text" name="phone" class="text1">
+													
+                              </div>
+                            </label>
+                            
+                            <label>
+                            	<div class="lb"><div class="title">Хаяг 1</div>
+                              <input type="text" name="address1" class="text1">
+													
+                              </div>
+                            </label>
+                            <label>
+                            	<div class="lb"><div class="title">Хаяг 2</div>
+                              <input type="text" name="address2" class="text1">
+													
+                              </div>
+                            </label>
+                            
+                            <label>
+                            	<div class="lb"><div class="title">Хот</div>
+                              <input type="text" name="city" class="text1">
+													
+                              </div>
+                            </label>
+												
+                        
+                        
+                            <label>
+                            	<div class="lb"><div class="title">Zip код</div>
+                              <input type="text" name="zip" class="text1">
+													
+                              </div>
+                            </label>
+                            
+                            <label>
+                            	<div class="lb"><div class="title">Бүс </div>
+                              <input type="text" name="state" class="text1">
+													
+                              </div>
+                            </label>
+                            
+                            <label>
+                            	<div class="lb">
+                                	<div class="title">Улс</div>
+                                	
+                                </div>
+                            </label>
+                            
+                            
+                            <label class="label1">
+                            	<div class="lb"><div class="title">Нууц үг</div>
+                              <input type="password" name="password" class="text1">
+                              </div>
+                            </label>
+                            
+                            <label>
+                            	<div class="lb"><div class="title">Нууц үгийг давтан оруул</div>
+                            
+                              <input type="password" name="password2" class="text1">
+                              </div>
+                            </label>
+                            
+
+                            <label class="label1">
+                            	<div align="center" onclick="js_signup();"><button>Signup</button></div>
+                            </label>
+                            
+                            
+                        </form>
+                    </div>
+                    
+                    
+                    
+			</div>
+        </div> <!-- end class right main -->
+      </div> <!-- end id main -->
+    </div> <!-- end container -->
+    <? include("footer.php"); ?>	
 	</body>
 </html>
 <?
